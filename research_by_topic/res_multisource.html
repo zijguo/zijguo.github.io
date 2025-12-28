@@ -17,6 +17,7 @@
       count { display: block }
       countreset { display: block; counter-reset: item; }
       count:before { content: counter(item) ". "; counter-increment: item }
+      countreset ul { list-style-type: none; }
       h1 { font-size: 32px !important; }
       h2 { font-size:22.5px !important; }
     </style>
@@ -35,8 +36,10 @@
 
           <div class="menu-category">Research</div>
           <div class="menu-item"><a href="../pub.html">Publications</a></div>
-          <div class="menu-item"><a href="../research.html">Research&nbsp;by&nbsp;Topic</a></div>
           <div class="menu-item"><a href="../talks.html">Talks</a></div>
+
+          <div class="menu-category">Research by Topic</div>
+          <div class="menu-item"><a href="../research.html">Research&nbsp;by&nbsp;Topic</a></div>
 
           <div class="menu-category">Software</div>
           <div class="menu-item"><a href="../software.html">Software</a></div>

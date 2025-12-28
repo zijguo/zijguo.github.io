@@ -1,29 +1,3 @@
-<style type="text/css">
-
-count {display: block
-}
-countreset {display: block
-}
-countreset{
-  counter-reset: item
-}
-
-count:before {
-  content: counter(item) ". ";
-  counter-increment: item
-
-</style>
-
-<style>
-  html * {
-   font-size:18.5px;
-  line-height: 1.65;
-
-}
-</style>
-
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
   "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -40,6 +14,14 @@ MathJax.Hub.Config({
 	  TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
+    <style type="text/css">
+      html * { line-height: 1.65; font-size:19px; }
+      count { display: block }
+      countreset { display: block; counter-reset: item; }
+      count:before { content: counter(item) ". "; counter-increment: item }
+      h1 { font-size: 32px !important; }
+      h2 { font-size:22.5px !important; }
+    </style>
 <!-- End MathJax -->
 </head>
 <body>
@@ -57,22 +39,15 @@ MathJax.Hub.Config({
 <div class="menu-item"><a href="Zijian_Guo_CV.pdf">CV</a></div>
 <div class="menu-category">Research</div>
 <div class="menu-item"><a href="pub.html">Publications</a></div>
-<div class="menu-item"><a href="research.html">Research&nbsp;by&nbsp;Topic</a></div>
 <div class="menu-item"><a href="talks.html">Talks</a></div>
+<div class="menu-category">Research by Topic</div>
+<div class="menu-item"><a href="research.html">Research&nbsp;by&nbsp;Topic</a></div>
 <div class="menu-category">Software</div>
 <div class="menu-item"><a href="software.html">Software</a></div>
 <div class="menu-category">Teaching</div>
 <div class="menu-item"><a href="teaching.html">Teaching</a></div>
 </td>
 
-
-
-
-
-
-
-
-<ol>
 
 <td id="layout-content">
 <div id="toptitle">
@@ -449,7 +424,7 @@ Disease.  </a><br />
 <p><count><b>Guo, Z.</b>, Kogan, R., Qiu, H., and Strichartz, R. S.(2014). <br />
 <a href="arxiv/1310.6463v1.pdf" style="color: #0061CE " > Boundary value problems for a family of domains in the Sierpinski gasket</a>. <br />
 <i>Illinois Journal of Mathematics,</i> 58, 497 - 519. 
-</ol>
+
 </p>
 
 </ul>

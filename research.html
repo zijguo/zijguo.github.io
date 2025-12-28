@@ -24,13 +24,7 @@
       h2 {
         font-size: 22.5px !important;
       }
-      count {
-        display: block;
-      }
-      countreset {
-        display: block;
-        counter-reset: item;
-      }
+      
       count:before {
         content: counter(item) ". ";
         counter-increment: item;
@@ -44,19 +38,16 @@
         <td id="layout-menu">
           <img src="photos/bio.jpg" alt="alt text" width="200" height="300" />
           <h1 id="name">Zijian Guo</h1>
-
           <div class="menu-category">Home</div>
           <div class="menu-item"><a href="index.html">About&nbsp;Me</a></div>
           <div class="menu-item"><a href="Zijian_Guo_CV.pdf">CV</a></div>
-
           <div class="menu-category">Research</div>
           <div class="menu-item"><a href="pub.html">Publications</a></div>
-          <div class="menu-item"><a href="research.html" class="current">Research&nbsp;by&nbsp;Topic</a></div>
           <div class="menu-item"><a href="talks.html">Talks</a></div>
-
+          <div class="menu-category">Research by Topic</div>
+          <div class="menu-item"><a href="research.html">Research&nbsp;by&nbsp;Topic</a></div>
           <div class="menu-category">Software</div>
           <div class="menu-item"><a href="software.html">Software</a></div>
-
           <div class="menu-category">Teaching</div>
           <div class="menu-item"><a href="teaching.html">Teaching</a></div>
         </td>
