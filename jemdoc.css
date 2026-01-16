@@ -302,3 +302,47 @@ table.imgtable, table.imgtable td {
     border: none;
     text-align: left;
 }
+
+/* 网格布局容器 */
+.student-grid {
+    display: flex;
+    flex-wrap: wrap;      /* 允许换行 */
+    justify-content: center; /* 关键：让内容（无论是1张还是3张）水平居中 */
+    gap: 30px;            /* 图片之间的间距，可以根据喜好调整 */
+    padding: 20px 0;
+    width: 100%;          /* 占据整栏宽度 */
+}
+
+/* 单个学生卡片 */
+.student-card {
+    /* 如果你想严格并排3张，可以设置为 width: calc(33% - 40px); */
+    /* 或者保留固定宽度，只要容器够宽，它们就会自动排成一排 */
+    width: 200px;         
+    border: 1px solid black;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    text-decoration: none; /* 如果外面套了 a 标签，去掉下划线 */
+    color: inherit;        /* 继承文字颜色 */
+}
+
+/* 学生照片样式 */
+.student-card img {
+    width: 100%;
+    height: 200px;        /* 适当调高了高度以符合 3 张并排的视觉 */
+    object-fit: cover;    /* 确保照片比例不失真 */
+    display: block;
+}
+
+/* 底部名字区域 */
+.student-info {
+    padding: 12px 5px;
+    border-top: 1px solid black;
+    font-size: 18px !important;
+    font-weight: bold;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
