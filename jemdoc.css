@@ -317,7 +317,7 @@ table.imgtable, table.imgtable td {
 .student-card {
     /* 如果你想严格并排3张，可以设置为 width: calc(33% - 40px); */
     /* 或者保留固定宽度，只要容器够宽，它们就会自动排成一排 */
-    width: 200px;         
+    width: 230px;         
     border: 1px solid black;
     text-align: center;
     display: flex;
