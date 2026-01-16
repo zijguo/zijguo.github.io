@@ -1,17 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <link rel="stylesheet" href="../jemdoc.css" type="text/css" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <link href="../jemdoc.css" rel="stylesheet" type="text/css">
     <title>Applications to Genetics and Health Record Data - Zijian Guo</title>
-
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    <script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'>
+    </script>
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         TeX: { equationNumbers: { autoNumber: "AMS" } }
       });
     </script>
-
     <style type="text/css">
       html * { line-height: 1.65; font-size:19px; }
       count { display: block }
@@ -21,91 +20,98 @@
       h1 { font-size: 32px !important; }
       h2 { font-size:22.5px !important; }
     </style>
-  </head>
-
-  <body>
-    <table summary="Table for page layout." id="tlayout">
-      <tr valign="top">
-        <td id="layout-menu">
-          <img src="../photos/bio.jpg" alt="alt text" width="200" height="300" />
-          <h1 id="name">Zijian Guo</h1>
-          <div class="menu-category">Home</div>
-          <div class="menu-item"><a href="../index.html">About&nbsp;Me</a></div>
-          <div class="menu-item"><a href="../CV/Zijian_Guo_CV.pdf">CV</a></div>
-
-          <div class="menu-category">Research</div>
-          <div class="menu-item"><a href="../research/pub.html">Publications</a></div>
-          <div class="menu-item"><a href="../research/talks.html">Talks</a></div>
-          <div class="menu-item"><a href="../research/software.html">Software</a></div>
-
-          <div class="menu-category">Research by Topic</div>
-          <div class="menu-item"><a href="res_multisource.html">Multi-source&nbsp;Learning</a></div>
-          <div class="menu-item"><a href="res_nonstandard.html">Nonstandard&nbsp;Inference</a></div>
-          <div class="menu-item"><a href="res_optstat.html">Stochastic&nbsp;Optimization</a></div>
-          <div class="menu-item"><a href="res_causal.html">Causal&nbsp;Inference</a></div>
-          <div class="menu-item"><a href="res_highdim.html">High-dimensional&nbsp;Statistics</a></div>
-          <div class="menu-item"><a href="res_ai4science.html">AI4Science</a></div>
-
-          <div class="menu-category">Teaching</div>
-          <div class="menu-item"><a href="../teaching/teaching.html">Teaching</a></div>
-          <div class="menu-item"><a href="../teaching/supervised.html">Supervised Students</a></div>
-        </td>
-
-        <td id="layout-content">
-          <div id="toptitle">
-            <h1>AI4Science</h1>
-          </div>
-
-          <div class="infoblock">
-            <div class="blockcontent">
-              <h3 style="margin-bottom: 0em; margin-top: 0;"> Summary (LLM read my papers; human bias-correction applied) </h3>
-              <p>
-                In my AI4Science / biomedical data work, I develop statistical methods that make large, heterogeneous datasets—such as genetics/proteomics and multi-center EHRs—more actionable for science: the goal is to draw conclusions that remain reliable when real-world complications arise (e.g., imperfect instruments in genetics, strong cross-hospital heterogeneity, and privacy constraints that limit data sharing). 
-
-                </br></br>
-Concretely, one line of work proposes MR-SPI, a robust Mendelian randomization approach that automatically selects valid genetic instruments and then performs post-selection inference, so causal biomarker discovery is less sensitive to invalid SNPs; it is applied to UK Biobank proteomics (912 proteins) to identify proteins associated with Alzheimer’s disease, with follow-up structural analysis via AlphaFold2. 
- Another line of work develops SurvMaximin, a robust federated/transfer learning method for survival risk prediction that borrows strength across centers using one-time summary sharing (no patient-level data) and is designed to remain stable even when site-specific models are highly heterogeneous, improving performance especially for smaller target sites.
-              </p>
-              
-             
-            </div>
-          </div>
-
-          <countreset>
-            <ul>
-              <li>
-                <p>
-                  <count> <u>Yao, M.</u>, Miller, G., Vardarajan, B., Baccarelli, A.,<b>Guo, Z.</b><sup>✉</sup>,and Liu, Z.<sup>✉</sup> (2024+).<br /> 
-                  <a href="../arxiv/2023.02.20.23286200v5.full.pdf" style="color: #0061CE "> Robust Mendelian Randomization Analysis by Automatically Selecting Valid Genetic Instruments with Applications to Identify Plasma Protein Biomarkers for Alzheimer’s Disease. </a><br />
-                  <i> Cell Genomics, to appear. </i>
-                </p>
-              </li>
-            </ul>
-
-           <ul>
-              <li>
-                <p>
-                  <count>Wang, X., Zhou, H., · · ·, 4CE,Avillach, P.<sup>✉</sup>,<b> Guo, Z.</b><sup>✉</sup>, and Cai, T.<sup>✉</sup> (2022) <br />
-                  <a href="../arxiv/2022.02.03.22270410v1.full.pdf" style="color: #0061CE ">Surv-Maximin: Robust Federated Approach to Transporting Survival Risk Prediction Models</a>. <br />
-                  <i>Journal of Biomedical Informatics, 134 (2022): 104-176.</i>
-                </p>
-              </li>
-            </ul>
-            
-          </countreset>
-
-           <p style="font-size: 16px; color: #555;">
-                <i>underline indicates supervised students ; # indicates equal contribution; 
-                * indicates alphabetical ordering ; ✉ indicates corresponding authorship.</i>
-              </p>
-          
-          <div id="footer">
-            <div id="footer-text">
-              Page generated 2025, by jemdoc+MathJax.
-            </div>
-          </div>
-        </td>
-      </tr>
+</head>
+<body>
+    <table id="tlayout" summary="Table for page layout.">
+        <tr valign="top">
+            <td id="layout-menu">
+                <img alt="alt text" height="300" src="../photos/bio.jpg" width="200">
+                <h1 id="name">Zijian Guo</h1>
+                <div class="menu-category">
+                    Home
+                </div>
+                <div class="menu-item">
+                    <a href="../index.html">About&nbsp;Me</a>
+                </div>
+                <div class="menu-item">
+                    <a href="../CV/Zijian_Guo_CV.pdf">CV</a>
+                </div>
+                <div class="menu-category">
+                    Research
+                </div>
+                <div class="menu-item">
+                    <a href="../research/pub.html">Publications</a>
+                </div>
+                <div class="menu-item">
+                    <a href="../research/talks.html">Talks</a>
+                </div>
+                <div class="menu-item">
+                    <a href="../research/software.html">Software</a>
+                </div>
+                <div class="menu-category">
+                    Research by Topic
+                </div>
+                <div class="menu-item">
+                    <a href="res_multisource.html">Multi-source&nbsp;Learning</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_nonstandard.html">Nonstandard&nbsp;Inference</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_optstat.html">Stochastic&nbsp;Optimization</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_causal.html">Causal&nbsp;Inference</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_highdim.html">High-dimensional&nbsp;Statistics</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_ai4science.html">AI4Science</a>
+                </div>
+                <div class="menu-category">
+                    Teaching
+                </div>
+                <div class="menu-item">
+                    <a href="../teaching/teaching.html">Teaching</a>
+                </div>
+                <div class="menu-item">
+                    <a href="../teaching/supervised.html">Supervised Students</a>
+                </div>
+            </td>
+            <td id="layout-content">
+                <div id="toptitle">
+                    <h1>AI4Science</h1>
+                </div>
+                <div class="infoblock">
+                    <div class="blockcontent">
+                        <h3 style="margin-bottom: 0em; margin-top: 0;">Summary (LLM read my papers; human bias-correction applied)</h3>
+                        <p>In my AI4Science / biomedical data work, I develop statistical methods that make large, heterogeneous datasets—such as genetics/proteomics and multi-center EHRs—more actionable for science: the goal is to draw conclusions that remain reliable when real-world complications arise (e.g., imperfect instruments in genetics, strong cross-hospital heterogeneity, and privacy constraints that limit data sharing).<br>
+                        Concretely, one line of work proposes MR-SPI, a robust Mendelian randomization approach that automatically selects valid genetic instruments and then performs post-selection inference, so causal biomarker discovery is less sensitive to invalid SNPs; it is applied to UK Biobank proteomics (912 proteins) to identify proteins associated with Alzheimer’s disease, with follow-up structural analysis via AlphaFold2. Another line of work develops SurvMaximin, a robust federated/transfer learning method for survival risk prediction that borrows strength across centers using one-time summary sharing (no patient-level data) and is designed to remain stable even when site-specific models are highly heterogeneous, improving performance especially for smaller target sites.</p>
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        <p><u>Yao, M.</u>, Miller, G., Vardarajan, B., Baccarelli, A.,<b>Guo, Z.</b><sup>✉</sup>,and Liu, Z.<sup>✉</sup> (2024+).<br>
+                        <a href="../arxiv/2023.02.20.23286200v5.full.pdf" style="color: #0061CE">Robust Mendelian Randomization Analysis by Automatically Selecting Valid Genetic Instruments with Applications to Identify Plasma Protein Biomarkers for Alzheimer’s Disease.</a><br>
+                        <i>Cell Genomics, to appear.</i></p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p>Wang, X., Zhou, H., · · ·, 4CE,Avillach, P.<sup>✉</sup>, <b>Guo, Z.</b><sup>✉</sup>, and Cai, T.<sup>✉</sup> (2022)<br>
+                        <a href="../arxiv/2022.02.03.22270410v1.full.pdf" style="color: #0061CE">Surv-Maximin: Robust Federated Approach to Transporting Survival Risk Prediction Models</a>.<br>
+                        <i>Journal of Biomedical Informatics, 134 (2022): 104-176.</i></p>
+                    </li>
+                </ul>
+                <p style="font-size: 16px; color: #555;"><i>underline indicates supervised students ; # indicates equal contribution; * indicates alphabetical ordering ; ✉ indicates corresponding authorship.</i></p>
+                <div id="footer">
+                    <div id="footer-text">
+                        Page generated 2025, by jemdoc+MathJax.
+                    </div>
+                </div>
+            </td>
+        </tr>
     </table>
-  </body>
+</body>
 </html>

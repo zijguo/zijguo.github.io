@@ -1,17 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <link rel="stylesheet" href="../jemdoc.css" type="text/css" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <link href="../jemdoc.css" rel="stylesheet" type="text/css">
     <title>Nonstandard Inference - Zijian Guo</title>
-
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    <script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'>
+    </script>
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         TeX: { equationNumbers: { autoNumber: "AMS" } }
       });
     </script>
-
     <style type="text/css">
       html * { line-height: 1.65; font-size:19px; }
       count { display: block }
@@ -21,139 +20,132 @@
       h1 { font-size: 32px !important; }
       h2 { font-size:22.5px !important; }
     </style>
-  </head>
-
-  <body>
-    <table summary="Table for page layout." id="tlayout">
-      <tr valign="top">
-        <td id="layout-menu">
-          <img src="../photos/bio.jpg" alt="alt text" width="200" height="300" />
-          <h1 id="name">Zijian Guo</h1>
-          <div class="menu-category">Home</div>
-          <div class="menu-item"><a href="../index.html">About&nbsp;Me</a></div>
-          <div class="menu-item"><a href="../CV/Zijian_Guo_CV.pdf">CV</a></div>
-
-          <div class="menu-category">Research</div>
-          <div class="menu-item"><a href="../research/pub.html">Publications</a></div>
-          <div class="menu-item"><a href="../research/talks.html">Talks</a></div>
-          <div class="menu-item"><a href="../research/software.html">Software</a></div>
-
-          <div class="menu-category">Research by Topic</div>
-          <div class="menu-item"><a href="res_multisource.html">Multi-source&nbsp;Learning</a></div>
-          <div class="menu-item"><a href="res_nonstandard.html">Nonstandard&nbsp;Inference</a></div>
-          <div class="menu-item"><a href="res_optstat.html">Stochastic&nbsp;Optimization</a></div>
-          <div class="menu-item"><a href="res_causal.html">Causal&nbsp;Inference</a></div>
-          <div class="menu-item"><a href="res_highdim.html">High-dimensional&nbsp;Statistics</a></div>
-          <div class="menu-item"><a href="res_ai4science.html">AI4Science</a></div>
-
-          <div class="menu-category">Teaching</div>
-          <div class="menu-item"><a href="../teaching/teaching.html">Teaching</a></div>
-          <div class="menu-item"><a href="../teaching/supervised.html">Supervised Students</a></div>
-        </td>
-
-        <td id="layout-content">
-          <div id="toptitle">
-            <h1>Nonstandard Inference</h1>
-          </div>
-
-          <div class="infoblock">
-            <div class="blockcontent">
-              <h3 style="margin-bottom: 0em; margin-top: 0;"> Summary (LLM read my papers; human bias-correction applied) </h3>
-              <p>
-                 A central theme of my work is reliable uncertainty quantification in modern problems where standard Wald intervals with “estimate + standard error” recipes can break.
-                This happens when the target is defined through an optimization (e.g., a worst-case/robust objective), when the procedure involves data-adaptive steps (e.g., model selection or causal discovery), 
-                or when key regularity conditions fail so the usual smooth asymptotic normal approximations are no longer accurate.
-                In these settings, I develop inference methods—often based on perturbation/resampling or other stability-driven constructions—that remain valid even when the limiting distribution is nonsmooth or non-normal,
-                or when nuisance components are learned flexibly and may converge slowly. Intuitively, the goal is to provide confidence statements that continue to mean what they say (correct coverage) 
-                in the realistic regimes where robustness, selection, and complex learning are essential, but classical asymptotic theory is overly optimistic.
-              </p>
-            </div>
-          </div>
-
-          <countreset>
-            <ul>
-              <li>
-                <p>
-                  <count> <u>Koo, T.</u> and <b>Guo, Z.</b> (2025).<br /> 
-                  <a href="https://arxiv.org/abs/2511.02632" style="color: #0061CE "> Distributionally Robust Synthetic Control: Ensuring Robustness Against Highly Correlated Controls and Weight Shifts. </a><br />
-                  Technical Report
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count> <u>Zheng, M.</u>,Bonvini, M.<sup>✉</sup>,and <b>Guo, Z.</b><sup>✉</sup>(2025).<br /> 
-                  <a href="https://arxiv.org/abs/2511.01222" style="color: #0061CE "> Perturbed Double Machine Learning: Nonstandard Inference Beyond the Parametric Length </a><br />
-                  Technical Report
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count> <b>Guo, Z.</b>, <u>Wang, Z.</u>, Hu, Y., and Bach, F.(2025).<br /> 
-                  <a href="https://arxiv.org/abs/2507.09905" style="color: #0061CE "> Statistical Inference for Conditional Group Distributionally Robust Optimization with Cross-Entropy Loss </a><br />
-                  Technical Report
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count><b>Guo, Z.</b>, Li, X., Han, L., and Cai Tianxi. (2025+). <br/> 
-                  <a href="../arxiv/2301.00718v1.pdf" style="color: #0061CE "> Robust Inference for Federated Meta-Learning</a><br />
-                  <i> Journal of the American Statistical Association, to appear. </i>[<a href="https://github.com/celehs/RIFL" style="color: #FF2D00">Codes</a>]
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count> <u>Chang, T. H.</u>, <b>Guo, Z.</b>, and Malinsky, D. (2025+). <br/> 
-                  <a href="../arxiv/2405.06763v4.pdf" style="color: #0061CE "> Post-selection inference for causal effects after causal discovery.</a><br />
-                  <i> Biometrika, to appear. </i>
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count><b>Guo, Z.</b> (2024). <br />
-                  <a href="../arxiv/2011.07568v4.pdf" style="color: #0061CE ">Statistical Inference for Maximin Effects: Identifying Stable Associations across Multiple Studies </a>. <br />
-                  <i>Journal of the American Statistical Association, 119(547), 1968-1984.</i> [<a href="https://github.com/zywang0701/MaximinInfer/" style="color: #FF2D00">Codes</a>]
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count><b>Guo, Z.</b> (2023). <br />
-                  <a href="../arxiv/2104.06911v5.pdf" style="color: #0061CE ">Causal Inference with Invalid Instruments: Post-selection Problems and A Solution Using Searching and Sampling.</a> <br />
-                  <i> Journal of the Royal Statistical Society: Series B (Statistical Methodology), 85(3), 959-985. </i>[<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00" >Codes</a>]
-                </p>
-              </li>
-            </ul>
-          </countreset>
-          
- <p style="font-size: 16px; color: #555;">
-                <i>underline indicates supervised students ; # indicates equal contribution; 
-                * indicates alphabetical ordering ; ✉ indicates corresponding authorship.</i>
-              </p>
-          
-          <div id="footer">
-            <div id="footer-text">
-              Page generated 2025, by jemdoc+MathJax.
-            </div>
-          </div>
-        </td>
-      </tr>
+</head>
+<body>
+    <table id="tlayout" summary="Table for page layout.">
+        <tr valign="top">
+            <td id="layout-menu">
+                <img alt="alt text" height="300" src="../photos/bio.jpg" width="200">
+                <h1 id="name">Zijian Guo</h1>
+                <div class="menu-category">
+                    Home
+                </div>
+                <div class="menu-item">
+                    <a href="../index.html">About&nbsp;Me</a>
+                </div>
+                <div class="menu-item">
+                    <a href="../CV/Zijian_Guo_CV.pdf">CV</a>
+                </div>
+                <div class="menu-category">
+                    Research
+                </div>
+                <div class="menu-item">
+                    <a href="../research/pub.html">Publications</a>
+                </div>
+                <div class="menu-item">
+                    <a href="../research/talks.html">Talks</a>
+                </div>
+                <div class="menu-item">
+                    <a href="../research/software.html">Software</a>
+                </div>
+                <div class="menu-category">
+                    Research by Topic
+                </div>
+                <div class="menu-item">
+                    <a href="res_multisource.html">Multi-source&nbsp;Learning</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_nonstandard.html">Nonstandard&nbsp;Inference</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_optstat.html">Stochastic&nbsp;Optimization</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_causal.html">Causal&nbsp;Inference</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_highdim.html">High-dimensional&nbsp;Statistics</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_ai4science.html">AI4Science</a>
+                </div>
+                <div class="menu-category">
+                    Teaching
+                </div>
+                <div class="menu-item">
+                    <a href="../teaching/teaching.html">Teaching</a>
+                </div>
+                <div class="menu-item">
+                    <a href="../teaching/supervised.html">Supervised Students</a>
+                </div>
+            </td>
+            <td id="layout-content">
+                <div id="toptitle">
+                    <h1>Nonstandard Inference</h1>
+                </div>
+                <div class="infoblock">
+                    <div class="blockcontent">
+                        <h3 style="margin-bottom: 0em; margin-top: 0;">Summary (LLM read my papers; human bias-correction applied)</h3>
+                        <p>A central theme of my work is reliable uncertainty quantification in modern problems where standard Wald intervals with “estimate + standard error” recipes can break. This happens when the target is defined through an optimization (e.g., a worst-case/robust objective), when the procedure involves data-adaptive steps (e.g., model selection or causal discovery), or when key regularity conditions fail so the usual smooth asymptotic normal approximations are no longer accurate. In these settings, I develop inference methods—often based on perturbation/resampling or other stability-driven constructions—that remain valid even when the limiting distribution is nonsmooth or non-normal, or when nuisance components are learned flexibly and may converge slowly. Intuitively, the goal is to provide confidence statements that continue to mean what they say (correct coverage) in the realistic regimes where robustness, selection, and complex learning are essential, but classical asymptotic theory is overly optimistic.</p>
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        <p><u>Koo, T.</u> and <b>Guo, Z.</b> (2025).<br>
+                        <a href="https://arxiv.org/abs/2511.02632" style="color: #0061CE">Distributionally Robust Synthetic Control: Ensuring Robustness Against Highly Correlated Controls and Weight Shifts.</a><br>
+                        Technical Report</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><u>Zheng, M.</u>,Bonvini, M.<sup>✉</sup>,and <b>Guo, Z.</b><sup>✉</sup>(2025).<br>
+                        <a href="https://arxiv.org/abs/2511.01222" style="color: #0061CE">Perturbed Double Machine Learning: Nonstandard Inference Beyond the Parametric Length</a><br>
+                        Technical Report</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><b>Guo, Z.</b>, <u>Wang, Z.</u>, Hu, Y., and Bach, F.(2025).<br>
+                        <a href="https://arxiv.org/abs/2507.09905" style="color: #0061CE">Statistical Inference for Conditional Group Distributionally Robust Optimization with Cross-Entropy Loss</a><br>
+                        Technical Report</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><b>Guo, Z.</b>, Li, X., Han, L., and Cai Tianxi. (2025+).<br>
+                        <a href="../arxiv/2301.00718v1.pdf" style="color: #0061CE">Robust Inference for Federated Meta-Learning</a><br>
+                        <i>Journal of the American Statistical Association, to appear.</i> [<a href="https://github.com/celehs/RIFL" style="color: #FF2D00">Codes</a>]</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><u>Chang, T. H.</u>, <b>Guo, Z.</b>, and Malinsky, D. (2025+).<br>
+                        <a href="../arxiv/2405.06763v4.pdf" style="color: #0061CE">Post-selection inference for causal effects after causal discovery.</a><br>
+                        <i>Biometrika, to appear.</i></p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><b>Guo, Z.</b> (2024).<br>
+                        <a href="../arxiv/2011.07568v4.pdf" style="color: #0061CE">Statistical Inference for Maximin Effects: Identifying Stable Associations across Multiple Studies</a> .<br>
+                        <i>Journal of the American Statistical Association, 119(547), 1968-1984.</i> [<a href="https://github.com/zywang0701/MaximinInfer/" style="color: #FF2D00">Codes</a>]</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><b>Guo, Z.</b> (2023).<br>
+                        <a href="../arxiv/2104.06911v5.pdf" style="color: #0061CE">Causal Inference with Invalid Instruments: Post-selection Problems and A Solution Using Searching and Sampling.</a><br>
+                        <i>Journal of the Royal Statistical Society: Series B (Statistical Methodology), 85(3), 959-985.</i> [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]</p>
+                    </li>
+                </ul>
+                <p style="font-size: 16px; color: #555;"><i>underline indicates supervised students ; # indicates equal contribution; * indicates alphabetical ordering ; ✉ indicates corresponding authorship.</i></p>
+                <div id="footer">
+                    <div id="footer-text">
+                        Page generated 2025, by jemdoc+MathJax.
+                    </div>
+                </div>
+            </td>
+        </tr>
     </table>
-  </body>
+</body>
 </html>

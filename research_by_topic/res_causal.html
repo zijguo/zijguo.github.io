@@ -1,17 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <link rel="stylesheet" href="../jemdoc.css" type="text/css" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <link href="../jemdoc.css" rel="stylesheet" type="text/css">
     <title>Causal Inference - Zijian Guo</title>
-
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    <script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'>
+    </script>
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         TeX: { equationNumbers: { autoNumber: "AMS" } }
       });
     </script>
-
     <style type="text/css">
       html * { line-height: 1.65; font-size:19px; }
       count { display: block }
@@ -21,296 +20,231 @@
       h1 { font-size: 32px !important; }
       h2 { font-size:22.5px !important; }
     </style>
-  </head>
-
-  <body>
-    <table summary="Table for page layout." id="tlayout">
-      <tr valign="top">
-        <td id="layout-menu">
-          <img src="../photos/bio.jpg" alt="alt text" width="200" height="300" />
-          <h1 id="name">Zijian Guo</h1>
-          <div class="menu-category">Home</div>
-          <div class="menu-item"><a href="../index.html">About&nbsp;Me</a></div>
-          <div class="menu-item"><a href="../CV/Zijian_Guo_CV.pdf">CV</a></div>
-
-          <div class="menu-category">Research</div>
-          <div class="menu-item"><a href="../research/pub.html">Publications</a></div>
-          <div class="menu-item"><a href="../research/talks.html">Talks</a></div>
-          <div class="menu-item"><a href="../research/software.html">Software</a></div>
-
-          <div class="menu-category">Research by Topic</div>
-          <div class="menu-item"><a href="res_multisource.html">Multi-source&nbsp;Learning</a></div>
-          <div class="menu-item"><a href="res_nonstandard.html">Nonstandard&nbsp;Inference</a></div>
-          <div class="menu-item"><a href="res_optstat.html">Stochastic&nbsp;Optimization</a></div>
-          <div class="menu-item"><a href="res_causal.html">Causal&nbsp;Inference</a></div>
-          <div class="menu-item"><a href="res_highdim.html">High-dimensional&nbsp;Statistics</a></div>
-          <div class="menu-item"><a href="res_ai4science.html">AI4Science</a></div>
-
-          <div class="menu-category">Teaching</div>
-          <div class="menu-item"><a href="../teaching/teaching.html">Teaching</a></div>
-          <div class="menu-item"><a href="../teaching/supervised.html">Supervised Students</a></div>
-        </td>
-
-        <td id="layout-content">
-          <div id="toptitle">
-            <h1>Causal Inference</h1>
-          </div>
-
-          <div class="infoblock">
-            <div class="blockcontent">
-              <h3 style="margin-bottom: 0em; margin-top: 0;"> Summary (LLM read my papers; human bias-correction applied) </h3>
-              <p>
-              My causal inference research centers on instrumental variables (IV)—methods for estimating 
-              causal effects when important confounders are unmeasured—while recognizing that, 
-              in real studies, instruments can be imperfect. A main contribution of my work is robust IV methodology: 
-              I develop identification and inference tools that remain meaningful even when some 
-              instruments may be invalid (e.g., they affect the outcome through pathways other 
-              than the treatment), rather than relying on idealized assumptions that all instruments 
-              are perfectly valid.</br></br>
-              More recently, my interests extend to two related directions. First, I study 
-              under-identification and non-regular inference, where standard confidence 
-              intervals—especially the familiar Wald interval—can give a false sense of precision 
-              when the causal signal is fragile. Second, I develop methods for causal invariance 
-              learning, which aims to identify relationships that remain stable 
-              across environments and can therefore be interpreted causally and 
-              transported to new settings.
-
-              </p>
-
-            </div>
-          </div>
-
-          <countreset>
-            <ul>
-              <li>
-                <p>
-                  <count> <u>Koo, T.</u> and <b>Guo, Z.</b> (2025).<br /> 
-                  <a href="https://arxiv.org/abs/2511.02632" style="color: #0061CE "> Distributionally Robust Synthetic Control: Ensuring Robustness Against Highly Correlated Controls and Weight Shifts. </a><br />
-                  Technical Report
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count> <u>Zheng, M.</u>, Bonvini, M.<sup>✉</sup>,and <b>Guo, Z.</b><sup>✉</sup>(2025).<br /> 
-                  <a href="https://arxiv.org/abs/2511.01222" style="color: #0061CE "> Perturbed Double Machine Learning: Nonstandard Inference Beyond the Parametric Length </a><br />
-                  Technical Report
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count> <u>Scheidegger, C.</u>, <b>Guo, Z.</b>, and Bühlmann, P.(2025).<br /> 
-                  <a href="https://arxiv.org/abs/2503.03530" style="color: #0061CE "> Inference for Heterogeneous Treatment Effects with Efficient Instruments and Machine Learning</a><br />
-                  Technical Report
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count> <u>Gu, Y.</u>, Fang, C., Xu, Y., <b>Guo, Z.</b>, and Fan, J.(2025).<br /> 
-                  <a href="https://arxiv.org/abs/2501.17354" style="color: #0061CE "> Fundamental Computational Limits in Pursuing Invariant Causal Prediction and Invariance-Guided Regularization</a><br />
-                  Technical Report
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count> <u>Wang, Z.<sup>#</sup></u>, Hu, Y.<sup>#</sup>, Bühlmann, P., and <b> Guo, Z.</b>(2024).<br /> 
-                  <a href="https://arxiv.org/abs/2412.11850" style="color: #0061CE "> Causal Invariance Learning via Efficient Optimization of a Nonconvex Objective</a><br />
-                  Technical Report
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count> *Fan, Q., <b>Guo, Z.</b>, <u>Mei, Z.</u>,and Zhang, C. (2023).<br /> 
-                  <a href="https://arxiv.org/abs/2310.08063" style="color: #0061CE "> Uniform Inference for Nonlinear Endogenous Treatment Effects with High-Dimensional Covariates. </a><br />
-                  Technical report
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count> <b>Guo, Z.</b>, <u>Zheng, M.</u>,and Bühlmann, P. (2022). <br /> 
-                  <a href="https://arxiv.org/abs/2203.12808" style="color: #0061CE "> Robustness Against Weak or Invalid Instruments: Exploring Nonlinear Treatment Models with Machine Learning </a><br />
-                  Technical Report
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count> <u>Chang, T. H.</u>, <b>Guo, Z.</b>, and Malinsky, D. (2025+). <br/> 
-                  <a href="../arxiv/2405.06763v4.pdf" style="color: #0061CE "> Post-selection inference for causal effects after causal discovery.</a><br />
-                  <i> Biometrika, to appear. </i>
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count> <u>Scheidegger, C.</u>, <b>Guo, Z.</b>, and Bühlmann, P. (2024+).<br /> 
-                  <a href="../arxiv/2312.02860v3.pdf" style="color: #0061CE "> Spectral deconfounding for high-dimensional sparse additive models </a><br />
-                  <i> ACM/IMS Journal of Data Science, to appear. </i>
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count> *Fan, Q., <b>Guo, Z.</b>,and <u>Mei, Z.</u> (2024+). <br /> 
-                  <a href="../arxiv/2205.00171v3.pdf" style="color: #0061CE "> A Heteroskedasticity-Robust Overidentifying Restriction Test with High-Dimensional Covariates </a><br />
-                  <i> Journal of Business & Economic Statistics, to appear. </i>
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count>Carl, D., Emmenegger, C., Bühlmann, P., and <b>Guo, Z.</b>(2024+). <br /> 
-                  <a href="../arxiv/2304.00513v1.pdf" style="color: #0061CE "> TSCI: Two Stage Curvature Identification for Causal Inference with Invalid Instruments</a><br />
-                  <i> Journal of Statistical software, to appear. </i> [<a href="https://github.com/zijguo/TSCI" style="color: #FF2D00">Codes</a>]
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count> Kang, H., <b>Guo, Z.</b>, Liu, Z., and Small, D.(2024).<br /> 
-                  <a href="../arxiv/2407.19558v1.pdf" style="color: #0061CE "> Identification and Inference with Invalid Instruments </a><br />
-                  <i> Annual Review of Statistics and Its Application, to appear. </i>
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count><b>Guo, Z.</b> (2023). <br />
-                  <a href="../arxiv/2104.06911v5.pdf" style="color: #0061CE ">Causal Inference with Invalid Instruments: Post-selection Problems and A Solution Using Searching and Sampling.</a> <br />
-                  <i> Journal of the Royal Statistical Society: Series B (Statistical Methodology), 85(3), 959-985. </i>[<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00" >Codes</a>]
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count> <u>Koo, T.</u>, Lee, Y., Small, D., <b>Guo, Z.</b>(2023). <br /> 
-                  <a href="../arxiv/2301.04412v2.pdf" style="color: #0061CE "> RobustIV and controlfunctionIV: Causal Inference for Linear and Nonlinear Models with Invalid Instrumental Variables</a><br />
-                  <i> Observational Studies, 9(4), 97-120. </i> [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count><b>Guo, Z.</b> , Cevid, D., and Bühlmann, P. (2022). <br />
-                  <a href="../arxiv/2004.03758v3.pdf" style="color: #0061CE "> Doubly Debiased Lasso: High-Dimensional Inference under Hidden Confounding</a>. <br />
-                  <i>Annals of Statistics</i>, 50 (3), 1320 - 1347.
-                  [<a href="https://github.com/zijguo/Doubly-Debiased-Lasso" style="color: #FF2D00">Codes</a>]
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count><b>Guo, Z.</b>, Kang, H., Cai, T. T. and Small, D. S. (2018). <br />
-                  <a href="../arxiv/1609.06713v3.pdf" style="color: #0061CE ">Testing Endogeneity with High Dimensional Covariates</a>. <br />
-                  <i>The Journal of Econometrics,</i> 207(1), 175-187. 
-                  [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count><b>Guo, Z.</b>, Kang, H., Cai, T. T. and Small, D. S. (2018). <br />
-                  <a href="../arxiv/1603.05224v3.pdf" style="color: #0061CE ">Confidence Intervals for Causal Effects with Invalid Instruments using Two-Stage Hard Thresholding with Voting</a>. <br />
-                  <i>Journal of the Royal Statistical Society: Series B,</i> 80(4), 793-815. 
-                  [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count><b>Guo, Z.</b>, Small, D. S., Gansky, S. A., and Cheng, J. (2018). <br />
-                  <a href="../arxiv/1601.06294v2.pdf" style="color: #0061CE ">Mediation Analysis for Count and Zero-Inflated Count Data without Sequential Ignorability</a>. <br />
-                  <i>Journal of the Royal Statistical Society: Series C,</i> 67(2), 371-394. 
-                  [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count>Cheng J., Cheng, N. F., <b>Guo, Z.</b>, Gregorich, S., Ismail, A. I. and Gansky, S. A. (2018). <br />
-                  <a href="../arxiv/nihms861607.pdf" style="color: #0061CE ">Mediation Analysis for Count and Zero-Inflated Count Data</a>. <br />
-                  <i>Statistical Methods in Medical Research,</i> 27(9), 2756-2774. 
-                  [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count><b>Guo, Z.</b> and Small, D. S. (2016). <br />
-                  <a href="../arxiv/1602.01051v1.pdf" style="color: #0061CE ">Control Function Instrumental Variable Estimation of Nonlinear Causal Effect Models</a>. <br />
-                  <i>Journal of Machine Learning Research,</i>  17(100):1-35, 2016. 
-                  [<a href="https://github.com/zijguo/controlfunctionIV"  style="color: #FF2D00">Codes</a>]
-                </p>
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <p>
-                  <count><b>Guo, Z.</b>, Cheng, J.,Lorch, S. A., and Small, D. S. (2014). <br />
-                  <a href="../arxiv/1601.06288v1.pdf" style="color: #0061CE "> Using an Instrumental Variable to Test for Unmeasured Confounding</a>. <br />
-                  <i>Statistics in Medicine,</i>  33, 3528 - 3546. 
-                  [<a href="https://github.com/zijguo/controlfunctionIV" style="color: #FF2D00">Codes</a>]
-                </p>
-              </li>
-            </ul>
-          </countreset>
-
-          <p style="font-size: 16px; color: #555;">
-                <i>underline indicates supervised students ; # indicates equal contribution; 
-                * indicates alphabetical ordering ; ✉ indicates corresponding authorship.</i>
-            </p>
-          
-          <div id="footer">
-            <div id="footer-text">
-              Page generated 2025, by jemdoc+MathJax.
-            </div>
-          </div>
-        </td>
-      </tr>
+</head>
+<body>
+    <table id="tlayout" summary="Table for page layout.">
+        <tr valign="top">
+            <td id="layout-menu">
+                <img alt="alt text" height="300" src="../photos/bio.jpg" width="200">
+                <h1 id="name">Zijian Guo</h1>
+                <div class="menu-category">
+                    Home
+                </div>
+                <div class="menu-item">
+                    <a href="../index.html">About&nbsp;Me</a>
+                </div>
+                <div class="menu-item">
+                    <a href="../CV/Zijian_Guo_CV.pdf">CV</a>
+                </div>
+                <div class="menu-category">
+                    Research
+                </div>
+                <div class="menu-item">
+                    <a href="../research/pub.html">Publications</a>
+                </div>
+                <div class="menu-item">
+                    <a href="../research/talks.html">Talks</a>
+                </div>
+                <div class="menu-item">
+                    <a href="../research/software.html">Software</a>
+                </div>
+                <div class="menu-category">
+                    Research by Topic
+                </div>
+                <div class="menu-item">
+                    <a href="res_multisource.html">Multi-source&nbsp;Learning</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_nonstandard.html">Nonstandard&nbsp;Inference</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_optstat.html">Stochastic&nbsp;Optimization</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_causal.html">Causal&nbsp;Inference</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_highdim.html">High-dimensional&nbsp;Statistics</a>
+                </div>
+                <div class="menu-item">
+                    <a href="res_ai4science.html">AI4Science</a>
+                </div>
+                <div class="menu-category">
+                    Teaching
+                </div>
+                <div class="menu-item">
+                    <a href="../teaching/teaching.html">Teaching</a>
+                </div>
+                <div class="menu-item">
+                    <a href="../teaching/supervised.html">Supervised Students</a>
+                </div>
+            </td>
+            <td id="layout-content">
+                <div id="toptitle">
+                    <h1>Causal Inference</h1>
+                </div>
+                <div class="infoblock">
+                    <div class="blockcontent">
+                        <h3 style="margin-bottom: 0em; margin-top: 0;">Summary (LLM read my papers; human bias-correction applied)</h3>
+                        <p>My causal inference research centers on instrumental variables (IV)—methods for estimating causal effects when important confounders are unmeasured—while recognizing that, in real studies, instruments can be imperfect. A main contribution of my work is robust IV methodology: I develop identification and inference tools that remain meaningful even when some instruments may be invalid (e.g., they affect the outcome through pathways other than the treatment), rather than relying on idealized assumptions that all instruments are perfectly valid.<br>
+                        More recently, my interests extend to two related directions. First, I study under-identification and non-regular inference, where standard confidence intervals—especially the familiar Wald interval—can give a false sense of precision when the causal signal is fragile. Second, I develop methods for causal invariance learning, which aims to identify relationships that remain stable across environments and can therefore be interpreted causally and transported to new settings.</p>
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        <p><u>Koo, T.</u> and <b>Guo, Z.</b> (2025).<br>
+                        <a href="https://arxiv.org/abs/2511.02632" style="color: #0061CE">Distributionally Robust Synthetic Control: Ensuring Robustness Against Highly Correlated Controls and Weight Shifts.</a><br>
+                        Technical Report</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><u>Zheng, M.</u>, Bonvini, M.<sup>✉</sup>,and <b>Guo, Z.</b><sup>✉</sup>(2025).<br>
+                        <a href="https://arxiv.org/abs/2511.01222" style="color: #0061CE">Perturbed Double Machine Learning: Nonstandard Inference Beyond the Parametric Length</a><br>
+                        Technical Report</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><u>Scheidegger, C.</u>, <b>Guo, Z.</b>, and Bühlmann, P.(2025).<br>
+                        <a href="https://arxiv.org/abs/2503.03530" style="color: #0061CE">Inference for Heterogeneous Treatment Effects with Efficient Instruments and Machine Learning</a><br>
+                        Technical Report</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><u>Gu, Y.</u>, Fang, C., Xu, Y., <b>Guo, Z.</b>, and Fan, J.(2025).<br>
+                        <a href="https://arxiv.org/abs/2501.17354" style="color: #0061CE">Fundamental Computational Limits in Pursuing Invariant Causal Prediction and Invariance-Guided Regularization</a><br>
+                        Technical Report</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><u>Wang, Z.<sup>#</sup></u>, Hu, Y.<sup>#</sup>, Bühlmann, P., and <b>Guo, Z.</b>(2024).<br>
+                        <a href="https://arxiv.org/abs/2412.11850" style="color: #0061CE">Causal Invariance Learning via Efficient Optimization of a Nonconvex Objective</a><br>
+                        Technical Report</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p>*Fan, Q., <b>Guo, Z.</b>, <u>Mei, Z.</u>,and Zhang, C. (2023).<br>
+                        <a href="https://arxiv.org/abs/2310.08063" style="color: #0061CE">Uniform Inference for Nonlinear Endogenous Treatment Effects with High-Dimensional Covariates.</a><br>
+                        Technical report</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><b>Guo, Z.</b>, <u>Zheng, M.</u>,and Bühlmann, P. (2022).<br>
+                        <a href="https://arxiv.org/abs/2203.12808" style="color: #0061CE">Robustness Against Weak or Invalid Instruments: Exploring Nonlinear Treatment Models with Machine Learning</a><br>
+                        Technical Report</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><u>Chang, T. H.</u>, <b>Guo, Z.</b>, and Malinsky, D. (2025+).<br>
+                        <a href="../arxiv/2405.06763v4.pdf" style="color: #0061CE">Post-selection inference for causal effects after causal discovery.</a><br>
+                        <i>Biometrika, to appear.</i></p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><u>Scheidegger, C.</u>, <b>Guo, Z.</b>, and Bühlmann, P. (2024+).<br>
+                        <a href="../arxiv/2312.02860v3.pdf" style="color: #0061CE">Spectral deconfounding for high-dimensional sparse additive models</a><br>
+                        <i>ACM/IMS Journal of Data Science, to appear.</i></p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p>*Fan, Q., <b>Guo, Z.</b>,and <u>Mei, Z.</u> (2024+).<br>
+                        <a href="../arxiv/2205.00171v3.pdf" style="color: #0061CE">A Heteroskedasticity-Robust Overidentifying Restriction Test with High-Dimensional Covariates</a><br>
+                        <i>Journal of Business & Economic Statistics, to appear.</i></p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p>Carl, D., Emmenegger, C., Bühlmann, P., and <b>Guo, Z.</b>(2024+).<br>
+                        <a href="../arxiv/2304.00513v1.pdf" style="color: #0061CE">TSCI: Two Stage Curvature Identification for Causal Inference with Invalid Instruments</a><br>
+                        <i>Journal of Statistical software, to appear.</i> [<a href="https://github.com/zijguo/TSCI" style="color: #FF2D00">Codes</a>]</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p>Kang, H., <b>Guo, Z.</b>, Liu, Z., and Small, D.(2024).<br>
+                        <a href="../arxiv/2407.19558v1.pdf" style="color: #0061CE">Identification and Inference with Invalid Instruments</a><br>
+                        <i>Annual Review of Statistics and Its Application, to appear.</i></p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><b>Guo, Z.</b> (2023).<br>
+                        <a href="../arxiv/2104.06911v5.pdf" style="color: #0061CE">Causal Inference with Invalid Instruments: Post-selection Problems and A Solution Using Searching and Sampling.</a><br>
+                        <i>Journal of the Royal Statistical Society: Series B (Statistical Methodology), 85(3), 959-985.</i> [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><u>Koo, T.</u>, Lee, Y., Small, D., <b>Guo, Z.</b>(2023).<br>
+                        <a href="../arxiv/2301.04412v2.pdf" style="color: #0061CE">RobustIV and controlfunctionIV: Causal Inference for Linear and Nonlinear Models with Invalid Instrumental Variables</a><br>
+                        <i>Observational Studies, 9(4), 97-120.</i> [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><b>Guo, Z.</b> , Cevid, D., and Bühlmann, P. (2022).<br>
+                        <a href="../arxiv/2004.03758v3.pdf" style="color: #0061CE">Doubly Debiased Lasso: High-Dimensional Inference under Hidden Confounding</a>.<br>
+                        <i>Annals of Statistics</i>, 50 (3), 1320 - 1347. [<a href="https://github.com/zijguo/Doubly-Debiased-Lasso" style="color: #FF2D00">Codes</a>]</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><b>Guo, Z.</b>, Kang, H., Cai, T. T. and Small, D. S. (2018).<br>
+                        <a href="../arxiv/1609.06713v3.pdf" style="color: #0061CE">Testing Endogeneity with High Dimensional Covariates</a>.<br>
+                        <i>The Journal of Econometrics,</i> 207(1), 175-187. [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><b>Guo, Z.</b>, Kang, H., Cai, T. T. and Small, D. S. (2018).<br>
+                        <a href="../arxiv/1603.05224v3.pdf" style="color: #0061CE">Confidence Intervals for Causal Effects with Invalid Instruments using Two-Stage Hard Thresholding with Voting</a>.<br>
+                        <i>Journal of the Royal Statistical Society: Series B,</i> 80(4), 793-815. [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><b>Guo, Z.</b>, Small, D. S., Gansky, S. A., and Cheng, J. (2018).<br>
+                        <a href="../arxiv/1601.06294v2.pdf" style="color: #0061CE">Mediation Analysis for Count and Zero-Inflated Count Data without Sequential Ignorability</a>.<br>
+                        <i>Journal of the Royal Statistical Society: Series C,</i> 67(2), 371-394. [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p>Cheng J., Cheng, N. F., <b>Guo, Z.</b>, Gregorich, S., Ismail, A. I. and Gansky, S. A. (2018).<br>
+                        <a href="../arxiv/nihms861607.pdf" style="color: #0061CE">Mediation Analysis for Count and Zero-Inflated Count Data</a>.<br>
+                        <i>Statistical Methods in Medical Research,</i> 27(9), 2756-2774. [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><b>Guo, Z.</b> and Small, D. S. (2016).<br>
+                        <a href="../arxiv/1602.01051v1.pdf" style="color: #0061CE">Control Function Instrumental Variable Estimation of Nonlinear Causal Effect Models</a>.<br>
+                        <i>Journal of Machine Learning Research,</i> 17(100):1-35, 2016. [<a href="https://github.com/zijguo/controlfunctionIV" style="color: #FF2D00">Codes</a>]</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><b>Guo, Z.</b>, Cheng, J.,Lorch, S. A., and Small, D. S. (2014).<br>
+                        <a href="../arxiv/1601.06288v1.pdf" style="color: #0061CE">Using an Instrumental Variable to Test for Unmeasured Confounding</a>.<br>
+                        <i>Statistics in Medicine,</i> 33, 3528 - 3546. [<a href="https://github.com/zijguo/controlfunctionIV" style="color: #FF2D00">Codes</a>]</p>
+                    </li>
+                </ul>
+                <p style="font-size: 16px; color: #555;"><i>underline indicates supervised students ; # indicates equal contribution; * indicates alphabetical ordering ; ✉ indicates corresponding authorship.</i></p>
+                <div id="footer">
+                    <div id="footer-text">
+                        Page generated 2025, by jemdoc+MathJax.
+                    </div>
+                </div>
+            </td>
+        </tr>
     </table>
-  </body>
+</body>
 </html>
