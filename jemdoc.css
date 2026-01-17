@@ -317,7 +317,7 @@ table.imgtable, table.imgtable td {
 .student-card {
     /* 如果你想严格并排3张，可以设置为 width: calc(33% - 40px); */
     /* 或者保留固定宽度，只要容器够宽，它们就会自动排成一排 */
-    width: 230px;         
+    width: 280px;         
     border: none !important;      /* 强制去掉黑色外框 */
     box-shadow: none !important;  /* 确保没有阴影边框 */
     background: transparent;      /* 背景设为透明或与网页底色一致 */
@@ -331,9 +331,11 @@ table.imgtable, table.imgtable td {
 
 /* 学生照片样式 */
 .student-card img {
-    width: 100%;
-    height: 200px;        /* 适当调高了高度以符合 3 张并排的视觉 */
+    width: 240px;
+    
+    height: 330px;        /* 适当调高了高度以符合 3 张并排的视觉 */
     object-fit: cover;    /* 确保照片比例不失真 */
+    object-position: contain;
     display: block;
 }
 
