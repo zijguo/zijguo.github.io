@@ -318,7 +318,9 @@ table.imgtable, table.imgtable td {
     /* 如果你想严格并排3张，可以设置为 width: calc(33% - 40px); */
     /* 或者保留固定宽度，只要容器够宽，它们就会自动排成一排 */
     width: 230px;         
-    border: 1px solid black;
+    border: none !important;      /* 强制去掉黑色外框 */
+    box-shadow: none !important;  /* 确保没有阴影边框 */
+    background: transparent;      /* 背景设为透明或与网页底色一致 */
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -338,11 +340,12 @@ table.imgtable, table.imgtable td {
 /* 底部名字区域 */
 .student-info {
     padding: 12px 5px;
-    border-top: 1px solid black;
+    display: block !important;
+    border-top: none !important;  /* 明确禁用顶部的分割线 */
+    padding-top: 10px;            /* 虽然没了线，但保留一点间距才好看 */
     font-size: 18px !important;
     font-weight: bold;
     min-height: 45px;
-    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -364,7 +367,7 @@ table.imgtable, table.imgtable td {
 
 /* 简介样式：缩小字号、左对齐、调整行高 */
 .student-desc {
-    font-size: 14px !important; /* 缩小字号是处理长文本的关键 */
+    font-size: 18px !important; /* 缩小字号是处理长文本的关键 */
     line-height: 1.4;           /* 增加行间距防止文字粘在一起 */
     text-align: left;           /* 长文本左对齐比居中更易于阅读 */
     margin: 0;
@@ -375,5 +378,5 @@ table.imgtable, table.imgtable td {
 /* 修正容器对齐 */
 .student-info {
     display: block !important; /* 从 flex 改为 block，让 p 标签自然换行 */
-    border-top: 1px solid black;
+    /*border-top: 1px solid black;*/
 }
