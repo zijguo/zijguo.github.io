@@ -329,53 +329,54 @@ table.imgtable, table.imgtable td {
     color: inherit;        /* 继承文字颜色 */
 }
 
-/* 学生照片样式 */
+/* 确保图片本身在卡片内居中 */
 .student-card img {
     width: 240px;
-    
-    height: 330px;        /* 适当调高了高度以符合 3 张并排的视觉 */
-    object-fit: cover;    /* 确保照片比例不失真 */
-    object-position: contain;
+    height: 330px;
+    object-fit: cover;
+    margin: 0 auto;                /* 确保图片在 card 容器里水平居中 */
     display: block;
 }
 
-/* 底部名字区域 */
-.student-info {
-    padding: 12px 5px;
-    display: block !important;
-    border-top: none !important;  /* 明确禁用顶部的分割线 */
-    padding-top: 10px;            /* 虽然没了线，但保留一点间距才好看 */
-    font-size: 18px !important;
-    font-weight: bold;
-    min-height: 45px;
-    align-items: center;
-    justify-content: center;
-}
 
 /* 针对校友卡片，可以适当放宽宽度（可选） */
 .alumni-card {
     width: 320px !important; /* 如果介绍太长，可以比普通学生卡片稍宽一点 */
 }
 
-/* 姓名样式：加粗、居中、字号稍大 */
+/* 1. 所有名字的通用样式 */
 .student-name {
     display: block;
     font-weight: bold;
     font-size: 19px !important;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     text-align: center;
-    color: #224b8d;
+    /* 默认设为黑色 */
+    color: #000000 !important; 
 }
 
-/* 简介样式：缩小字号、左对齐、调整行高 */
-.student-desc {
-    font-size: 18px !important; /* 缩小字号是处理长文本的关键 */
-    line-height: 1.4;           /* 增加行间距防止文字粘在一起 */
-    text-align: left;           /* 长文本左对齐比居中更易于阅读 */
-    margin: 0;
-    padding: 5px 10px 10px 10px; /* 增加内边距防止文字贴边 */
-    color: #444;                /* 颜色稍浅，突出姓名 */
+/* 2. 专门针对“有链接”的名字：设为蓝色 */
+a.student-name {
+    /* 使用深蓝色，比普通亮蓝更专业 */
+    color: #224b8d !important; 
+    text-decoration: none; /* 初始去掉下划线，保持整洁 */
 }
+
+/* 3. 鼠标悬停在链接上的效果（可选，建议保留） */
+a.student-name:hover {
+    color: #0056b3 !important; /* 悬停时稍微变色 */
+    text-decoration: underline; /* 悬停时出现下划线，提示可点击 */
+}
+
+/* 4. 学校和年份信息：保持灰色或根据喜好调整 */
+.student-desc {
+    display: block;
+    font-size: 18px !important;
+    text-align: center;
+    color: #666; 
+    font-weight: normal; /* 确保第二行不加粗 */
+}
+
 
 /* 修正容器对齐 */
 .student-info {
