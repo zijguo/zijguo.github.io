@@ -382,3 +382,17 @@ table.imgtable, table.imgtable td {
     display: block !important; /* 从 flex 改为 block，让 p 标签自然换行 */
     /*border-top: 1px solid black;*/
 }
+
+/* 1. 在每个 h2 标题处重置计数器 */
+h2 {
+  counter-reset: paper-count;
+}
+
+/* 2. 针对包含论文内容的 div 内部的 p 标签进行自动编号 */
+#layout-content div[style*="margin-left: 2em"] p::before {
+  counter-increment: paper-count;
+  content: "" counter(paper-count) ". "; /* 显示格式为 [1], [2]... */
+  font-weight: bold;
+  color: #333;
+  margin-right: 8px;
+}
