@@ -19,6 +19,22 @@
       countreset ul { list-style-type: none; }
       h1 { font-size: 32px !important; }
       h2 { font-size:22.5px !important; }
+    #layout-content {
+    counter-reset: paper-item;
+    }
+
+    #layout-content ul {
+    list-style-type: none; /* 去掉原本的点 */
+    margin-left: 20px;
+    padding-left: 4px;
+    }
+
+    #layout-content ul li p::before {
+    counter-increment: paper-item;
+    content: "" counter(paper-item) ". "; /* 显示为 [1], [2] */
+    font-weight: bold;
+    margin-right: 8px;
+    }
     </style>
 </head>
 <body>
@@ -71,6 +87,9 @@
                 </div>
                 <div class="menu-category">
                     Teaching
+                </div>
+                <div class="menu-item">
+                    <a href="../teaching/StatisticalOptimization.html">Statistical Optimization</a>
                 </div>
                 <div class="menu-item">
                     <a href="../teaching/teaching.html">Teaching</a>
