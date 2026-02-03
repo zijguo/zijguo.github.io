@@ -1,6 +1,7 @@
 // --- 修改开始：动态获取当前日期 ---
 const TODAY = new Date();
 const CURRENT_YEAR = TODAY.getFullYear();
+const MAX_LOOKAHEAD_YEARS = 1; // 允许最多往后看 1 年
 
 // 计算本周一的日期
 const dayOfWeek = TODAY.getDay(); // 0(周日) - 6(周六)
@@ -99,10 +100,23 @@ function closeAdminSettings() {
 }
 
 function logout() {
-    document.getElementById('adminSettings').style.display = 'none';
-    document.getElementById('mainContent').classList.remove('active');
+    currentUser = null;
+    
+    // 1. 显示登录界面
     document.getElementById('loginPage').style.display = 'flex';
+    
+    // 2. 隐藏主要内容区域 (年份日历等)
+    document.getElementById('mainContent').classList.remove('active');
+    
+    // 3. 【关键修复】隐藏 AdminSettings 区域 (这里包含了预约表 scheduleContainer)
+    document.getElementById('adminSettings').style.display = 'none';
+    
+    // 4. 清理输入框和错误信息
     document.getElementById('password').value = '';
+    document.getElementById('errorMessage').style.display = 'none';
+    
+    // 5. 额外的安全措施：如果打开了 Availability Settings 面板，也强制关闭
+    document.getElementById('availabilitySettings').style.display = 'none';
 }
 
 function loadAdminSettings() {
@@ -311,23 +325,64 @@ function clearAllBookings() {
 function loginUser() {
     const password = document.getElementById('password').value;
     const errorDiv = document.getElementById('errorMessage');
+    const settingsPanel = document.getElementById('settingsPanel');
+    const layoutGrid = document.getElementById('mainLayoutGrid');
     
-    // 获取刚才我们在 HTML 里标记的设置面板
-    const settingsPanel = document.getElementById('settingsPanel'); 
-    
-    // 情况 A：老师登录 (Admin)
+    // 获取布局元素
+    const scheduleColumn = document.getElementById('scheduleColumn'); 
+    const scheduleContainer = document.getElementById('scheduleContainer');
+
+    // --- 情况 A：老师登录 (Admin) ---
     if (password === ADMIN_PASSWORD) {
         currentUser = { role: 'admin' };
         enterSystem();
-        // 显示设置面板
-        settingsPanel.style.display = 'block'; 
         
-    // 情况 B：学生登录 (Student)
+        if(settingsPanel) settingsPanel.style.display = 'block'; 
+        
+        // 恢复双列布局
+        if(layoutGrid) {
+            layoutGrid.style.gridTemplateColumns = '1fr 1fr';
+        }
+
+        // 老师视图：恢复默认块级显示，左对齐
+        if(scheduleColumn) {
+            scheduleColumn.style.display = 'block'; 
+            scheduleColumn.style.textAlign = 'left';
+            scheduleColumn.style.alignItems = 'normal'; // 重置 Flex 属性
+        }
+        
+        // 老师视图：表格宽度自适应
+        if(scheduleContainer) {
+            scheduleContainer.style.width = '100%';
+            scheduleContainer.style.maxWidth = 'none';
+        }
+        
+    // --- 情况 B：学生登录 (Student) ---
     } else if (password === STUDENT_PASSWORD) {
         currentUser = { role: 'student' };
         enterSystem();
-        // 【关键点】隐藏设置面板
-        settingsPanel.style.display = 'none'; 
+        
+        if(settingsPanel) settingsPanel.style.display = 'none'; 
+        
+        // 1. 改为单列布局
+        if(layoutGrid) {
+            layoutGrid.style.gridTemplateColumns = '1fr';
+        }
+        
+        // 2. 【终极解决方案】使用 Flexbox 强制居中
+        // 这会强制 scheduleColumn 里的所有内容（标题、表格）都居中
+        if(scheduleColumn) {
+            scheduleColumn.style.display = 'flex';
+            scheduleColumn.style.flexDirection = 'column'; // 垂直排列
+            scheduleColumn.style.alignItems = 'center';    // 水平居中 (关键!)
+            scheduleColumn.style.width = '100%';
+        }
+        
+        // 3. 限制表格最大宽度，防止在大屏幕太丑
+        if(scheduleContainer) {
+            scheduleContainer.style.width = '100%';
+            scheduleContainer.style.maxWidth = '1000px'; 
+        }
         
     } else {
         errorDiv.textContent = 'Invalid password. Please try again.';
@@ -339,22 +394,26 @@ function loginUser() {
 function enterSystem() {
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('mainContent').classList.add('active');
-    document.getElementById('adminSettings').style.display = 'flex'; // 显示主容器
+    const adminSettings = document.getElementById('adminSettings');
+    adminSettings.style.display = 'flex';
+    adminSettings.style.flexDirection = 'column';
+    adminSettings.style.alignItems = 'stretch'
+
     updateScheduleDisplay();
-    renderStudentYearCalendar(); // 这里必须用 renderStudentYearCalendar
+    // 确保年份显示的是今年
+    studentCalendarYear = CURRENT_YEAR; 
+    document.getElementById('studentYearDisplay').textContent = studentCalendarYear;
+    
+    renderStudentYearCalendar(); 
+    
+    // 【新增】初始化按钮状态
+    updateYearNavButtons();
+   
     // 如果是学生，不需要加载 AdminStats 或 AvailabilityDays，防止报错或多余渲染
     if (currentUser.role === 'admin') {
         renderAvailabilityDays();
         loadAdminSettings();
     }
-}
-
-function logout() {
-    currentUser = null;
-    document.getElementById('loginPage').style.display = 'flex';
-    document.getElementById('mainContent').classList.remove('active');
-    document.getElementById('password').value = '';
-    document.getElementById('errorMessage').style.display = 'none';
 }
 
 function openAvailabilitySettings() {
@@ -377,7 +436,10 @@ function closeAvailabilitySettings() {
     document.getElementById('mainContent').style.display = 'block'; // 或者 '' 清空也行
     
     // 恢复显示管理员面板
-    document.getElementById('adminSettings').style.display = 'flex';
+    const adminSettings = document.getElementById('adminSettings');
+    adminSettings.style.display = 'flex';
+    adminSettings.style.flexDirection = 'column';
+    adminSettings.style.alignItems = 'stretch';
 }
 
 function renderDailyAvailability() {
@@ -825,15 +887,50 @@ function selectWeekFromCalendar(year, month, date) {
 }
 
 function studentPreviousYear() {
-    studentCalendarYear--;
-    document.getElementById('studentYearDisplay').textContent = studentCalendarYear;
-    renderStudentYearCalendar();
+    if (studentCalendarYear > CURRENT_YEAR) {
+        studentCalendarYear--;
+        document.getElementById('studentYearDisplay').textContent = studentCalendarYear;
+        renderStudentYearCalendar();
+        updateYearNavButtons(); // 更新按钮状态（变灰/变亮）
+    }
 }
 
 function studentNextYear() {
-    studentCalendarYear++;
-    document.getElementById('studentYearDisplay').textContent = studentCalendarYear;
-    renderStudentYearCalendar();
+    // 只有当前查看的年份小于 (真实年份 + 1) 时，才允许前进
+    if (studentCalendarYear < CURRENT_YEAR + MAX_LOOKAHEAD_YEARS) {
+        studentCalendarYear++;
+        document.getElementById('studentYearDisplay').textContent = studentCalendarYear;
+        renderStudentYearCalendar();
+        updateYearNavButtons(); // 更新按钮状态
+    }
+}
+
+// --- 新增这个辅助函数来控制按钮样式 ---
+function updateYearNavButtons() {
+    const prevBtn = document.querySelector('button[onclick="studentPreviousYear()"]');
+    const nextBtn = document.querySelector('button[onclick="studentNextYear()"]');
+    
+    // 如果已经是今年（或更早），禁用“上一年”按钮
+    if (studentCalendarYear <= CURRENT_YEAR) {
+        prevBtn.disabled = true;
+        prevBtn.style.opacity = "0.3";
+        prevBtn.style.cursor = "not-allowed";
+    } else {
+        prevBtn.disabled = false;
+        prevBtn.style.opacity = "1";
+        prevBtn.style.cursor = "pointer";
+    }
+
+    // 如果达到了最大限制年份，禁用“下一年”按钮
+    if (studentCalendarYear >= CURRENT_YEAR + MAX_LOOKAHEAD_YEARS) {
+        nextBtn.disabled = true;
+        nextBtn.style.opacity = "0.3";
+        nextBtn.style.cursor = "not-allowed";
+    } else {
+        nextBtn.disabled = false;
+        nextBtn.style.opacity = "1";
+        nextBtn.style.cursor = "pointer";
+    }
 }
 
 function renderStudentYearCalendar() {

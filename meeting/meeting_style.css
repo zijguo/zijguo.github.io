@@ -395,3 +395,16 @@ body {
         grid-template-columns: 1fr;
     }
 }
+/* 确保表格容器本身也是居中的 */
+#scheduleContainer {
+    width: 100%;
+    max-width: 1000px; /* 稍微调窄一点，在居中模式下会更精致 */
+    margin: 0 auto;
+    display: inline-block; /* 或者 block，配合 text-align: center 使用 */
+    text-align: left; /* 这一行很重要：让表格内部的文字（比如 "Click to book"）保持靠左或居中，看你喜好。通常表格里的字保持左对齐或居中都可以 */
+}
+
+/* 让表格格子内的文字居中 */
+.schedule-grid {
+    margin: 0 auto; /* 强制表格在容器内居中 */
+}
