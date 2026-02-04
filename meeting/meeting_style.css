@@ -408,3 +408,12 @@ body {
 .schedule-grid {
     margin: 0 auto; /* 强制表格在容器内居中 */
 }
+
+/* 新增：过期时间段的样式 */
+.slot-cell.past {
+    background: #eeeeee;       /* 浅灰色背景 */
+    color: #bbbbbb;            /* 灰色文字 */
+    cursor: not-allowed !important; /* 禁止鼠标点击手势 */
+    pointer-events: none;      /* 彻底禁止鼠标事件（点击无效） */
+    border-color: #e0e0e0;
+}

@@ -19,7 +19,7 @@ currentFriday.setDate(currentMonday.getDate() + 4);
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 let START_HOUR = 7;
 let END_HOUR = 24;
-let SLOT_DURATION = 30;
+let SLOT_DURATION = 60;
 let STUDENT_PASSWORD = 'guolab'; // 学生用这个密码，只能预约
 let ADMIN_PASSWORD = 'admin';    // 老师用这个密码，可以改设置
 
@@ -106,9 +106,14 @@ function logout() {
     document.getElementById('loginPage').style.display = 'flex';
     
     // 2. 隐藏主要内容区域 (年份日历等)
-    document.getElementById('mainContent').classList.remove('active');
+    const mainContent = document.getElementById('mainContent');
+    mainContent.classList.remove('active');
     
-    // 3. 【关键修复】隐藏 AdminSettings 区域 (这里包含了预约表 scheduleContainer)
+    // 【关键修复】强制清除内联样式。
+    // 之前的操作可能留下了 style="display: block"，这会覆盖 css 的隐藏规则。
+    mainContent.style.display = 'none'; 
+    
+    // 3. 隐藏 AdminSettings 区域 (这里包含了预约表 scheduleContainer)
     document.getElementById('adminSettings').style.display = 'none';
     
     // 4. 清理输入框和错误信息
@@ -120,11 +125,18 @@ function logout() {
 }
 
 function loadAdminSettings() {
-    document.getElementById('startHour').value = START_HOUR;
-    document.getElementById('endHour').value = END_HOUR;
-    document.getElementById('slotDuration').value = SLOT_DURATION;
-    document.getElementById('availStartHour').value = availStartHour;
-    document.getElementById('availEndHour').value = availEndHour;
+    // 安全获取元素并赋值的辅助函数
+    const safeSetValue = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.value = value;
+    };
+
+    safeSetValue('startHour', START_HOUR);
+    safeSetValue('endHour', END_HOUR);
+    // safeSetValue('slotDuration', SLOT_DURATION);
+    safeSetValue('availStartHour', availStartHour);
+    safeSetValue('availEndHour', availEndHour);
+
     updateCurrentTimeRange();
     setWeekDateInputs();
     renderMeetingTimeSelector();
@@ -133,10 +145,16 @@ function loadAdminSettings() {
     loadAdminStats();
 }
 
+// 找到 updateCurrentTimeRange 函数，完全替换为：
 function updateCurrentTimeRange() {
     const startStr = String(START_HOUR).padStart(2, '0') + ':00';
     const endStr = String(END_HOUR).padStart(2, '0') + ':00';
-    document.getElementById('currentTimeRange').textContent = `${startStr} - ${endStr}`;
+    
+    // 增加安全检查，防止找不到元素报错
+    const rangeEl = document.getElementById('currentTimeRange');
+    if (rangeEl) {
+        rangeEl.textContent = `${startStr} - ${endStr}`;
+    }
 }
 
 function updateAdminPassword() {
@@ -277,51 +295,85 @@ function updateAvailability() {
     }, 3000);
 }
 
+// 找到 meeting_script.js 中的 loadAdminStats 函数，替换为：
+
 function loadAdminStats() {
-    const timeSlots = generateTimeSlots();
-    const totalSlots = DAYS.length * timeSlots.length;
+    // 1. 只计算已预约的数量，不再计算 Total 和 Available
     const bookedSlots = Object.keys(bookings).filter(key => bookings[key] && bookings[key].name).length;
+
+    // 2. 修改 HTML 结构：只保留一个 "Booked Slots" 的卡片
+    // 我把 grid 布局改为了简单的 flex 居中，或者你可以直接放左边
     let html = `
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px;">
-                    <div class="stat-box">
-                        <div class="stat-number">${bookedSlots}</div>
-                        <div class="stat-label">Booked Slots</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number">${totalSlots - bookedSlots}</div>
-                        <div class="stat-label">Available Slots</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number">${totalSlots}</div>
-                        <div class="stat-label">Total Slots</div>
-                    </div>
-                </div>
-                <h4 style="color: #667eea; margin-top: 20px; margin-bottom: 10px;">All Bookings:</h4>
-            `;
+        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+            <div class="stat-box" style="flex: 0 0 200px; text-align: center; border-left: 5px solid #667eea;">
+                <div class="stat-number" style="font-size: 2.5em; font-weight: bold; color: #667eea;">${bookedSlots}</div>
+                <div class="stat-label" style="color: #666;">Booked Sessions</div>
+            </div>
+        </div>
+        
+        <h4 style="color: #667eea; margin-top: 20px; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 10px;">
+            📋 Detailed List
+        </h4>
+    `;
+
+    // 3. 下面生成表格的逻辑保持不变 (复制原本的逻辑即可)
     if (Object.keys(bookings).length === 0) {
-        html += '<p style="color: #999;">No bookings yet.</p>';
+        html += '<p style="color: #999; font-style: italic;">No bookings yet.</p>';
     } else {
-        const sortedBookings = Object.entries(bookings).filter(([_, booking]) => booking && booking.name).sort(([keyA], [keyB]) => keyA.localeCompare(keyB));
-        html += '<table style="width: 100%; border-collapse: collapse; margin-top: 10px;">';
-        html += '<tr style="background: #667eea; color: white;"><th style="padding: 10px; text-align: left;">Day</th><th style="padding: 10px; text-align: left;">Time</th><th style="padding: 10px; text-align: left;">Name</th><th style="padding: 10px; text-align: left;">Email</th></tr>';
+        const sortedBookings = Object.entries(bookings)
+            .filter(([_, booking]) => booking && booking.name)
+            .sort(([keyA], [keyB]) => keyA.localeCompare(keyB));
+
+        html += '<table style="width: 100%; border-collapse: collapse; margin-top: 10px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">';
+        html += '<tr style="background: #f8f9fa; color: #666; border-bottom: 2px solid #eee;">' +
+                '<th style="padding: 12px; text-align: left;">Day</th>' +
+                '<th style="padding: 12px; text-align: left;">Time</th>' +
+                '<th style="padding: 12px; text-align: left;">Student Name</th>' +
+                '<th style="padding: 12px; text-align: left;">Email</th>' +
+                '</tr>';
+
         sortedBookings.forEach(([key, booking]) => {
             const [dayIndex, time] = key.split('-');
             const day = DAYS[dayIndex];
-            html += `<tr style="border-bottom: 1px solid #e0e0e0;"><td style="padding: 10px;">${day}</td><td style="padding: 10px;">${time}</td><td style="padding: 10px; font-weight: bold;">${booking.name}</td><td style="padding: 10px;">${booking.email || '-'}</td></tr>`;
+            html += `<tr style="border-bottom: 1px solid #f0f0f0;">
+                        <td style="padding: 12px; color: #666;">${day}</td>
+                        <td style="padding: 12px; font-weight: bold; color: #667eea;">${time}</td>
+                        <td style="padding: 12px; font-weight: bold; color: #333;">${booking.name}</td>
+                        <td style="padding: 12px; color: #666;">${booking.email || '-'}</td>
+                     </tr>`;
         });
         html += '</table>';
     }
+
     document.getElementById('adminStats').innerHTML = html;
 }
 
 function clearAllBookings() {
-    bookings = {};
-    saveData();
-    updateScheduleDisplay();
-    loadAdminStats();
-    alert('✓ All bookings have been cleared!');
-}
+    // 1. 第一层保护：普通的 Confirm 弹窗 (或者直接跳过这步用 prompt 也可以，双重更保险)
+    if (!confirm('⚠️ WARNING: You are about to delete ALL bookings!\n\nThis action cannot be undone. Are you sure?')) {
+        return;
+    }
 
+    // 2. 第二层保护：强制要求输入特定单词
+    // 只有当用户准确输入 'DELETE' 时，操作才会执行
+    const userInput = prompt("🚨 FINAL CHECK 🚨\n\nTo confirm deletion, please type the word 'DELETE' (in all caps) below:");
+
+    if (userInput === 'DELETE') {
+        // 用户输入正确，执行删除
+        bookings = {};
+        saveData();
+        updateScheduleDisplay();
+        loadAdminStats();
+        
+        // 成功提示
+        alert('✓ System Reset: All bookings have been cleared.');
+    } else {
+        // 用户输入错误或取消
+        if (userInput !== null) { // 如果用户点了取消，userInput 是 null，就不弹提示了
+            alert('❌ Operation Cancelled: Input did not match "DELETE".');
+        }
+    }
+}
 function loginUser() {
     const password = document.getElementById('password').value;
     const errorDiv = document.getElementById('errorMessage');
@@ -393,7 +445,16 @@ function loginUser() {
 // 辅助函数：处理通用的登录后续操作
 function enterSystem() {
     document.getElementById('loginPage').style.display = 'none';
-    document.getElementById('mainContent').classList.add('active');
+    
+    // 获取 mainContent
+    const mainContent = document.getElementById('mainContent');
+    
+    // 【关键修复】确保移除 logout 时添加的 display: none
+    mainContent.style.display = ''; 
+    
+    // 添加 active 类来显示内容
+    mainContent.classList.add('active');
+    
     const adminSettings = document.getElementById('adminSettings');
     adminSettings.style.display = 'flex';
     adminSettings.style.flexDirection = 'column';
@@ -490,7 +551,8 @@ function saveAvailabilitySettings() {
 function updateScheduleDisplay() {
     const days = DAYS;
     let allTimeSlots = new Set();
-    // Collect all time slots that are available on ANY day
+    
+    // 1. 收集所有可用时间槽
     days.forEach((day, dayIndex) => {
         const dayAvail = dayHourAvailability[dayIndex];
         for (let hour = dayAvail.start; hour < dayAvail.end; hour++) {
@@ -500,8 +562,15 @@ function updateScheduleDisplay() {
             }
         }
     });
+
     const timeSlots = Array.from(allTimeSlots).sort();
+    
+    // 2. 获取当前系统时间，用于对比
+    const now = new Date();
+
     let html = '<div class="schedule-grid">';
+    
+    // 渲染表头 (日期)
     html += '<div class="schedule-cell day-header">Time</div>';
     days.forEach((day, dayIndex) => {
         const date = new Date(WEEK_START_DATE);
@@ -512,58 +581,93 @@ function updateScheduleDisplay() {
         });
         html += `<div class="schedule-cell day-header">${day}<br><small>${dateStr}</small></div>`;
     });
+
+    // 3. 渲染每一行时间
     timeSlots.forEach(time => {
         html += `<div class="schedule-cell time-cell">${time}</div>`;
+        
         days.forEach((day, dayIndex) => {
+            // --- 计算当前格子的具体日期和时间 ---
+            const date = new Date(WEEK_START_DATE);
+            date.setDate(date.getDate() + dayIndex);
+            
+            // 解析 grid 的时间 (例如 "09:30")
+            const [h, m] = time.split(':').map(Number);
+            
+            // 创建该格子的完整 Date 对象
+            const slotDateTime = new Date(date);
+            slotDateTime.setHours(h, m, 0, 0);
+
+            // --- 判断是否是过去的时间 ---
+            const isPast = slotDateTime < now;
+
             const slotKey = getDateKey(dayIndex, time);
             const booking = bookings[slotKey];
             const isBlocked = blockedSlots[slotKey];
             const isFullDayBlocked = fullDayBlocks[dayIndex];
-            // Check availability system
+            
+            // 检查 availability 设置
             const dayAvail = dayHourAvailability[dayIndex];
-            const hour = parseInt(time.split(':')[0]);
-            const isTimeAvailable = (hour >= dayAvail.start && hour < dayAvail.end);
+            const isTimeAvailable = (h >= dayAvail.start && h < dayAvail.end);
+            
             let content = '';
             let classList = 'slot-cell';
-            // Slot is unavailable if: outside available hours or explicitly blocked
+            
+            // --- 逻辑判断顺序 ---
+            
+            // 情况1: 不在营业时间 或 全天屏蔽 或 单独屏蔽
             const isUnavailable = !isTimeAvailable || isFullDayBlocked || isBlocked;
+
             if (isUnavailable) {
                 classList += ' blocked';
                 content = `<div class="slot-blocked-label">UNAVAILABLE</div>`;
+            
+            // 情况2: 已经被预约了 (即便是过去的时间，如果被约了也要显示名字)
             } else if (booking && booking.name) {
                 classList += ' booked';
+                // 如果是过去的时间，稍微变灰一点，但保留名字
+                if (isPast) classList += ' past'; 
                 content = `<div class="slot-name">${booking.name}</div>`;
+
+            // 情况3: 【新增】如果是过去的时间，且没被约，显示过期
+            } else if (isPast) {
+                classList += ' past';
+                content = `<div style="color: #ccc;">Expired</div>`; 
+
+            // 情况4: 正常可预约
             } else {
                 content = `<div style="color: #999;">Click to book</div>`;
             }
-            if (!isUnavailable) {
+
+            // 只有不是 (blocked 或 past) 才能点击。
+            // 注意：如果是 booked 且是 past，我们也不让点（防止修改过去的数据），或者你可以允许管理员点。
+            // 下面的逻辑是：只有正常状态下才能点开。
+            
+            // 如果已经被约了，即使过期了，通常也允许点开查看详情/删除。
+            // 如果纯粹是过去的时间且没约，就不能点。
+            
+            let canClick = true;
+            if (isUnavailable) canClick = false;
+            if (isPast && !booking) canClick = false; // 过去且没被约，不能点
+
+            if (canClick) {
                 html += `
-                            <div class="${classList}" onclick="openBookingModal('${slotKey}', '${day}', '${time}')">
-                                ${content}
-                            </div>
-                        `;
+                    <div class="${classList}" onclick="openBookingModal('${slotKey}', '${day}', '${time}')">
+                        ${content}
+                    </div>
+                `;
             } else {
                 html += `
-                            <div class="${classList}">
-                                ${content}
-                            </div>
-                        `;
+                    <div class="${classList}">
+                        ${content}
+                    </div>
+                `;
             }
         });
     });
+    
     html += '</div>';
     document.getElementById('scheduleContainer').innerHTML = html;
-    updateStats();
-}
-
-function updateStats() {
-    const timeSlots = generateTimeSlots();
-    const totalSlots = DAYS.length * timeSlots.length;
-    const bookedSlots = Object.keys(bookings).filter(key => bookings[key] && bookings[key].name).length;
-    const availableSlots = totalSlots - bookedSlots;
-    document.getElementById('bookedCount').textContent = bookedSlots;
-    document.getElementById('availableCount').textContent = availableSlots;
-    document.getElementById('totalSlots').textContent = totalSlots;
 }
 
 function openBookingModal(slotKey, day, time) {
@@ -662,14 +766,8 @@ function loadData() {
         const config = JSON.parse(savedConfig);
         START_HOUR = config.startHour;
         END_HOUR = config.endHour;
-        SLOT_DURATION = config.slotDuration;
+        // SLOT_DURATION = config.slotDuration;
     }
-    //const savedWeekDates = localStorage.getItem('guoLabWeekDates');
-    //if (savedWeekDates) {
-   //     const dates = JSON.parse(savedWeekDates);
-    //    WEEK_START_DATE = new Date(dates.start);
-    //    WEEK_END_DATE = new Date(dates.end);
-    //}
     const savedMeetingTime = localStorage.getItem('guoLabMeetingTime');
     if (savedMeetingTime) {
         MEETING_TIME = savedMeetingTime;
@@ -699,8 +797,13 @@ function setWeekDateInputs() {
         const day = String(date.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     };
-    document.getElementById('mondayDate').value = formatDate(WEEK_START_DATE);
-    document.getElementById('fridayDate').value = formatDate(WEEK_END_DATE);
+    
+    // 安全检查：只有元素存在时才赋值
+    const monEl = document.getElementById('mondayDate');
+    const friEl = document.getElementById('fridayDate');
+    
+    if (monEl) monEl.value = formatDate(WEEK_START_DATE);
+    if (friEl) friEl.value = formatDate(WEEK_END_DATE);
 }
 
 function updateWeekDates() {
@@ -787,6 +890,10 @@ function clearBlockedSlots() {
 }
 
 function renderMeetingTimeSelector() {
+    // 如果容器不存在，直接结束函数，不执行后续逻辑
+    const container = document.getElementById('meetingTimeSelector');
+    if (!container) return;
+
     const timeSlots = generateTimeSlots();
     let html = '';
     timeSlots.forEach(time => {
@@ -794,7 +901,7 @@ function renderMeetingTimeSelector() {
         const classList = isSelected ? 'time-btn selected' : 'time-btn';
         html += `<button class="${classList}" onclick="selectMeetingTime('${time}')">${time}</button>`;
     });
-    document.getElementById('meetingTimeSelector').innerHTML = html;
+    container.innerHTML = html;
 }
 
 function selectMeetingTime(time) {
@@ -821,6 +928,8 @@ function nextYear() {
 }
 
 function renderYearCalendar() {
+    const container = document.getElementById('yearCalendarContainer');
+    if (!container) return; // 找不到元素就直接退出，防止报错
     let html = '';
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     for (let month = 0; month < 12; month++) {
