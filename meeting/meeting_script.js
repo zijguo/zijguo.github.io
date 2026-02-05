@@ -20,8 +20,8 @@ const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 let START_HOUR = 7;
 let END_HOUR = 24;
 let SLOT_DURATION = 60;
-let STUDENT_PASSWORD = 'guolab'; // 学生用这个密码，只能预约
-let ADMIN_PASSWORD = 'admin';    // 老师用这个密码，可以改设置
+const STUDENT_HASH = '7313cd9030458bbb409607a5f3b034473e9bfa32cde1ce6a9d1c9e4ba368d0fd';
+const ADMIN_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
 
 // 使用刚才计算出的动态日期
 let WEEK_START_DATE = currentMonday; 
@@ -63,10 +63,18 @@ let fullDayBlocks = {};
 let selectedSlot = null;
 let editingSlot = null;
 
+async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 function initializeApp() {
     loadData();
     updateWeekDateDisplay();
 }
+
 
 function generateTimeSlots() {
     const slots = [];
@@ -347,98 +355,123 @@ function loadAdminStats() {
 
     document.getElementById('adminStats').innerHTML = html;
 }
-
+// 新的触发函数
 function clearAllBookings() {
-    // 1. 第一层保护：普通的 Confirm 弹窗 (或者直接跳过这步用 prompt 也可以，双重更保险)
-    if (!confirm('⚠️ WARNING: You are about to delete ALL bookings!\n\nThis action cannot be undone. Are you sure?')) {
+    // 只是打开弹窗，不执行逻辑
+    document.getElementById('confirmModal').classList.add('active');
+    document.getElementById('confirmInput').value = ''; // 清空输入
+    checkDeleteInput(); // 重置按钮状态
+}
+
+// 关闭弹窗
+function closeConfirmModal() {
+    document.getElementById('confirmModal').classList.remove('active');
+}
+
+// 检查用户是否输入了 'DELETE'
+function checkDeleteInput() {
+    const input = document.getElementById('confirmInput').value;
+    const btn = document.getElementById('btnConfirmDelete');
+    
+    if (input === 'DELETE') {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
+    } else {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+        btn.style.cursor = 'not-allowed';
+    }
+}
+
+// 真正执行删除的函数
+function executeClearAll() {
+    bookings = {};
+    saveData();
+    updateScheduleDisplay();
+    loadAdminStats();
+    
+    closeConfirmModal();
+    // 用你的 showMessage 替代 alert
+    showMessage('✓ System Reset: All bookings have been cleared.', 'adminStats', 'success'); 
+}
+
+async function loginUser() {
+    const passwordInput = document.getElementById('password').value;
+    const errorDiv = document.getElementById('errorMessage');
+    
+    // 1. 如果没输入密码，直接报错（省得去算哈希）
+    if (!passwordInput) {
+        errorDiv.textContent = 'Please enter a password.';
+        errorDiv.style.display = 'block';
         return;
     }
 
-    // 2. 第二层保护：强制要求输入特定单词
-    // 只有当用户准确输入 'DELETE' 时，操作才会执行
-    const userInput = prompt("🚨 FINAL CHECK 🚨\n\nTo confirm deletion, please type the word 'DELETE' (in all caps) below:");
+    // 2. 计算用户输入的哈希值 (关键步骤)
+    // 这里会把用户输入的 "guolab" 变成 "26d611..."
+    const inputHash = await sha256(passwordInput);
 
-    if (userInput === 'DELETE') {
-        // 用户输入正确，执行删除
-        bookings = {};
-        saveData();
-        updateScheduleDisplay();
-        loadAdminStats();
-        
-        // 成功提示
-        alert('✓ System Reset: All bookings have been cleared.');
-    } else {
-        // 用户输入错误或取消
-        if (userInput !== null) { // 如果用户点了取消，userInput 是 null，就不弹提示了
-            alert('❌ Operation Cancelled: Input did not match "DELETE".');
-        }
-    }
-}
-function loginUser() {
-    const password = document.getElementById('password').value;
-    const errorDiv = document.getElementById('errorMessage');
+    // 获取界面元素，用于后续的显示/隐藏操作
     const settingsPanel = document.getElementById('settingsPanel');
     const layoutGrid = document.getElementById('mainLayoutGrid');
-    
-    // 获取布局元素
     const scheduleColumn = document.getElementById('scheduleColumn'); 
     const scheduleContainer = document.getElementById('scheduleContainer');
 
+    // 3. 开始对比哈希值
+    
     // --- 情况 A：老师登录 (Admin) ---
-    if (password === ADMIN_PASSWORD) {
+    if (inputHash === ADMIN_HASH) {
         currentUser = { role: 'admin' };
         enterSystem();
         
+        // 老师界面设置：显示右侧面板，双列布局
         if(settingsPanel) settingsPanel.style.display = 'block'; 
-        
-        // 恢复双列布局
-        if(layoutGrid) {
-            layoutGrid.style.gridTemplateColumns = '1fr 1fr';
-        }
+        if(layoutGrid) layoutGrid.style.gridTemplateColumns = '1fr 1fr';
 
-        // 老师视图：恢复默认块级显示，左对齐
+        // 老师视图：左对齐，默认块级
         if(scheduleColumn) {
             scheduleColumn.style.display = 'block'; 
             scheduleColumn.style.textAlign = 'left';
-            scheduleColumn.style.alignItems = 'normal'; // 重置 Flex 属性
+            scheduleColumn.style.alignItems = 'normal';
         }
-        
-        // 老师视图：表格宽度自适应
         if(scheduleContainer) {
             scheduleContainer.style.width = '100%';
             scheduleContainer.style.maxWidth = 'none';
         }
-        
+
     // --- 情况 B：学生登录 (Student) ---
-    } else if (password === STUDENT_PASSWORD) {
+    } else if (inputHash === STUDENT_HASH) {
         currentUser = { role: 'student' };
         enterSystem();
         
+        // 学生界面设置：隐藏右侧面板，单列布局
         if(settingsPanel) settingsPanel.style.display = 'none'; 
+        if(layoutGrid) layoutGrid.style.gridTemplateColumns = '1fr';
         
-        // 1. 改为单列布局
-        if(layoutGrid) {
-            layoutGrid.style.gridTemplateColumns = '1fr';
-        }
-        
-        // 2. 【终极解决方案】使用 Flexbox 强制居中
-        // 这会强制 scheduleColumn 里的所有内容（标题、表格）都居中
+        // 学生视图：强制居中
         if(scheduleColumn) {
             scheduleColumn.style.display = 'flex';
-            scheduleColumn.style.flexDirection = 'column'; // 垂直排列
-            scheduleColumn.style.alignItems = 'center';    // 水平居中 (关键!)
+            scheduleColumn.style.flexDirection = 'column';
+            scheduleColumn.style.alignItems = 'center';
             scheduleColumn.style.width = '100%';
         }
-        
-        // 3. 限制表格最大宽度，防止在大屏幕太丑
         if(scheduleContainer) {
             scheduleContainer.style.width = '100%';
             scheduleContainer.style.maxWidth = '1000px'; 
         }
         
     } else {
+        // --- 密码错误 ---
         errorDiv.textContent = 'Invalid password. Please try again.';
         errorDiv.style.display = 'block';
+        
+        // 加一个小动画提示用户输错了（可选）
+        const loginBox = document.querySelector('.login-form');
+        if (loginBox) {
+            loginBox.style.transform = 'translateX(5px)';
+            setTimeout(() => loginBox.style.transform = 'translateX(-5px)', 100);
+            setTimeout(() => loginBox.style.transform = 'translateX(0)', 200);
+        }
     }
 }
 

@@ -33,7 +33,6 @@
                 <button class="logout-btn" onclick="logout()">Logout</button>
                 <div style="clear: both;"></div>
                 <div class="message" id="scheduleMessage"></div>
-                
                 <h2 style="color: #667eea; margin-bottom: 20px;">
                     📅 Year Calendar - Select Your Week
                 </h2>
@@ -123,6 +122,28 @@
                 </div>
                 <div id="deleteSection" style="margin-top: 15px; display: none;">
                     <button class="modal-btn btn-delete" onclick="deleteBooking()">🗑️ Delete This Booking</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="confirmModal">
+            <div class="modal-content" style="border-top: 5px solid #ff6b6b; text-align: center;">
+                <div style="font-size: 3em; margin-bottom: 10px;">
+                    ⚠️
+                </div>
+                <h2 style="color: #333; margin-bottom: 10px;">
+                    Are you sure?
+                </h2>
+                <p style="color: #666; margin-bottom: 20px; line-height: 1.5;">
+                    This action will <strong>permanently delete all bookings</strong>.<br>
+                    This cannot be undone.
+                </p>
+                <div style="margin-bottom: 20px;">
+                    <p style="font-size: 0.9em; margin-bottom: 5px;">
+                        Type <strong>DELETE</strong> to confirm:
+                    </p><input id="confirmInput" onkeyup="checkDeleteInput()" placeholder="DELETE" style="padding: 10px; border: 2px solid #ddd; border-radius: 6px; width: 100%; text-align: center; font-weight: bold; text-transform: uppercase;" type="text">
+                </div>
+                <div class="modal-buttons">
+                    <button class="modal-btn btn-delete" disabled id="btnConfirmDelete" onclick="executeClearAll()" style="opacity: 0.5; cursor: not-allowed;">🗑️ Clear All Data</button> <button class="modal-btn btn-cancel" onclick="closeConfirmModal()">Cancel</button>
                 </div>
             </div>
         </div>

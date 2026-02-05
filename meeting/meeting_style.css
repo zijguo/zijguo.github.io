@@ -14,8 +14,11 @@ body {
     margin: 0 auto;
     background: white;
     border-radius: 15px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    border-radius: 20px; /* 更大的圆角 */
+    /* 更柔和、多层次的阴影 */
+    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.5); /* 玻璃质感边缘 */
 }
 .header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -37,10 +40,10 @@ body {
 .login-form {
     background: white;
     padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* 非常淡的阴影 */
 }
 .login-form h2 {
     color: #667eea;
@@ -68,21 +71,28 @@ body {
     outline: none;
     border-color: #667eea;
 }
+/* 替换 .login-btn */
 .login-btn {
     width: 100%;
-    padding: 12px;
+    padding: 14px; /* 更胖一点，手指好点 */
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 1.1em;
-    font-weight: bold;
+    border-radius: 12px; /* 圆润按钮 */
+    font-size: 1em;
+    font-weight: 600;
     cursor: pointer;
-    transition: transform 0.3s;
-    margin-bottom: 10px;
+    box-shadow: 0 4px 6px rgba(102, 126, 234, 0.25); /* 彩色投影 */
+    transition: all 0.2s ease;
 }
+
 .login-btn:hover {
     transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(102, 126, 234, 0.3);
+}
+
+.login-btn:active {
+    transform: translateY(1px); /* 点击下沉 */
 }
 .admin-btn {
     width: 100%;
@@ -139,6 +149,7 @@ body {
     overflow: hidden;
     margin-bottom: 20px;
 }
+
 .schedule-cell {
     background: white;
     padding: 15px;
@@ -156,28 +167,45 @@ body {
     font-size: 0.85em;
 }
 .day-header {
-    background: #667eea;
-    color: white;
-    font-weight: bold;
+    background: #f8f9fa; /* 不要用深紫色背景，改用浅灰，显得干净 */
+    color: #555;
+    font-weight: 800;
+    border-bottom: 2px solid #eee;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8em;
+    padding: 20px 10px;
 }
 .slot-cell {
-    cursor: pointer;
-    transition: all 0.3s;
-    border: 2px solid #e0e0e0;
+    border-bottom: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+    margin: 4px; /* 格子之间留一点白 */
+    border-radius: 8px; /* 格子变成小圆块 */
+    transition: all 0.2s;
+    border: 1px solid transparent; /* 预留边框位置 */
 }
 .slot-cell:hover {
-    background: #f0f0f0;
+    background: #f0fcf4; /* 鼠标悬停变极淡的绿色 */
+    border-color: #4CAF50;
+    transform: scale(1.02); /* 微微放大 */
+    z-index: 1;
 }
 .slot-cell.booked {
-    background: #d4edda;
-    border-color: #667eea;
-    padding: 8px;
+    background: #eff6ff; /* 极淡的蓝色背景 */
+    border-left: 4px solid #667eea; /* 左侧加深色条，像专业的日程表 */
+    border-radius: 4px; /* 稍微方一点 */
+    padding-left: 12px; /* 给左侧色条留位置 */
+    color: #667eea;
 }
 .slot-cell.blocked {
-    background: #ffe6e6;
-    border-color: #ff6b6b;
-    padding: 8px;
-    cursor: not-allowed !important;
+    background: repeating-linear-gradient(
+        45deg,
+        #fafafa,
+        #fafafa 10px,
+        #f0f0f0 10px,
+        #f0f0f0 20px
+    ); /* 斜线纹理，表示禁用 */
+    opacity: 0.6;
 }
 .slot-name {
     font-weight: bold;
@@ -416,4 +444,29 @@ body {
     cursor: not-allowed !important; /* 禁止鼠标点击手势 */
     pointer-events: none;      /* 彻底禁止鼠标事件（点击无效） */
     border-color: #e0e0e0;
+}
+
+@media (max-width: 768px) {
+    /* 1. 让容器填满屏幕，去掉圆角 */
+    .container {
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    /* 2. 表格允许横向滑动 */
+    #scheduleContainer {
+        width: 100%;
+        overflow-x: auto; /* 关键：横向滚动 */
+        padding-bottom: 20px;
+    }
+    
+    /* 3. 强制表格保持最小宽度，防止挤压 */
+    .schedule-grid {
+        min-width: 600px; 
+    }
+    
+    /* 4. 调整头部字体大小 */
+    .header h1 {
+        font-size: 1.5em;
+    }
 }
