@@ -88,7 +88,16 @@ function generateTimeSlots() {
 }
 
 function getDateKey(dayIndex, time) {
-    return `${dayIndex}-${time}`;
+    let targetDate = new Date(WEEK_START_DATE);
+    
+    targetDate.setDate(targetDate.getDate() + dayIndex);
+    
+    const year = targetDate.getFullYear();
+    const month = String(targetDate.getMonth() + 1).padStart(2, '0');
+    const day = String(targetDate.getDate()).padStart(2, '0');
+    const dateStr = `${year}-${month}-${day}`;
+    
+    return `${dateStr}-${time}`;
 }
 
 function openAdminPanel() {
@@ -113,23 +122,34 @@ function logout() {
     // 1. 显示登录界面
     document.getElementById('loginPage').style.display = 'flex';
     
-    // 2. 隐藏主要内容区域 (年份日历等)
+    // 2. 隐藏主要内容区域
     const mainContent = document.getElementById('mainContent');
     mainContent.classList.remove('active');
-    
-    // 【关键修复】强制清除内联样式。
-    // 之前的操作可能留下了 style="display: block"，这会覆盖 css 的隐藏规则。
     mainContent.style.display = 'none'; 
     
-    // 3. 隐藏 AdminSettings 区域 (这里包含了预约表 scheduleContainer)
+    // 3. 隐藏 AdminSettings
     document.getElementById('adminSettings').style.display = 'none';
     
-    // 4. 清理输入框和错误信息
+    // 4. 清理输入框
     document.getElementById('password').value = '';
     document.getElementById('errorMessage').style.display = 'none';
     
-    // 5. 额外的安全措施：如果打开了 Availability Settings 面板，也强制关闭
+    // 5. 隐藏 Availability Settings
     document.getElementById('availabilitySettings').style.display = 'none';
+
+    // --- 【新增】强制重置 UI 样式，防止学生样式污染管理员界面 ---
+    const settingsPanel = document.getElementById('settingsPanel');
+    const layoutGrid = document.getElementById('mainLayoutGrid');
+    const scheduleColumn = document.getElementById('scheduleColumn');
+    
+    // 恢复成默认的 CSS 状态 (清空内联样式)
+    if (settingsPanel) settingsPanel.style.display = ''; 
+    if (layoutGrid) layoutGrid.style.gridTemplateColumns = '';
+    if (scheduleColumn) {
+        scheduleColumn.style.display = '';
+        scheduleColumn.style.textAlign = '';
+        scheduleColumn.style.alignItems = '';
+    }
 }
 
 function loadAdminSettings() {
@@ -341,8 +361,13 @@ function loadAdminStats() {
                 '</tr>';
 
         sortedBookings.forEach(([key, booking]) => {
-            const [dayIndex, time] = key.split('-');
-            const day = DAYS[dayIndex];
+            const lastDashIndex = key.lastIndexOf('-');
+            const datePart = key.substring(0, lastDashIndex); // "2023-10-27"
+            const timePart = key.substring(lastDashIndex + 1); // "09:00"
+            const dateObj = new Date(datePart);
+            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const safeDate = new Date(datePart + 'T12:00:00'); 
+            const dayName = dayNames[safeDate.getDay()];
             html += `<tr style="border-bottom: 1px solid #f0f0f0;">
                         <td style="padding: 12px; color: #666;">${day}</td>
                         <td style="padding: 12px; font-weight: bold; color: #667eea;">${time}</td>
@@ -400,35 +425,27 @@ async function loginUser() {
     const passwordInput = document.getElementById('password').value;
     const errorDiv = document.getElementById('errorMessage');
     
-    // 1. 如果没输入密码，直接报错（省得去算哈希）
     if (!passwordInput) {
         errorDiv.textContent = 'Please enter a password.';
         errorDiv.style.display = 'block';
         return;
     }
 
-    // 2. 计算用户输入的哈希值 (关键步骤)
-    // 这里会把用户输入的 "guolab" 变成 "26d611..."
     const inputHash = await sha256(passwordInput);
 
-    // 获取界面元素，用于后续的显示/隐藏操作
+    // 获取界面元素
     const settingsPanel = document.getElementById('settingsPanel');
     const layoutGrid = document.getElementById('mainLayoutGrid');
     const scheduleColumn = document.getElementById('scheduleColumn'); 
     const scheduleContainer = document.getElementById('scheduleContainer');
 
-    // 3. 开始对比哈希值
-    
-    // --- 情况 A：老师登录 (Admin) ---
     if (inputHash === ADMIN_HASH) {
         currentUser = { role: 'admin' };
-        enterSystem();
         
-        // 老师界面设置：显示右侧面板，双列布局
+        // --- 【修改点 1】先把界面改成老师的样子 (防止后面报错导致界面没变) ---
         if(settingsPanel) settingsPanel.style.display = 'block'; 
         if(layoutGrid) layoutGrid.style.gridTemplateColumns = '1fr 1fr';
 
-        // 老师视图：左对齐，默认块级
         if(scheduleColumn) {
             scheduleColumn.style.display = 'block'; 
             scheduleColumn.style.textAlign = 'left';
@@ -438,17 +455,17 @@ async function loginUser() {
             scheduleContainer.style.width = '100%';
             scheduleContainer.style.maxWidth = 'none';
         }
+        // -----------------------------------------------------------
 
-    // --- 情况 B：学生登录 (Student) ---
+        enterSystem(); // 最后再加载数据
+
     } else if (inputHash === STUDENT_HASH) {
         currentUser = { role: 'student' };
-        enterSystem();
         
-        // 学生界面设置：隐藏右侧面板，单列布局
+        // --- 【修改点 2】先把界面改成学生的样子 ---
         if(settingsPanel) settingsPanel.style.display = 'none'; 
         if(layoutGrid) layoutGrid.style.gridTemplateColumns = '1fr';
         
-        // 学生视图：强制居中
         if(scheduleColumn) {
             scheduleColumn.style.display = 'flex';
             scheduleColumn.style.flexDirection = 'column';
@@ -459,13 +476,13 @@ async function loginUser() {
             scheduleContainer.style.width = '100%';
             scheduleContainer.style.maxWidth = '1000px'; 
         }
+        // -----------------------------------------------------------
+        
+        enterSystem(); // 最后再加载数据
         
     } else {
-        // --- 密码错误 ---
         errorDiv.textContent = 'Invalid password. Please try again.';
         errorDiv.style.display = 'block';
-        
-        // 加一个小动画提示用户输错了（可选）
         const loginBox = document.querySelector('.login-form');
         if (loginBox) {
             loginBox.style.transform = 'translateX(5px)';
