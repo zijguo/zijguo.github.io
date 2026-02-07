@@ -439,11 +439,26 @@ body {
 
 /* 新增：过期时间段的样式 */
 .slot-cell.past {
-    background: #eeeeee;       /* 浅灰色背景 */
-    color: #bbbbbb;            /* 灰色文字 */
-    cursor: not-allowed !important; /* 禁止鼠标点击手势 */
-    pointer-events: none;      /* 彻底禁止鼠标事件（点击无效） */
+    background: #eeeeee;
+    color: #bbbbbb;
     border-color: #e0e0e0;
+}
+
+/* 只有“没被约”且“过期”的格子才禁用鼠标 */
+/* 注意：HTML里没有专门给没约的格子加类，所以我们可以反过来写 */
+/* 或者更简单地，只针对 expired 状态禁用 */
+
+/* 方案：我们在 JS 里控制 pointer-events 也许更灵活，或者用 CSS 选择器 */
+/* 但最简单的 CSS 改法是：去掉 pointer-events: none，把控制权还给 JS */
+
+.slot-cell.past:not(.booked) {
+    cursor: not-allowed !important;
+    pointer-events: none;
+}
+
+.slot-cell.past.booked {
+    cursor: pointer; /* 已预约的过期格子，依然是小手 */
+    opacity: 0.7;    /*稍微透明一点区别于未来的预约*/
 }
 
 @media (max-width: 768px) {

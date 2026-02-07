@@ -18,10 +18,24 @@ const MAX_LOOKAHEAD_YEARS = 1; // 允许最多往后看 1 年
 
 // 计算本周一的日期
 const dayOfWeek = TODAY.getDay(); // 0(周日) - 6(周六)
-// 如果今天是周日(0)，我们要回退6天找到周一；否则回退 (今天-1) 天
-const diffToMonday = TODAY.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+
+let daysToMonday;
+
+// 逻辑优化：如果是周六(6) 或 周日(0)，通常意味着本周工作日已结束，直接显示"下周一"
+if (dayOfWeek === 6) { 
+    daysToMonday = 2; // 周六 + 2天 = 下周一
+} else if (dayOfWeek === 0) {
+    daysToMonday = 1; // 周日 + 1天 = 下周一
+} else {
+    // 周一到周五：回退到本周一
+    // 周一(1) -> 偏移 0 天
+    // 周二(2) -> 偏移 -1 天 ... 以此类推
+    daysToMonday = 1 - dayOfWeek;
+}
+
 const currentMonday = new Date(TODAY);
-currentMonday.setDate(diffToMonday);
+// setDate 会自动处理月份跨越（比如 2月28日 + 2天 会变成 3月）
+currentMonday.setDate(TODAY.getDate() + daysToMonday);
 currentMonday.setHours(0, 0, 0, 0); // 清除时间，只保留日期
 
 // 计算本周五的日期 (周一 + 4天)
@@ -339,11 +353,12 @@ function updateAvailability() {
 // 找到 meeting_script.js 中的 loadAdminStats 函数，替换为：
 
 function loadAdminStats() {
-    // 1. 只计算已预约的数量，不再计算 Total 和 Available
-    const bookedSlots = Object.keys(bookings).filter(key => bookings[key] && bookings[key].name).length;
+    // 1. 计算有效的预约数量
+    // 过滤掉空值或没有名字的预约
+    const validBookings = Object.entries(bookings).filter(([_, booking]) => booking && booking.name);
+    const bookedSlots = validBookings.length;
 
-    // 2. 修改 HTML 结构：只保留一个 "Booked Slots" 的卡片
-    // 我把 grid 布局改为了简单的 flex 居中，或者你可以直接放左边
+    // 2. 生成 HTML
     let html = `
         <div style="display: flex; gap: 20px; margin-bottom: 20px;">
             <div class="stat-box" style="flex: 0 0 200px; text-align: center; border-left: 5px solid #667eea;">
@@ -357,13 +372,12 @@ function loadAdminStats() {
         </h4>
     `;
 
-    // 3. 下面生成表格的逻辑保持不变 (复制原本的逻辑即可)
-    if (Object.keys(bookings).length === 0) {
+    // 3. 判断显示列表还是空状态
+    if (bookedSlots === 0) {
         html += '<p style="color: #999; font-style: italic;">No bookings yet.</p>';
     } else {
-        const sortedBookings = Object.entries(bookings)
-            .filter(([_, booking]) => booking && booking.name)
-            .sort(([keyA], [keyB]) => keyA.localeCompare(keyB));
+        // 先排序
+        validBookings.sort(([keyA], [keyB]) => keyA.localeCompare(keyB));
 
         html += '<table style="width: 100%; border-collapse: collapse; margin-top: 10px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">';
         html += '<tr style="background: #f8f9fa; color: #666; border-bottom: 2px solid #eee;">' +
@@ -373,17 +387,20 @@ function loadAdminStats() {
                 '<th style="padding: 12px; text-align: left;">Email</th>' +
                 '</tr>';
 
-        sortedBookings.forEach(([key, booking]) => {
+        validBookings.forEach(([key, booking]) => {
             const lastDashIndex = key.lastIndexOf('-');
-            const datePart = key.substring(0, lastDashIndex); // "2023-10-27"
-            const timePart = key.substring(lastDashIndex + 1); // "09:00"
-            const dateObj = new Date(datePart);
-            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const datePart = key.substring(0, lastDashIndex); 
+            const timePart = key.substring(lastDashIndex + 1); // 变量名是 timePart
+            
+            // 为了获取星期几，我们创建一个日期对象
+            // 注意：为了避免时区问题导致日期偏差，建议加上 T12:00:00
             const safeDate = new Date(datePart + 'T12:00:00'); 
-            const dayName = dayNames[safeDate.getDay()];
+            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const dayName = dayNames[safeDate.getDay()]; // 变量名是 dayName
+
             html += `<tr style="border-bottom: 1px solid #f0f0f0;">
-                        <td style="padding: 12px; color: #666;">${day}</td>
-                        <td style="padding: 12px; font-weight: bold; color: #667eea;">${time}</td>
+                        <td style="padding: 12px; color: #666;">${dayName}</td>
+                        <td style="padding: 12px; font-weight: bold; color: #667eea;">${timePart}</td>
                         <td style="padding: 12px; font-weight: bold; color: #333;">${booking.name}</td>
                         <td style="padding: 12px; color: #666;">${booking.email || '-'}</td>
                      </tr>`;
@@ -606,6 +623,7 @@ function saveAvailabilitySettings() {
         };
     });
     localStorage.setItem('guoLabDayAvailability', JSON.stringify(dayHourAvailability));
+    saveToFirebase();
     updateScheduleDisplay();
     showMessage('✓ Availability saved successfully!', 'availabilityMessage', 'success');
     setTimeout(() => closeAvailabilitySettings(), 1500);
@@ -778,11 +796,33 @@ function confirmBooking() {
 
 function deleteBooking() {
     if (confirm(`Remove booking for ${selectedSlot.day} at ${selectedSlot.time}?`)) {
-        delete bookings[selectedSlot.key];
-        saveToFirebase();
-        updateScheduleDisplay();
-        showMessage(`✓ Booking cancelled!`, 'scheduleMessage', 'success');
-        closeModal();
+        
+        // 1. 获取要删除的那个 key
+        const slotKey = selectedSlot.key;
+
+        // 2. 直接告诉数据库：只删除这一个字段，不要动别的！
+        // 使用 update 而不是 set，使用 FieldValue.delete()
+        const updateData = {};
+        updateData[`bookings.${slotKey}`] = firebase.firestore.FieldValue.delete();
+
+        db.collection('lab_data').doc('schedule').update(updateData)
+            .then(() => {
+                // 数据库删除成功后，手动更新一下本地显示（虽然 onSnapshot 也会做，但这样更顺滑）
+                delete bookings[slotKey]; 
+                updateScheduleDisplay();
+                
+                // 如果是管理员，顺便刷新一下统计列表
+                if (currentUser && currentUser.role === 'admin') {
+                    loadAdminStats();
+                }
+
+                showMessage(`✓ Booking cancelled!`, 'scheduleMessage', 'success');
+                closeModal();
+            })
+            .catch((error) => {
+                console.error("Delete failed: ", error);
+                showMessage('❌ Failed to delete. Please try again.', 'scheduleMessage', 'error');
+            });
     }
 }
 
@@ -803,8 +843,8 @@ function saveToFirebase() {
         blockedSlots: blockedSlots || {},
         fullDayBlocks: fullDayBlocks || {},
         // 如果你需要同步 Available Days 设置，把下面两行注释打开
-        // availableDays: availableDays,
-        // dayHourAvailability: dayHourAvailability,
+        availableDays: availableDays,
+        dayHourAvailability: dayHourAvailability,
         lastUpdated: new Date().toISOString()
     };
 
@@ -835,8 +875,8 @@ function listenToFirebase() {
                 fullDayBlocks = data.fullDayBlocks || {};
                 
                 // 如果同步了设置，这里也要接收
-                // if(data.availableDays) availableDays = data.availableDays;
-                // if(data.dayHourAvailability) dayHourAvailability = data.dayHourAvailability;
+                if(data.availableDays) availableDays = data.availableDays;
+                if(data.dayHourAvailability) dayHourAvailability = data.dayHourAvailability;
 
                 // 刷新界面
                 updateScheduleDisplay();
