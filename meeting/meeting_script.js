@@ -1,4 +1,17 @@
-// --- 修改开始：动态获取当前日期 ---
+// --- Firebase 配置与初始化 ---
+const firebaseConfig = {
+  apiKey: "AIzaSyAoCotzk7b6ZY2RgL4jf9t-q8453EXs3kg",
+  authDomain: "guolab-scheduler.firebaseapp.com",
+  projectId: "guolab-scheduler",
+  storageBucket: "guolab-scheduler.firebasestorage.app",
+  messagingSenderId: "256665748304",
+  appId: "1:256665748304:web:1ad6d84387196f64c26255"
+};
+
+// 初始化 Firebase (使用兼容版语法)
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
 const TODAY = new Date();
 const CURRENT_YEAR = TODAY.getFullYear();
 const MAX_LOOKAHEAD_YEARS = 1; // 允许最多往后看 1 年
@@ -71,7 +84,7 @@ async function sha256(message) {
 }
 
 function initializeApp() {
-    loadData();
+    listenToFirebase();
     updateWeekDateDisplay();
 }
 
@@ -280,7 +293,7 @@ function toggleAvailableDay(dayIndex) {
         availableDays.push(dayIndex);
     }
     availableDays.sort();
-    saveData();
+    saveToFirebase();
     renderAvailabilityDays();
     updateScheduleDisplay();
 }
@@ -312,7 +325,7 @@ function updateAvailability() {
     }
     availStartHour = startHour;
     availEndHour = endHour;
-    saveData();
+    saveToFirebase();
     messageEl.textContent = '✓ Availability updated successfully!';
     messageEl.classList.remove('error');
     messageEl.classList.add('success');
@@ -412,7 +425,7 @@ function checkDeleteInput() {
 // 真正执行删除的函数
 function executeClearAll() {
     bookings = {};
-    saveData();
+    saveToFirebase();
     updateScheduleDisplay();
     loadAdminStats();
     
@@ -757,7 +770,7 @@ function confirmBooking() {
         email,
         bookedAt: new Date().toISOString()
     };
-    saveData();
+    saveToFirebase();
     updateScheduleDisplay();
     showMessage(`✓ Successfully booked ${selectedSlot.day} at ${selectedSlot.time}!`, 'scheduleMessage', 'success');
     closeModal();
@@ -766,7 +779,7 @@ function confirmBooking() {
 function deleteBooking() {
     if (confirm(`Remove booking for ${selectedSlot.day} at ${selectedSlot.time}?`)) {
         delete bookings[selectedSlot.key];
-        saveData();
+        saveToFirebase();
         updateScheduleDisplay();
         showMessage(`✓ Booking cancelled!`, 'scheduleMessage', 'success');
         closeModal();
@@ -783,61 +796,62 @@ function showMessage(text, elementId, type) {
     }, 4000);
 }
 
-function saveData() {
-    localStorage.setItem('guoLabBookings', JSON.stringify(bookings));
-    localStorage.setItem('guoLabBlockedSlots', JSON.stringify(blockedSlots));
-    localStorage.setItem('guoLabFullDayBlocks', JSON.stringify(fullDayBlocks));
-    localStorage.setItem('guoLabMeetingTime', MEETING_TIME);
-    localStorage.setItem('guoLabAvailableDays', JSON.stringify(availableDays));
-    localStorage.setItem('guoLabAvailStartHour', availStartHour);
-    localStorage.setItem('guoLabAvailEndHour', availEndHour);
-    localStorage.setItem('guoLabDayAvailability', JSON.stringify(dayHourAvailability));
+function saveToFirebase() {
+    console.log("正在保存到云端...");
+    const dataPackage = {
+        bookings: bookings || {},
+        blockedSlots: blockedSlots || {},
+        fullDayBlocks: fullDayBlocks || {},
+        // 如果你需要同步 Available Days 设置，把下面两行注释打开
+        // availableDays: availableDays,
+        // dayHourAvailability: dayHourAvailability,
+        lastUpdated: new Date().toISOString()
+    };
+
+    // 写入数据库: lab_data 集合 -> schedule 文档
+    db.collection('lab_data').doc('schedule').set(dataPackage, { merge: true })
+        .then(() => {
+            console.log("保存成功！");
+        })
+        .catch((error) => {
+            console.error("保存失败: ", error);
+            alert("同步数据失败，请检查网络");
+        });
 }
 
-function loadData() {
-    const saved = localStorage.getItem('guoLabBookings');
-    if (saved) {
-        bookings = JSON.parse(saved);
-    }
-    const savedBlocked = localStorage.getItem('guoLabBlockedSlots');
-    if (savedBlocked) {
-        blockedSlots = JSON.parse(savedBlocked);
-    }
-    const savedFullDayBlocks = localStorage.getItem('guoLabFullDayBlocks');
-    if (savedFullDayBlocks) {
-        fullDayBlocks = JSON.parse(savedFullDayBlocks);
-    }
-    const savedAdminPassword = localStorage.getItem('guoLabAdminPassword');
-    if (savedAdminPassword) {
-        ADMIN_PASSWORD = savedAdminPassword;
-    }
-    const savedConfig = localStorage.getItem('guoLabScheduleConfig');
-    if (savedConfig) {
-        const config = JSON.parse(savedConfig);
-        START_HOUR = config.startHour;
-        END_HOUR = config.endHour;
-        // SLOT_DURATION = config.slotDuration;
-    }
-    const savedMeetingTime = localStorage.getItem('guoLabMeetingTime');
-    if (savedMeetingTime) {
-        MEETING_TIME = savedMeetingTime;
-    }
-    const savedAvailableDays = localStorage.getItem('guoLabAvailableDays');
-    if (savedAvailableDays) {
-        availableDays = JSON.parse(savedAvailableDays);
-    }
-    const savedAvailStartHour = localStorage.getItem('guoLabAvailStartHour');
-    if (savedAvailStartHour) {
-        availStartHour = parseInt(savedAvailStartHour);
-    }
-    const savedAvailEndHour = localStorage.getItem('guoLabAvailEndHour');
-    if (savedAvailEndHour) {
-        availEndHour = parseInt(savedAvailEndHour);
-    }
-    const savedDayAvailability = localStorage.getItem('guoLabDayAvailability');
-    if (savedDayAvailability) {
-        dayHourAvailability = JSON.parse(savedDayAvailability);
-    }
+function listenToFirebase() {
+    console.log("开始监听云端数据...");
+    
+    // 监听 lab_data/schedule 文档
+    db.collection('lab_data').doc('schedule')
+        .onSnapshot((doc) => {
+            if (doc.exists) {
+                const data = doc.data();
+                console.log("收到云端更新:", data);
+
+                // 更新本地变量
+                bookings = data.bookings || {};
+                blockedSlots = data.blockedSlots || {};
+                fullDayBlocks = data.fullDayBlocks || {};
+                
+                // 如果同步了设置，这里也要接收
+                // if(data.availableDays) availableDays = data.availableDays;
+                // if(data.dayHourAvailability) dayHourAvailability = data.dayHourAvailability;
+
+                // 刷新界面
+                updateScheduleDisplay();
+                
+                // 如果管理员面板是打开的，刷新统计
+                if (currentUser && currentUser.role === 'admin') {
+                    loadAdminStats();
+                }
+            } else {
+                console.log("数据库为空，正在初始化...");
+                saveToFirebase(); // 如果是第一次用，保存当前的空状态
+            }
+        }, (error) => {
+             console.error("监听失败:", error);
+        });
 }
 
 function setWeekDateInputs() {
@@ -926,14 +940,14 @@ function toggleBlockSlot(slotKey) {
     } else {
         blockedSlots[slotKey] = true;
     }
-    saveData();
+    saveToFirebase();
     renderBlockSchedule();
 }
 
 function clearBlockedSlots() {
     if (confirm('Unblock all sessions?')) {
         blockedSlots = {};
-        saveData();
+        saveToFirebase();
         renderBlockSchedule();
         showMessage('✓ All sessions unblocked!', 'timeMessage', 'success');
     }
@@ -956,7 +970,7 @@ function renderMeetingTimeSelector() {
 
 function selectMeetingTime(time) {
     MEETING_TIME = MEETING_TIME === time ? null : time;
-    saveData();
+    saveToFirebase();
     renderMeetingTimeSelector();
     if (MEETING_TIME) {
         showMessage(`✓ Meeting time set to ${MEETING_TIME}`, 'timeMessage', 'success');
@@ -1186,7 +1200,7 @@ function toggleFullDayBlock(dayIndex) {
     } else {
         fullDayBlocks[dayIndex] = true;
     }
-    saveData();
+    saveToFirebase();
     renderBlockFullDayUI();
     updateScheduleDisplay();
 }
@@ -1194,7 +1208,7 @@ function toggleFullDayBlock(dayIndex) {
 function clearFullDayBlocks() {
     if (confirm('Unblock all full days?')) {
         fullDayBlocks = {};
-        saveData();
+        saveToFirebase();
         renderBlockFullDayUI();
         updateScheduleDisplay();
         showMessage('✓ All full day blocks cleared!', 'scheduleMessage', 'success');
