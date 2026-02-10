@@ -118,7 +118,9 @@
                 </div>
                 <div id="currentBooking" style="margin: 20px 0; padding: 15px; background: #f9f9f9; border-radius: 8px; text-align: center;"></div>
                 <div class="modal-buttons">
-                    <button class="modal-btn btn-confirm" onclick="confirmBooking()">✓ Confirm</button> <button class="modal-btn btn-cancel" onclick="closeModal()">✗ Cancel</button>
+                    <button class="modal-btn btn-confirm" id="btnConfirmBooking" onclick="confirmBooking()">✓ Confirm Booking</button> 
+                    <button class="modal-btn" id="btnBlockSlot" onclick="toggleSlotBlock()" style="background: #607D8B; color: white; display: none;">🚫 Set Unavailable</button>
+                    <button class="modal-btn btn-cancel" onclick="closeModal()">Close</button>
                 </div>
                 <div id="deleteSection" style="margin-top: 15px; display: none;">
                     <button class="modal-btn btn-delete" onclick="deleteBooking()">🗑️ Delete This Booking</button>

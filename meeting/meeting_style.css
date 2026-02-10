@@ -161,28 +161,30 @@ body {
     font-size: 0.9em;
 }
 .time-cell {
-    background: #f5f5f5;
-    font-weight: bold;
+    background: #f8f9fa;
     color: #667eea;
+    font-weight: bold;
     font-size: 0.85em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #e0e0e0; /* 加强时间列的分隔感 */
 }
 .day-header {
-    background: #f8f9fa; /* 不要用深紫色背景，改用浅灰，显得干净 */
-    color: #555;
-    font-weight: 800;
-    border-bottom: 2px solid #eee;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.8em;
-    padding: 20px 10px;
+    background: #667eea; /* 用深色背景区分表头 */
+    color: white;
+    padding: 10px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.2;
 }
 .slot-cell {
-    border-bottom: 1px solid #f0f0f0;
-    border-right: 1px solid #f0f0f0;
-    margin: 4px; /* 格子之间留一点白 */
-    border-radius: 8px; /* 格子变成小圆块 */
-    transition: all 0.2s;
-    border: 1px solid transparent; /* 预留边框位置 */
+    /* 之前的样式保持不变，确保有以下 flex 属性 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; /* 确保内容垂直排列 */
+    text-align: center;
 }
 .slot-cell:hover {
     background: #f0fcf4; /* 鼠标悬停变极淡的绿色 */
@@ -434,7 +436,16 @@ body {
 
 /* 让表格格子内的文字居中 */
 .schedule-grid {
-    margin: 0 auto; /* 强制表格在容器内居中 */
+    display: grid;
+    /* 强制定义 6 列：第1列固定宽度，后5列平分剩余空间 */
+    grid-template-columns: 80px repeat(5, 1fr); 
+    gap: 1px;
+    background: #e0e0e0; /* 网格线的颜色 */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    width: 100%; /* 确保撑满容器 */
 }
 
 /* 新增：过期时间段的样式 */
@@ -484,4 +495,26 @@ body {
     .header h1 {
         font-size: 1.5em;
     }
+}
+
+/* === 新增样式：状态文字标签 === */
+.status-label {
+    font-size: 0.75em;       /* 缩小字体，防止换行 */
+    font-weight: 700;        /* 加粗 */
+    letter-spacing: 0.5px;   /* 字间距稍微拉开 */
+    text-transform: uppercase; /* 强制大写 */
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* EXPIRED 样式：灰色 */
+.status-label.expired {
+    color: #b0b0b0; 
+}
+
+/* UNAVAILABLE 样式：红色或深灰色，带一点警示感 */
+.status-label.unavailable {
+    color: #e57373; /* 柔和的红色 */
+    opacity: 0.8;
 }

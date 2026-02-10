@@ -350,12 +350,29 @@ function updateAvailability() {
     }, 3000);
 }
 
-// 找到 meeting_script.js 中的 loadAdminStats 函数，替换为：
-
 function loadAdminStats() {
+    const now = new Date(); // 获取当前时间
+
     // 1. 计算有效的预约数量
-    // 过滤掉空值或没有名字的预约
-    const validBookings = Object.entries(bookings).filter(([_, booking]) => booking && booking.name);
+    // 过滤逻辑更新：
+    // - 必须有 booking 数据且有名字
+    // - 预约时间必须在“当前时间”之后 (slotDate >= now)
+    const validBookings = Object.entries(bookings).filter(([key, booking]) => {
+        // 基础校验：如果没有数据或没有名字，直接过滤
+        if (!booking || !booking.name) return false;
+
+        // 解析 key 获取日期和时间 (Key 格式示例: "2026-02-09-10:00")
+        const lastDashIndex = key.lastIndexOf('-');
+        const datePart = key.substring(0, lastDashIndex); 
+        const timePart = key.substring(lastDashIndex + 1);
+
+        // 构造该预约的时间对象 (添加 T 和 :00 以符合 ISO 格式)
+        const slotDate = new Date(`${datePart}T${timePart}:00`);
+
+        // 比较：如果预约时间小于当前时间，视为过期，不统计
+        return slotDate >= now;
+    });
+
     const bookedSlots = validBookings.length;
 
     // 2. 生成 HTML
@@ -363,20 +380,20 @@ function loadAdminStats() {
         <div style="display: flex; gap: 20px; margin-bottom: 20px;">
             <div class="stat-box" style="flex: 0 0 200px; text-align: center; border-left: 5px solid #667eea;">
                 <div class="stat-number" style="font-size: 2.5em; font-weight: bold; color: #667eea;">${bookedSlots}</div>
-                <div class="stat-label" style="color: #666;">Booked Sessions</div>
+                <div class="stat-label" style="color: #666;">Upcoming Bookings</div>
             </div>
         </div>
         
         <h4 style="color: #667eea; margin-top: 20px; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 10px;">
-            📋 Detailed List
+            📋 Detailed List (Future Only)
         </h4>
     `;
 
     // 3. 判断显示列表还是空状态
     if (bookedSlots === 0) {
-        html += '<p style="color: #999; font-style: italic;">No bookings yet.</p>';
+        html += '<p style="color: #999; font-style: italic;">No upcoming bookings.</p>';
     } else {
-        // 先排序
+        // 先排序 (按时间先后)
         validBookings.sort(([keyA], [keyB]) => keyA.localeCompare(keyB));
 
         html += '<table style="width: 100%; border-collapse: collapse; margin-top: 10px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">';
@@ -390,16 +407,15 @@ function loadAdminStats() {
         validBookings.forEach(([key, booking]) => {
             const lastDashIndex = key.lastIndexOf('-');
             const datePart = key.substring(0, lastDashIndex); 
-            const timePart = key.substring(lastDashIndex + 1); // 变量名是 timePart
+            const timePart = key.substring(lastDashIndex + 1);
             
-            // 为了获取星期几，我们创建一个日期对象
-            // 注意：为了避免时区问题导致日期偏差，建议加上 T12:00:00
+            // 获取星期几
             const safeDate = new Date(datePart + 'T12:00:00'); 
             const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            const dayName = dayNames[safeDate.getDay()]; // 变量名是 dayName
+            const dayName = dayNames[safeDate.getDay()];
 
             html += `<tr style="border-bottom: 1px solid #f0f0f0;">
-                        <td style="padding: 12px; color: #666;">${dayName}</td>
+                        <td style="padding: 12px; color: #666;">${dayName} <span style="font-size:0.8em; color:#999">(${datePart})</span></td>
                         <td style="padding: 12px; font-weight: bold; color: #667eea;">${timePart}</td>
                         <td style="padding: 12px; font-weight: bold; color: #333;">${booking.name}</td>
                         <td style="padding: 12px; color: #666;">${booking.email || '-'}</td>
@@ -629,126 +645,120 @@ function saveAvailabilitySettings() {
     setTimeout(() => closeAvailabilitySettings(), 1500);
 }
 
+// === 在 meeting_script.js 中完全替换 updateScheduleDisplay 函数 ===
+
 function updateScheduleDisplay() {
-    const days = DAYS;
+    const days = DAYS; // ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    const container = document.getElementById('scheduleContainer');
+    
+    // 1. 计算所有需要显示的时间段 (取并集，或者直接按营业时间生成)
+    // 为了防止时间错乱，我们直接生成从最早开始时间到最晚结束时间的完整列表
     let allTimeSlots = new Set();
     
-    // 1. 收集所有可用时间槽
-    days.forEach((day, dayIndex) => {
-        const dayAvail = dayHourAvailability[dayIndex];
-        for (let hour = dayAvail.start; hour < dayAvail.end; hour++) {
+    // 遍历所有天的设置，找出时间范围
+    Object.values(dayHourAvailability).forEach(avail => {
+        for (let hour = avail.start; hour < avail.end; hour++) {
+            // 补全分钟
             for (let min = 0; min < 60; min += SLOT_DURATION) {
                 const timeStr = `${String(hour).padStart(2, '0')}:${String(min).padStart(2, '0')}`;
                 allTimeSlots.add(timeStr);
             }
         }
     });
-
-    const timeSlots = Array.from(allTimeSlots).sort();
     
-    // 2. 获取当前系统时间，用于对比
+    // 排序时间
+    const timeSlots = Array.from(allTimeSlots).sort();
     const now = new Date();
 
+    // 2. 开始生成 Grid HTML
     let html = '<div class="schedule-grid">';
     
-    // 渲染表头 (日期)
+    // --- 表头 (Header Row) ---
+    // 第一格：空的或者写 Time
     html += '<div class="schedule-cell day-header">Time</div>';
+    
+    // 后续 5 格：星期几
     days.forEach((day, dayIndex) => {
         const date = new Date(WEEK_START_DATE);
         date.setDate(date.getDate() + dayIndex);
-        const dateStr = date.toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric'
-        });
-        html += `<div class="schedule-cell day-header">${day}<br><small>${dateStr}</small></div>`;
+        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        // 在表头显示日期
+        html += `<div class="schedule-cell day-header">${day}<br><small style="font-weight:normal; opacity:0.8">${dateStr}</small></div>`;
     });
 
-    // 3. 渲染每一行时间
+    // --- 内容行 (Content Rows) ---
+    // 外层循环：时间 (每一行)
     timeSlots.forEach(time => {
+        
+        // [关键修正] 每一行的第 1 列：时间标签
         html += `<div class="schedule-cell time-cell">${time}</div>`;
         
-        days.forEach((day, dayIndex) => {
-            // --- 计算当前格子的具体日期和时间 ---
-            const date = new Date(WEEK_START_DATE);
-            date.setDate(date.getDate() + dayIndex);
+        // [关键修正] 每一行的后 5 列：具体的格子
+        // 必须严格遍历 0 到 4 (周一到周五)，绝对不能跳过
+        for (let dayIndex = 0; dayIndex < 5; dayIndex++) {
             
-            // 解析 grid 的时间 (例如 "09:30")
+            // 1. 计算当前格子的状态
+            const dayAvail = dayHourAvailability[dayIndex] || { start: 0, end: 0 };
             const [h, m] = time.split(':').map(Number);
             
-            // 创建该格子的完整 Date 对象
+            // 构造完整的日期时间对象用于比对
+            const date = new Date(WEEK_START_DATE);
+            date.setDate(date.getDate() + dayIndex);
             const slotDateTime = new Date(date);
             slotDateTime.setHours(h, m, 0, 0);
 
-            // --- 判断是否是过去的时间 ---
             const isPast = slotDateTime < now;
-
-            const slotKey = getDateKey(dayIndex, time);
+            const slotKey = getDateKey(dayIndex, time); // 假设 getDateKey 函数存在且逻辑正确
             const booking = bookings[slotKey];
             const isBlocked = blockedSlots[slotKey];
             const isFullDayBlocked = fullDayBlocks[dayIndex];
             
-            // 检查 availability 设置
-            const dayAvail = dayHourAvailability[dayIndex];
+            // 判断是否在营业时间内
             const isTimeAvailable = (h >= dayAvail.start && h < dayAvail.end);
             
+            // 2. 决定样式和内容
+            let cellClass = 'slot-cell';
             let content = '';
-            let classList = 'slot-cell';
-            
-            // --- 逻辑判断顺序 ---
-            
-            // 情况1: 不在营业时间 或 全天屏蔽 或 单独屏蔽
-            const isUnavailable = !isTimeAvailable || isFullDayBlocked || isBlocked;
+            let clickAction = '';
 
-            if (isUnavailable) {
-                classList += ' blocked';
-                content = `<div class="slot-blocked-label">UNAVAILABLE</div>`;
-            
-            // 情况2: 已经被预约了 (即便是过去的时间，如果被约了也要显示名字)
-            } else if (booking && booking.name) {
-                classList += ' booked';
-                // 如果是过去的时间，稍微变灰一点，但保留名字
-                if (isPast) classList += ' past'; 
+            // A. 已预订 (Booked)
+            if (booking && booking.name) {
+                cellClass += ' booked';
+                if (isPast) cellClass += ' past';
                 content = `<div class="slot-name">${booking.name}</div>`;
+                clickAction = `onclick="openBookingModal('${slotKey}', '${days[dayIndex]}', '${time}')"`;
+            
+            // B. 不可用 (Unavailable/Blocked) - 无论是管理员还是学生，都显示文字
+            } else if (!isTimeAvailable || isFullDayBlocked || isBlocked) {
+                cellClass += ' blocked';
+                // 显示 UNAVAILABLE 文字
+                content = `<span class="status-label unavailable">UNAVAILABLE</span>`; 
+                
+                // 只有管理员可以点击去“解锁”
+                if (currentUser && currentUser.role === 'admin') {
+                     clickAction = `onclick="openBookingModal('${slotKey}', '${days[dayIndex]}', '${time}')"`;
+                }
 
-            // 情况3: 【新增】如果是过去的时间，且没被约，显示过期
+            // C. 过期且未预订 (Expired)
             } else if (isPast) {
-                classList += ' past';
-                content = `<div style="color: #ccc;">Expired</div>`; 
-
-            // 情况4: 正常可预约
+                cellClass += ' past';
+                // 显示 EXPIRED 文字
+                content = `<span class="status-label expired">EXPIRED</span>`;
+            
+            // D. 空闲可约 (Open)
             } else {
-                content = `<div style="color: #999;">Click to book</div>`;
+                // 这里保留 + 号比较美观，或者你可以改成 "CLICK TO BOOK"
+                content = `<span style="color:#667eea; font-weight:bold; font-size:1.5em;">+</span>`; 
+                clickAction = `onclick="openBookingModal('${slotKey}', '${days[dayIndex]}', '${time}')"`;
             }
 
-            // 只有不是 (blocked 或 past) 才能点击。
-            // 注意：如果是 booked 且是 past，我们也不让点（防止修改过去的数据），或者你可以允许管理员点。
-            // 下面的逻辑是：只有正常状态下才能点开。
-            
-            // 如果已经被约了，即使过期了，通常也允许点开查看详情/删除。
-            // 如果纯粹是过去的时间且没约，就不能点。
-            
-            let canClick = true;
-            if (isUnavailable) canClick = false;
-            if (isPast && !booking) canClick = false; // 过去且没被约，不能点
-
-            if (canClick) {
-                html += `
-                    <div class="${classList}" onclick="openBookingModal('${slotKey}', '${day}', '${time}')">
-                        ${content}
-                    </div>
-                `;
-            } else {
-                html += `
-                    <div class="${classList}">
-                        ${content}
-                    </div>
-                `;
-            }
-        });
+            // 3. 生成格子 HTML
+            html += `<div class="${cellClass}" ${clickAction}>${content}</div>`;
+        }
     });
     
-    html += '</div>';
-    document.getElementById('scheduleContainer').innerHTML = html;
+    html += '</div>'; // 关闭 schedule-grid
+    container.innerHTML = html;
 }
 
 function openBookingModal(slotKey, day, time) {
@@ -758,16 +768,69 @@ function openBookingModal(slotKey, day, time) {
         time
     };
     const booking = bookings[slotKey];
+    const isBlocked = blockedSlots[slotKey]; // 检查是否被锁
+
+    // 1. 设置标题
     document.getElementById('slotTitle').textContent = `${day} at ${time}`;
-    document.getElementById('studentName').value = booking ? booking.name : '';
-    document.getElementById('studentEmail').value = booking ? booking.email || '' : '';
     document.getElementById('currentBooking').innerHTML = `<strong>${day}</strong><br><strong>${time}</strong>`;
+
+    // 2. 获取按钮元素
+    const btnConfirm = document.getElementById('btnConfirmBooking');
+    const btnBlock = document.getElementById('btnBlockSlot');
     const deleteSection = document.getElementById('deleteSection');
-    if (booking && booking.name) {
-        deleteSection.style.display = 'block';
+    const inputName = document.getElementById('studentName');
+    const inputEmail = document.getElementById('studentEmail');
+
+    // 3. 填充输入框 (如果有预约)
+    inputName.value = booking ? booking.name : '';
+    inputEmail.value = booking ? booking.email || '' : '';
+
+    // --- 权限与界面逻辑 ---
+
+    if (currentUser.role === 'admin') {
+        // === 管理员视图 ===
+        
+        // 显示 Block 按钮
+        btnBlock.style.display = 'inline-block';
+        
+        if (isBlocked) {
+            // 如果已经被锁了 -> 显示 "Unblock" (设为可用)
+            btnBlock.textContent = "✅ Set Available";
+            btnBlock.style.background = "#4CAF50"; // 绿色
+            
+            // 锁住的时候，不能预约，隐藏输入框和确认按钮
+            btnConfirm.style.display = 'none';
+            inputName.disabled = true;
+            inputEmail.disabled = true;
+            document.getElementById('slotTitle').textContent += " (Unavailable)";
+        } else {
+            // 如果是正常的空闲格子 -> 显示 "Set Unavailable" (设为不可用)
+            btnBlock.textContent = "🚫 Set Unavailable";
+            btnBlock.style.background = "#607D8B"; // 灰色
+            
+            // 允许管理员帮学生预约
+            btnConfirm.style.display = 'inline-block'; 
+            inputName.disabled = false;
+            inputEmail.disabled = false;
+        }
+
+        // 如果有预约，显示删除按钮
+        deleteSection.style.display = (booking && booking.name) ? 'block' : 'none';
+
     } else {
-        deleteSection.style.display = 'none';
+        // === 学生视图 ===
+        // 学生永远看不到 Block 按钮
+        btnBlock.style.display = 'none';
+        
+        // 正常的预约逻辑
+        btnConfirm.style.display = 'inline-block';
+        inputName.disabled = false;
+        inputEmail.disabled = false;
+        
+        // 学生只能看到自己的预约删除按钮 (或者按照你之前的逻辑，有名字就显示删除)
+        deleteSection.style.display = (booking && booking.name) ? 'block' : 'none';
     }
+
     document.getElementById('bookingModal').classList.add('active');
 }
 
@@ -822,6 +885,45 @@ function deleteBooking() {
             .catch((error) => {
                 console.error("Delete failed: ", error);
                 showMessage('❌ Failed to delete. Please try again.', 'scheduleMessage', 'error');
+            });
+    }
+}
+
+function toggleSlotBlock() {
+    if (!selectedSlot || !currentUser || currentUser.role !== 'admin') return;
+
+    const slotKey = selectedSlot.key;
+    const isBlocked = blockedSlots[slotKey];
+
+    if (isBlocked) {
+        // 解锁 (Remove from blockedSlots)
+        // 使用 Firebase 的 FieldValue.delete() 删除该字段
+        const updateData = {};
+        updateData[`blockedSlots.${slotKey}`] = firebase.firestore.FieldValue.delete();
+
+        db.collection('lab_data').doc('schedule').update(updateData)
+            .then(() => {
+                delete blockedSlots[slotKey]; // 本地立即更新
+                updateScheduleDisplay();
+                closeModal();
+                showMessage('✓ Slot is now available!', 'scheduleMessage', 'success');
+            });
+    } else {
+        // 封锁 (Add to blockedSlots)
+        // 既然只是锁住，值设为 true 即可
+        const updateData = {};
+        updateData[`blockedSlots.${slotKey}`] = true;
+
+        // 如果这个格子已经被预约了，老师决定强行锁住，要不要删掉预约？
+        // 逻辑上：锁住通常意味着“今天不接客”，建议保留预约但变灰，或者你可以手动删预约。
+        // 这里我们只设置 block，不自动删 booking，防止误操作。
+
+        db.collection('lab_data').doc('schedule').update(updateData)
+            .then(() => {
+                blockedSlots[slotKey] = true; // 本地立即更新
+                updateScheduleDisplay();
+                closeModal();
+                showMessage('🚫 Slot set to unavailable.', 'scheduleMessage', 'success');
             });
     }
 }
