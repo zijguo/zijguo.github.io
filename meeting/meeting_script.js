@@ -1,16 +1,6 @@
-// --- Firebase 配置与初始化 ---
-const firebaseConfig = {
-  apiKey: "AIzaSyAoCotzk7b6ZY2RgL4jf9t-q8453EXs3kg",
-  authDomain: "guolab-scheduler.firebaseapp.com",
-  projectId: "guolab-scheduler",
-  storageBucket: "guolab-scheduler.firebasestorage.app",
-  messagingSenderId: "256665748304",
-  appId: "1:256665748304:web:1ad6d84387196f64c26255"
-};
-
-// 初始化 Firebase (使用兼容版语法)
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+const supabaseUrl = 'https://oqebiykwfzployraynyq.supabase.co'; 
+const supabaseKey = 'sb_publishable_ZKpZuP7NY9wxTn29TSqQNg_8e-9m1FY'; // 你的 public key
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
 const TODAY = new Date();
 const CURRENT_YEAR = TODAY.getFullYear();
@@ -860,72 +850,51 @@ function confirmBooking() {
 function deleteBooking() {
     if (confirm(`Remove booking for ${selectedSlot.day} at ${selectedSlot.time}?`)) {
         
-        // 1. 获取要删除的那个 key
         const slotKey = selectedSlot.key;
 
-        // 2. 直接告诉数据库：只删除这一个字段，不要动别的！
-        // 使用 update 而不是 set，使用 FieldValue.delete()
-        const updateData = {};
-        updateData[`bookings.${slotKey}`] = firebase.firestore.FieldValue.delete();
+        // 1. 修改本地数据：直接从 bookings 对象中删除这个 key
+        delete bookings[slotKey]; 
 
-        db.collection('lab_data').doc('schedule').update(updateData)
-            .then(() => {
-                // 数据库删除成功后，手动更新一下本地显示（虽然 onSnapshot 也会做，但这样更顺滑）
-                delete bookings[slotKey]; 
-                updateScheduleDisplay();
-                
-                // 如果是管理员，顺便刷新一下统计列表
-                if (currentUser && currentUser.role === 'admin') {
-                    loadAdminStats();
-                }
+        // 2. 保存到 Supabase
+        saveToFirebase();
 
-                showMessage(`✓ Booking cancelled!`, 'scheduleMessage', 'success');
-                closeModal();
-            })
-            .catch((error) => {
-                console.error("Delete failed: ", error);
-                showMessage('❌ Failed to delete. Please try again.', 'scheduleMessage', 'error');
-            });
+        // 3. 刷新界面
+        updateScheduleDisplay();
+        
+        // 如果是管理员，刷新统计列表
+        if (currentUser && currentUser.role === 'admin') {
+            loadAdminStats();
+        }
+
+        showMessage(`✓ Booking cancelled!`, 'scheduleMessage', 'success');
+        closeModal();
     }
 }
 
 function toggleSlotBlock() {
+    // 安全检查
     if (!selectedSlot || !currentUser || currentUser.role !== 'admin') return;
 
     const slotKey = selectedSlot.key;
     const isBlocked = blockedSlots[slotKey];
 
+    // 1. 修改本地数据
     if (isBlocked) {
-        // 解锁 (Remove from blockedSlots)
-        // 使用 Firebase 的 FieldValue.delete() 删除该字段
-        const updateData = {};
-        updateData[`blockedSlots.${slotKey}`] = firebase.firestore.FieldValue.delete();
-
-        db.collection('lab_data').doc('schedule').update(updateData)
-            .then(() => {
-                delete blockedSlots[slotKey]; // 本地立即更新
-                updateScheduleDisplay();
-                closeModal();
-                showMessage('✓ Slot is now available!', 'scheduleMessage', 'success');
-            });
+        // 如果原本是锁住的，现在解锁 -> 从对象中删除该 key
+        delete blockedSlots[slotKey];
+        showMessage('✓ Slot is now available!', 'scheduleMessage', 'success');
     } else {
-        // 封锁 (Add to blockedSlots)
-        // 既然只是锁住，值设为 true 即可
-        const updateData = {};
-        updateData[`blockedSlots.${slotKey}`] = true;
-
-        // 如果这个格子已经被预约了，老师决定强行锁住，要不要删掉预约？
-        // 逻辑上：锁住通常意味着“今天不接客”，建议保留预约但变灰，或者你可以手动删预约。
-        // 这里我们只设置 block，不自动删 booking，防止误操作。
-
-        db.collection('lab_data').doc('schedule').update(updateData)
-            .then(() => {
-                blockedSlots[slotKey] = true; // 本地立即更新
-                updateScheduleDisplay();
-                closeModal();
-                showMessage('🚫 Slot set to unavailable.', 'scheduleMessage', 'success');
-            });
+        // 如果原本是空闲的，现在锁住 -> 设置为 true
+        blockedSlots[slotKey] = true;
+        showMessage('🚫 Slot set to unavailable.', 'scheduleMessage', 'success');
     }
+
+    // 2. 保存到 Supabase (会把整个 blockedSlots 对象更新上去)
+    saveToFirebase(); 
+
+    // 3. 刷新界面
+    updateScheduleDisplay();
+    closeModal();
 }
 
 function showMessage(text, elementId, type) {
@@ -938,62 +907,81 @@ function showMessage(text, elementId, type) {
     }, 4000);
 }
 
-function saveToFirebase() {
-    console.log("正在保存到云端...");
+async function saveToFirebase() { // 函数名没改，为了兼容你其他代码
+    console.log("正在保存到 Supabase...");
     const dataPackage = {
         bookings: bookings || {},
         blockedSlots: blockedSlots || {},
         fullDayBlocks: fullDayBlocks || {},
-        // 如果你需要同步 Available Days 设置，把下面两行注释打开
         availableDays: availableDays,
         dayHourAvailability: dayHourAvailability,
         lastUpdated: new Date().toISOString()
     };
 
-    // 写入数据库: lab_data 集合 -> schedule 文档
-    db.collection('lab_data').doc('schedule').set(dataPackage, { merge: true })
-        .then(() => {
-            console.log("保存成功！");
-        })
-        .catch((error) => {
-            console.error("保存失败: ", error);
-            alert("同步数据失败，请检查网络");
-        });
+    // 更新 id=1 的那一行，把所有数据存进 app_data 列
+    const { error } = await supabaseClient
+        .from('lab-schedule')
+        .upsert({ id: 1, app_data: dataPackage });
+
+    if (error) {
+        console.error("保存失败: ", error);
+        alert("同步数据失败，请检查网络");
+    } else {
+        console.log("保存成功！");
+    }
 }
 
-function listenToFirebase() {
-    console.log("开始监听云端数据...");
+function listenToFirebase() { // 函数名保持不变
+    console.log("开始连接 Supabase...");
     
-    // 监听 lab_data/schedule 文档
-    db.collection('lab_data').doc('schedule')
-        .onSnapshot((doc) => {
-            if (doc.exists) {
-                const data = doc.data();
-                console.log("收到云端更新:", data);
+    // 1. 定义获取最新数据的函数
+    const fetchLatest = async () => {
+        const { data, error } = await supabaseClient
+            .from('lab-schedule')
+            .select('app_data')
+            .eq('id', 1)
+            .single();
 
-                // 更新本地变量
-                bookings = data.bookings || {};
-                blockedSlots = data.blockedSlots || {};
-                fullDayBlocks = data.fullDayBlocks || {};
-                
-                // 如果同步了设置，这里也要接收
-                if(data.availableDays) availableDays = data.availableDays;
-                if(data.dayHourAvailability) dayHourAvailability = data.dayHourAvailability;
+        if (data && data.app_data) {
+            console.log("收到云端更新:", data.app_data);
+            const remote = data.app_data;
+            
+            // 更新本地变量
+            bookings = remote.bookings || {};
+            blockedSlots = remote.blockedSlots || {};
+            fullDayBlocks = remote.fullDayBlocks || {};
+            if(remote.availableDays) availableDays = remote.availableDays;
+            if(remote.dayHourAvailability) dayHourAvailability = remote.dayHourAvailability;
 
-                // 刷新界面
-                updateScheduleDisplay();
-                
-                // 如果管理员面板是打开的，刷新统计
-                if (currentUser && currentUser.role === 'admin') {
-                    loadAdminStats();
-                }
-            } else {
-                console.log("数据库为空，正在初始化...");
-                saveToFirebase(); // 如果是第一次用，保存当前的空状态
+            // 刷新界面
+            updateScheduleDisplay();
+            if (currentUser && currentUser.role === 'admin') {
+                loadAdminStats();
             }
-        }, (error) => {
-             console.error("监听失败:", error);
-        });
+        }
+    };
+
+    // 2. 首次加载数据
+    fetchLatest();
+
+    // 3. 开启实时监听 (Realtime)
+    supabaseClient
+        .channel('schema-db-changes')
+        .on(
+            'postgres_changes',
+            {
+                event: 'UPDATE', // 监听更新事件
+                schema: 'public',
+                table: 'lab-schedule',
+                filter: 'id=eq.1' // 只监听 id=1 这一行
+            },
+            (payload) => {
+                console.log('检测到实时变更，正在刷新...');
+                // 当检测到变化时，重新拉取最新数据
+                fetchLatest();
+            }
+        )
+        .subscribe();
 }
 
 function setWeekDateInputs() {
