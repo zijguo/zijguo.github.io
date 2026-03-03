@@ -36,7 +36,7 @@ currentFriday.setDate(currentMonday.getDate() + 4);
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 let START_HOUR = 7;
 let END_HOUR = 24;
-let SLOT_DURATION = 60;
+let SLOT_DURATION = 30;
 const STUDENT_HASH = '7313cd9030458bbb409607a5f3b034473e9bfa32cde1ce6a9d1c9e4ba368d0fd';
 const ADMIN_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
 
