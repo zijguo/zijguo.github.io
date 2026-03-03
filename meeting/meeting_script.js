@@ -76,9 +76,11 @@ let dayHourAvailability = {
 let currentUser = null;
 let bookings = {};
 let blockedSlots = {};
+let openedSlots = {};
 let fullDayBlocks = {};
 let selectedSlot = null;
 let editingSlot = null;
+let isQuickEditMode = false;
 
 async function sha256(message) {
     const msgBuffer = new TextEncoder().encode(message);
@@ -153,6 +155,14 @@ function logout() {
     
     // 5. 隐藏 Availability Settings
     document.getElementById('availabilitySettings').style.display = 'none';
+
+    isQuickEditMode = false;
+    const quickEditBtn = document.getElementById('quickEditBtn');
+    if (quickEditBtn) {
+        quickEditBtn.style.display = 'none';
+        quickEditBtn.innerHTML = '⚡ 快速编辑 (Off)';
+        quickEditBtn.style.background = '#667eea';
+    }
 
     // --- 【新增】强制重置 UI 样式，防止学生样式污染管理员界面 ---
     const settingsPanel = document.getElementById('settingsPanel');
@@ -477,6 +487,8 @@ async function loginUser() {
 
     if (inputHash === ADMIN_HASH) {
         currentUser = { role: 'admin' };
+        const quickEditBtn = document.getElementById('quickEditBtn');
+        if (quickEditBtn) quickEditBtn.style.display = 'inline-block'; // 管理员显示按钮
         
         // --- 【修改点 1】先把界面改成老师的样子 (防止后面报错导致界面没变) ---
         if(settingsPanel) settingsPanel.style.display = 'block'; 
@@ -497,6 +509,8 @@ async function loginUser() {
 
     } else if (inputHash === STUDENT_HASH) {
         currentUser = { role: 'student' };
+        const quickEditBtn = document.getElementById('quickEditBtn');
+        if (quickEditBtn) quickEditBtn.style.display = 'none'; // 学生隐藏按钮
         
         // --- 【修改点 2】先把界面改成学生的样子 ---
         if(settingsPanel) settingsPanel.style.display = 'none'; 
@@ -635,8 +649,6 @@ function saveAvailabilitySettings() {
     setTimeout(() => closeAvailabilitySettings(), 1500);
 }
 
-// === 在 meeting_script.js 中完全替换 updateScheduleDisplay 函数 ===
-
 function updateScheduleDisplay() {
     const days = DAYS; // ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
     const container = document.getElementById('scheduleContainer');
@@ -700,7 +712,8 @@ function updateScheduleDisplay() {
             const isPast = slotDateTime < now;
             const slotKey = getDateKey(dayIndex, time); // 假设 getDateKey 函数存在且逻辑正确
             const booking = bookings[slotKey];
-            const isBlocked = blockedSlots[slotKey];
+            const isOpened = openedSlots[slotKey]; // 【新增】检查是否被老师手动开放
+            const isBlocked = !isOpened;           // 【修改】默认是 true (锁住)，只有在 openedSlots 里的才是 false
             const isFullDayBlocked = fullDayBlocks[dayIndex];
             
             // 判断是否在营业时间内
@@ -711,35 +724,46 @@ function updateScheduleDisplay() {
             let content = '';
             let clickAction = '';
 
-            // A. 已预订 (Booked)
+            // A. 已预订 (Booked) - 优先级最高，保留预约记录
             if (booking && booking.name) {
                 cellClass += ' booked';
                 if (isPast) cellClass += ' past';
                 content = `<div class="slot-name">${booking.name}</div>`;
                 clickAction = `onclick="openBookingModal('${slotKey}', '${days[dayIndex]}', '${time}')"`;
             
-            // B. 不可用 (Unavailable/Blocked) - 无论是管理员还是学生，都显示文字
-            } else if (!isTimeAvailable || isFullDayBlocked || isBlocked) {
-                cellClass += ' blocked';
-                // 显示 UNAVAILABLE 文字
-                content = `<span class="status-label unavailable">UNAVAILABLE</span>`; 
-                
-                // 只有管理员可以点击去“解锁”
-                if (currentUser && currentUser.role === 'admin') {
-                     clickAction = `onclick="openBookingModal('${slotKey}', '${days[dayIndex]}', '${time}')"`;
-                }
-
-            // C. 过期且未预订 (Expired)
+            // B. 过期且未预订 (Expired) - 优先级排第二！只要时间过了，一律显示 EXPIRED
             } else if (isPast) {
                 cellClass += ' past';
-                // 显示 EXPIRED 文字
                 content = `<span class="status-label expired">EXPIRED</span>`;
-            
-            // D. 空闲可约 (Open)
+                
+                // (可选) 如果你想让管理员即使在过期后也能点击查看/操作，可以取消下面这行的注释
+                // if (currentUser && currentUser.role === 'admin') clickAction = `onclick="openBookingModal('${slotKey}', '${days[dayIndex]}', '${time}')"`;
+
+            // C. 未开放/不可用 (Unavailable)
+            } else if (!isTimeAvailable || isFullDayBlocked || !isOpened) {
+                cellClass += ' blocked';
+                content = `<span class="status-label unavailable">UNAVAILABLE</span>`; 
+                
+                // 只有管理员可以点击
+                if (currentUser && currentUser.role === 'admin') {
+                     // 【修改】判断是否开启了快速编辑
+                     if (isQuickEditMode) {
+                         clickAction = `onclick="quickToggleSlot('${slotKey}')"`;
+                     } else {
+                         clickAction = `onclick="openBookingModal('${slotKey}', '${days[dayIndex]}', '${time}')"`;
+                     }
+                }
+
+            // D. 空闲可约 (Available)
             } else {
-                // 这里保留 + 号比较美观，或者你可以改成 "CLICK TO BOOK"
                 content = `<span style="color:#667eea; font-weight:bold; font-size:1.5em;">+</span>`; 
-                clickAction = `onclick="openBookingModal('${slotKey}', '${days[dayIndex]}', '${time}')"`;
+                
+                if (currentUser && currentUser.role === 'admin' && isQuickEditMode) {
+                     // 【修改】如果是快速模式，管理员点击已开放的格子，直接关闭；学生点击依然是预约弹窗
+                     clickAction = `onclick="quickToggleSlot('${slotKey}')"`;
+                } else {
+                     clickAction = `onclick="openBookingModal('${slotKey}', '${days[dayIndex]}', '${time}')"`;
+                }
             }
 
             // 3. 生成格子 HTML
@@ -758,7 +782,8 @@ function openBookingModal(slotKey, day, time) {
         time
     };
     const booking = bookings[slotKey];
-    const isBlocked = blockedSlots[slotKey]; // 检查是否被锁
+    const isOpened = openedSlots[slotKey]; 
+    const isBlocked = !isOpened; // 【修改】检查是否被锁（现在默认被锁）
 
     // 1. 设置标题
     document.getElementById('slotTitle').textContent = `${day} at ${time}`;
@@ -876,20 +901,20 @@ function toggleSlotBlock() {
     if (!selectedSlot || !currentUser || currentUser.role !== 'admin') return;
 
     const slotKey = selectedSlot.key;
-    const isBlocked = blockedSlots[slotKey];
+    const isOpened = openedSlots[slotKey];
 
     // 1. 修改本地数据
-    if (isBlocked) {
-        // 如果原本是锁住的，现在解锁 -> 从对象中删除该 key
-        delete blockedSlots[slotKey];
-        showMessage('✓ Slot is now available!', 'scheduleMessage', 'success');
-    } else {
-        // 如果原本是空闲的，现在锁住 -> 设置为 true
-        blockedSlots[slotKey] = true;
+    if (isOpened) {
+        // 如果原本是开着的 (Available)，现在设为不可用 -> 从 openedSlots 删除
+        delete openedSlots[slotKey];
         showMessage('🚫 Slot set to unavailable.', 'scheduleMessage', 'success');
+    } else {
+        // 如果原本是锁着的 (Unavailable)，现在设为可用 -> 加进 openedSlots
+        openedSlots[slotKey] = true;
+        showMessage('✓ Slot is now available!', 'scheduleMessage', 'success');
     }
 
-    // 2. 保存到 Supabase (会把整个 blockedSlots 对象更新上去)
+    // 2. 保存到 Supabase 
     saveToFirebase(); 
 
     // 3. 刷新界面
@@ -911,7 +936,7 @@ async function saveToFirebase() { // 函数名没改，为了兼容你其他代�
     console.log("正在保存到 Supabase...");
     const dataPackage = {
         bookings: bookings || {},
-        blockedSlots: blockedSlots || {},
+        openedSlots: openedSlots || {}, // 【修改】上传 openedSlots
         fullDayBlocks: fullDayBlocks || {},
         availableDays: availableDays,
         dayHourAvailability: dayHourAvailability,
@@ -948,7 +973,7 @@ function listenToFirebase() { // 函数名保持不变
             
             // 更新本地变量
             bookings = remote.bookings || {};
-            blockedSlots = remote.blockedSlots || {};
+            openedSlots = remote.openedSlots || {};
             fullDayBlocks = remote.fullDayBlocks || {};
             if(remote.availableDays) availableDays = remote.availableDays;
             if(remote.dayHourAvailability) dayHourAvailability = remote.dayHourAvailability;
@@ -1072,6 +1097,31 @@ function toggleBlockSlot(slotKey) {
     }
     saveToFirebase();
     renderBlockSchedule();
+}
+
+// 【新增】切换快速编辑模式
+function toggleQuickEdit() {
+    isQuickEditMode = !isQuickEditMode;
+    const btn = document.getElementById('quickEditBtn');
+    if (isQuickEditMode) {
+        btn.innerHTML = '⚡ 退出快速编辑';
+        btn.style.background = '#ff9800'; // 变成橙色提醒状态
+        showMessage('⚡ 快速编辑已开启：直接点击格子即可切换开放状态', 'scheduleMessage', 'success');
+    } else {
+        btn.innerHTML = '⚡ 快速编辑 (Off)';
+        btn.style.background = '#667eea'; // 恢复原色
+    }
+    updateScheduleDisplay();
+}
+
+function quickToggleSlot(slotKey) {
+    if (openedSlots[slotKey]) {
+        delete openedSlots[slotKey]; // 关掉
+    } else {
+        openedSlots[slotKey] = true; // 打开
+    }
+    saveToFirebase();
+    updateScheduleDisplay();
 }
 
 function clearBlockedSlots() {
