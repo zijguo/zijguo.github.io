@@ -3,187 +3,178 @@
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <link href="../../jemdoc.css" rel="stylesheet" type="text/css">
-    <title>Applications to Genetics and Health Record Data - Zijian Guo</title>
-    <script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'>
-    </script>
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        TeX: { equationNumbers: { autoNumber: "AMS" } }
-      });
-    </script>
-    <style type="text/css">
-      html * { line-height: 1.65; font-size:19px; }
-      count { display: block }
-      countreset { display: block; counter-reset: item; }
-      count:before { content: counter(item) ". "; counter-increment: item }
-      countreset ul { list-style-type: none; }
-      h1 { font-size: 32px !important; }
-      h2 { font-size:22.5px !important; }
-    #layout-content {
-    counter-reset: paper-item;
-    }
+    <title>Multi-source Learning — Zijian Guo</title>
+    <meta name="description" content="Research by Zijian Guo on multi-source learning across heterogeneous studies, hospitals, populations, and distribution shifts.">
+    <link rel="canonical" href="https://zijguo.github.io/research/research_by_topic/res_multisource.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Zijian Guo">
+    <meta property="og:title" content="Multi-source Learning — Zijian Guo">
+    <meta property="og:description" content="Research by Zijian Guo on multi-source learning across heterogeneous studies, hospitals, populations, and distribution shifts.">
+    <meta property="og:url" content="https://zijguo.github.io/research/research_by_topic/res_multisource.html">
+    <meta property="og:image" content="https://zijguo.github.io/assets/og-card.png">
+    <meta property="og:image:width" content="1731">
+    <meta property="og:image:height" content="909">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Multi-source Learning — Zijian Guo">
+    <meta name="twitter:description" content="Research by Zijian Guo on multi-source learning across heterogeneous studies, hospitals, populations, and distribution shifts.">
+    <meta name="twitter:image" content="https://zijguo.github.io/assets/og-card.png">
+    <meta name="theme-color" content="#176b73">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../photos/bio.jpg" type="image/jpeg">
+    <link href="../../homepage.css" rel="stylesheet" type="text/css">
 
-    #layout-content ul {
-    list-style-type: none; /* 去掉原本的点 */
-    margin-left: 20px;
-    padding-left: 4px;
-    }
-
-    #layout-content ul li p::before {
-    counter-increment: paper-item;
-    content: "" counter(paper-item) ". "; /* 显示为 [1], [2] */
-    font-weight: bold;
-    margin-right: 8px;
-    }
-    </style>
+    <link href="../../subpage.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-    <table id="tlayout" summary="Table for page layout.">
-        <tr valign="top">
-            <td id="layout-menu">
-                <img alt="alt text" height="300" src="../../photos/bio.jpg" width="200">
-                <h1 id="name">Zijian Guo</h1>
-                <div class="menu-category">
-                    Home
-                </div>
-                <div class="menu-item">
-                    <a href="../../index.html">About&nbsp;Me</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../../CV/Zijian_Guo_CV.pdf">CV</a>
-                </div>
-                <div class="menu-category">
-                    Research
-                </div>
-                <div class="menu-item">
-                    <a href="../pub.html">Publications</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../research_topics.html">Research by Topics</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../talks.html">Talks</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../software.html">Software</a>
-                </div>
-                <div class="menu-category">
-                    Teaching
-                </div>
-                <div class="menu-item">
-                    <a href="../../teaching/StatisticalOptimization.html">Statistical Optimization</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../../teaching/teaching.html">Teaching Evaluation</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../../teaching/group.html">Group Members</a>
-                </div>
-                <div class="menu-category">
-                    Meeting
-                </div>
-                <div class="menu-item">
-                    <a href="../../meeting/meeting.html">Meeting Reservation</a>
-                </div>
-            </td>
-            <td id="layout-content">
+<body class="topic-publications" style="--paper-start: 13;">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-shared-shell="true">
+    <div class="shell header-inner">
+      <a class="wordmark" href="../../index.html" aria-label="Zijian Guo, home">
+        <span class="monogram" aria-hidden="true">ZG</span>
+        <span>Zijian Guo</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="../../index.html">Home</a>
+        <a class="active" aria-current="page" href="../research_topics.html">Research</a>
+        <a href="../../research/pub.html">Publications</a>
+        <a href="../../research/talks.html">Talks</a>
+        <a href="../../research/software.html">Software</a>
+        <a href="../../teaching/teaching.html">Teaching</a>
+        <a href="../../teaching/group.html">Group</a>
+        <a href="../../blog.html">Blog</a>
+      </nav>
+      <details class="mobile-nav">
+        <summary aria-label="Open navigation">Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="../../index.html">Home</a>
+          <a class="active" aria-current="page" href="../research_topics.html">Research</a>
+          <a href="../../research/pub.html">Publications</a>
+          <a href="../../research/talks.html">Talks</a>
+          <a href="../../research/software.html">Software</a>
+          <a href="../../teaching/teaching.html">Teaching</a>
+          <a href="../../teaching/group.html">Group</a>
+          <a href="../../blog.html">Blog</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+  <main id="main">
+    <div id="layout-content">
                 <div id="toptitle">
-                    <h1>Generalizable Multi-source Learning</h1>
+                    <h1>Multi-source Learning</h1>
                 </div>
                 <div class="infoblock">
                     <div class="blockcontent">
-                        <h3 style="margin-bottom: 0em; margin-top: 0;">Topic Summary</h3>
-                        <p>In multi-source learning, my work aims to make models reliable when data come from multiple studies, hospitals, or environments that do not exactly agree. Rather than assuming a single pooled distribution, I define the target through an explicit robust optimization principle—typically a minimax (distributionally robust) objective that guards against the worst-case mixture or shift across sources—so the estimand itself is stable to heterogeneity. A key contribution is then to make this target computable and statistically actionable: in some settings, robust objectives admit an interpretable dual characterization that yields a closed-form solution or a simple reweighting rule; more generally, I develop efficient primal–dual / saddle-point algorithms tailored to the minimax structure, with theoretical guarantees. Finally, I provide valid uncertainty quantification for these optimization-defined estimands, even in nonstandard/nonregular regimes where classical smooth asymptotics can fail (e.g., due to nonsmooth objectives, boundary solutions, or source-adaptive behavior).</p>
+                        <h2 class="topic-summary-heading">At a glance</h2>
+                        <div class="topic-summary-grid">
+                            <div><span class="topic-summary-label">Problem</span><p>Studies, hospitals, and environments often disagree, so simple pooling can be unstable or misleading.</p></div>
+                            <div><span class="topic-summary-label">Approach</span><p>Minimax and distributionally robust targets guard against adverse mixtures and shifts across sources.</p></div>
+                            <div><span class="topic-summary-label">Inference and computation</span><p>Efficient algorithms and valid uncertainty quantification make optimization-defined targets statistically actionable.</p></div>
+                        </div>
                     </div>
                 </div>
+                <h2 class="related-work-heading">Related work <span class="section-count" aria-label="12 related works">12</span></h2>
                 <ul>
                     <li>
                         <p>Xiong, X., <b>Guo, Z.</b>, Zhu, H., Hong, C., Smoller, J. W., Cai, T., Liu, M<sup>✉</sup>. (2026).<br>
-                        <a href="../../arxiv/2601.11860v1.pdf" style="color: #0061CE">Adversarial Drift-Aware Predictive Transfer: Toward Durable Clinical AI.</a><br>
+                        <a href="https://zijguo.github.io/arxiv/2601.11860v1.pdf">Adversarial Drift-Aware Predictive Transfer: Toward Durable Clinical AI.</a><br>
                         Technical Report</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p><u>Wang, Z.</u>, Liu, M., Lei, J., Bach, F.<sup>✉</sup>, and <b>Guo, Z</b><sup>✉</sup>.(2025).<br>
-                        <a href="../../arxiv/2505.00940v1.pdf" style="color: #0061CE">StablePCA: 
+                        <p><u>Wang, Z.</u>, Liu, M., Lei, J., Bach, F.<sup>✉</sup>, and <b>Guo, Z.</b><sup>✉</sup> (2025).<br>
+                        <a href="https://zijguo.github.io/arxiv/2505.00940v1.pdf">StablePCA:
                             Distributionally Robust Learning of Shared Representations from Multi-Source Data</a><br>
                         Technical Report</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p><b>Guo, Z.</b>, <u>Wang, Z.</u>, Hu, Y., and Bach, F.(2025).<br>
-                        <a href="../../arxiv/2507.09905v2.pdf" style="color: #0061CE">Statistical Analysis for Conditional Group Distributionally Robust Optimization with Cross-Entropy Loss</a><br>
+                        <p><b>Guo, Z.</b>, <u>Wang, Z.</u>, Hu, Y., and Bach, F. (2025).<br>
+                        <a href="https://zijguo.github.io/arxiv/2507.09905v2.pdf">Statistical Analysis for Conditional Group Distributionally Robust Optimization with Cross-Entropy Loss</a><br>
                         Technical Report</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p><u>Gu, Y.</u>, Fang, C., Xu, Y., <b>Guo, Z.</b>, and Fan, J.(2025).<br>
-                        <a href="../../arxiv/2501.17354v1.pdf" style="color: #0061CE">Fundamental Computational Limits in Pursuing Invariant Causal Prediction and Invariance-Guided Regularization</a><br>
+                        <p><u>Gu, Y.</u>, Fang, C., Xu, Y., <b>Guo, Z.</b>, and Fan, J. (2025).<br>
+                        <a href="https://zijguo.github.io/arxiv/2501.17354v1.pdf">Fundamental Computational Limits in Pursuing Invariant Causal Prediction and Invariance-Guided Regularization</a><br>
                         Technical Report</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p><u>Wang, Z.<sup>#</sup></u>, Hu, Y.<sup>#</sup>, Bühlmann, P.<sup>✉</sup>, and <b>Guo, Z.</b><sup>✉</sup>(2024).<br>
-                        <a href="../../arxiv/2412.11850v3.pdf" style="color: #0061CE">Causal Invariance Learning via Efficient Nonconvex Optimization</a><br>
+                        <p><u>Wang, Z.<sup>#</sup></u>, Hu, Y.<sup>#</sup>, Bühlmann, P.<sup>✉</sup>, and <b>Guo, Z.</b><sup>✉</sup> (2024).<br>
+                        <a href="https://zijguo.github.io/arxiv/2412.11850v3.pdf">Causal Invariance Learning via Efficient Nonconvex Optimization</a><br>
                         Technical Report</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p><u>Wang, Z.</u>, Si, N., <b>Guo, Z.</b>, and Liu, M.(2024).<br>
-                        <a href="../../arxiv/2409.07380v3.pdf" style="color: #0061CE">Multi-source stable variable importance measure via adversarial machine learning</a><br>
+                        <p><u>Wang, Z.</u>, Si, N., <b>Guo, Z.</b>, and Liu, M. (2024).<br>
+                        <a href="https://zijguo.github.io/arxiv/2409.07380v3.pdf">Multi-source stable variable importance measure via adversarial machine learning</a><br>
                         Technical Report</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p><u>Zhan, K.</u>, <u>Xiong, X.</u>, <b>Guo, Z.</b>, Cai, T., and Liu, M.(2024).<br>
-                        <a href="../../arxiv/2407.20073v1.pdf" style="color: #0061CE">Transfer Learning Targeting Mixed Population: A Distributional Robust Perspective.</a><br>
+                        <p><u>Zhan, K.</u>, <u>Xiong, X.</u>, <b>Guo, Z.</b>, Cai, T., and Liu, M. (2024).<br>
+                        <a href="https://zijguo.github.io/arxiv/2407.20073v1.pdf">Transfer Learning Targeting Mixed Population: A Distributional Robust Perspective.</a><br>
                         Technical report</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p><u>Xiong, X.</u>,<b>Guo, Z.</b><sup>✉</sup>, and Cai, T.<sup>✉</sup>(2026).<br>
-                        <a href="../../arxiv/2309.06534v1.pdf" style="color: #0061CE">Distributionally Robust Transfer Learning</a><br>
+                        <p><u>Xiong, X.</u>, <b>Guo, Z.</b><sup>✉</sup>, and Cai, T.<sup>✉</sup> (2026).<br>
+                        <a href="https://zijguo.github.io/arxiv/2309.06534v1.pdf">Distributionally Robust Transfer Learning</a><br>
                         <i>Journal of the American Statistical Association, to appear.</i></p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><u>Wang, Z.</u>, Bühlmann, P., and <b>Guo, Z.</b> (2026).<br>
-                        <a href="../../arxiv/2309.02211v5.pdf" style="color: #0061CE">Distributionally Robust Learning for Multi-source Unsupervised Domain Adaptation.</a><br>
-                        <i>Annals of Statistics, 20(1), 718–770.</i></p>
+                        <a href="https://zijguo.github.io/arxiv/2309.02211v5.pdf">Distributionally Robust Learning for Multi-source Unsupervised Domain Adaptation.</a><br>
+                        <i>Annals of Statistics, 54(2), 570–596.</i></p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><b>Guo, Z.</b>, Li, X., Han, L., and Cai Tianxi. (2025).<br>
-                        <a href="../../arxiv/2301.00718v1.pdf" style="color: #0061CE">Robust Inference for Federated Meta-Learning</a><br>
-                        <i>Journal of the American Statistical Association,  120(551), 1695-1710.</i> [<a href="https://github.com/celehs/RIFL" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/2301.00718v1.pdf">Robust Inference for Federated Meta-Learning</a><br>
+                        <i>Journal of the American Statistical Association,  120(551), 1695-1710.</i> [<a class="resource-link" href="https://github.com/celehs/RIFL">Code</a>]</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><b>Guo, Z.</b> (2024).<br>
-                        <a href="../../arxiv/2011.07568v4.pdf" style="color: #0061CE">Statistical Inference for Maximin Effects: Identifying Stable Associations across Multiple Studies</a> .<br>
-                        <i>Journal of the American Statistical Association, 119(547), 1968-1984.</i> [<a href="https://github.com/zywang0701/MaximinInfer/" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/2011.07568v4.pdf">Statistical Inference for Maximin Effects: Identifying Stable Associations across Multiple Studies</a> .<br>
+                        <i>Journal of the American Statistical Association, 119(547), 1968-1984.</i> [<a class="resource-link" href="https://github.com/zywang0701/MaximinInfer/">Code</a>]</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p>Wang, X., Zhou, H., · · ·, 4CE,Avillach, P.<sup>✉</sup>, <b>Guo, Z.</b><sup>✉</sup>, and Cai, T.<sup>✉</sup> (2022)<br>
-                        <a href="../../arxiv/2022.02.03.22270410v1.full.pdf" style="color: #0061CE">Surv-Maximin: Robust Federated Approach to Transporting Survival Risk Prediction Models</a>.<br>
+                        <p>Wang, X., Zhou, H., · · ·, 4CE, Avillach, P.<sup>✉</sup>, <b>Guo, Z.</b><sup>✉</sup>, and Cai, T.<sup>✉</sup> (2022).<br>
+                        <a href="https://zijguo.github.io/arxiv/2022.02.03.22270410v1.full.pdf">Surv-Maximin: Robust Federated Approach to Transporting Survival Risk Prediction Models</a>.<br>
                         <i>Journal of Biomedical Informatics, 134 (2022): 104-176.</i></p>
                     </li>
                 </ul>
-                <p style="font-size: 16px; color: #555;"><i>underline indicates supervised students ; # indicates equal contribution; * indicates alphabetical ordering ; ✉ indicates corresponding authorship.</i></p>
-            </td>
-        </tr>
-    </table>
+                <div class="publication-legend" aria-label="Authorship notation">
+                    <strong>Authorship notation</strong>
+                    <span><u>Name</u> supervised student</span>
+                    <span><b>#</b> equal contribution</span>
+                    <span><b>*</b> alphabetical ordering</span>
+                    <span><b>✉</b> corresponding author</span>
+                </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" data-shared-shell="true">
+    <div class="shell footer-grid">
+      <div><p class="footer-name">Zijian Guo</p><p>Center for Data Science<br>Zhejiang University</p></div>
+      <div><p>No. 866 Yuhangtang Road<br>Hangzhou, Zhejiang, China</p></div>
+      <div><a href="mailto:zijguo@zju.edu.cn">zijguo@zju.edu.cn</a><p>© 2026 Zijian Guo</p></div>
+    </div>
+  </footer>
 </body>
 </html>

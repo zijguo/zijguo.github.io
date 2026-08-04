@@ -4,188 +4,120 @@
     <meta content="jemdoc, see http://jemdoc.jaboc.net/" name="generator">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <link href="../jemdoc.css" rel="stylesheet" type="text/css">
-    <title>Research Topics - Zijian Guo</title>
+    <title>Research by Topic — Zijian Guo</title>
+    <meta name="description" content="Explore six areas of Zijian Guo’s research: causal inference, multi-source learning, high-dimensional statistics, nonstandard inference, optimization, and applications to genetics and health data.">
+    <link rel="canonical" href="https://zijguo.github.io/research/research_topics.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Zijian Guo">
+    <meta property="og:title" content="Research by Topic — Zijian Guo">
+    <meta property="og:description" content="Explore six areas of Zijian Guo’s research: causal inference, multi-source learning, high-dimensional statistics, nonstandard inference, optimization, and applications to genetics and health data.">
+    <meta property="og:url" content="https://zijguo.github.io/research/research_topics.html">
+    <meta property="og:image" content="https://zijguo.github.io/assets/og-card.png">
+    <meta property="og:image:width" content="1731">
+    <meta property="og:image:height" content="909">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Research by Topic — Zijian Guo">
+    <meta name="twitter:description" content="Explore six areas of Zijian Guo’s research: causal inference, multi-source learning, high-dimensional statistics, nonstandard inference, optimization, and applications to genetics and health data.">
+    <meta name="twitter:image" content="https://zijguo.github.io/assets/og-card.png">
+    <meta name="theme-color" content="#176b73">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../photos/bio.jpg" type="image/jpeg">
+    <link href="../homepage.css" rel="stylesheet" type="text/css">
 
-    <script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'></script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-            TeX: { equationNumbers: { autoNumber: "AMS" } }
-        });
-    </script>
-    <style type="text/css">
-        html * { line-height: 1.65; font-size: 19px; }
-        h1 { font-size: 32px !important; }
-        h2 { font-size: 22.5px !important; }
-        
-        /* --- 新增的学术卡片式 UI 样式 --- */
-        .intro-text {
-            margin-bottom: 30px;
-            color: #333;
-        }
-
-        .topics-container {
-            display: flex;
-            flex-direction: column;
-            gap: 25px; /* 卡片之间的间距 */
-            margin-bottom: 40px;
-        }
-
-        .topic-card {
-            background-color: #ffffff;
-            border: 1px solid #eaeaea;
-            border-left: 5px solid #005A9C; /* 学术蓝左边框高亮 */
-            border-radius: 6px;
-            padding: 24px 30px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            transition: all 0.3s ease;
-        }
-
-        .topic-card:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            transform: translateY(-2px);
-            border-left-color: #003F70; /* 悬浮时加深颜色 */
-        }
-
-        .topic-card h2 {
-            margin-top: 0;
-            margin-bottom: 8px;
-        }
-
-        .topic-card h2 a {
-            color: #005A9C;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        .topic-card h2 a:hover {
-            color: #003F70;
-            text-decoration: underline;
-        }
-
-        .topic-keywords {
-            font-size: 15px;
-            color: #666;
-            font-style: italic;
-            margin-bottom: 12px;
-            font-family: Georgia, serif; /* 关键词使用衬线字体增加学术感 */
-        }
-
-        .topic-desc {
-            font-size: 17px;
-            color: #444;
-            margin-bottom: 16px;
-            text-align: justify;
-        }
-
-        .read-more {
-            display: inline-block;
-            font-size: 16px;
-            font-weight: bold;
-            color: #005A9C;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-bottom 0.2s ease;
-        }
-
-        .read-more:hover {
-            border-bottom: 1px solid #005A9C;
-        }
-        /* --- 结束 --- */
-    </style>
+    <link href="../subpage.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-    <table id="tlayout" summary="Table for page layout.">
-        <tr valign="top">
-            <td id="layout-menu">
-                <img alt="alt text" height="300" src="../photos/bio.jpg" width="200">
-                <h1 id="name">Zijian Guo</h1>
-                <div class="menu-category">Home</div>
-                <div class="menu-item"><a href="../index.html">About&nbsp;Me</a></div>
-                <div class="menu-item"><a href="../CV/Zijian_Guo_CV.pdf">CV</a></div>
-                
-                <div class="menu-category">Research</div>
-                <div class="menu-item">
-                    <a href="pub.html">Publications</a>
-                </div>
-                <div class="menu-item">
-                    <a href="research_topics.html">Research by Topics</a>
-                </div>
-                <div class="menu-item"><a href="talks.html">Talks</a></div>
-                <div class="menu-item"><a href="software.html">Software</a></div>
-                
-                <div class="menu-category">Teaching</div>
-                <div class="menu-item"><a href="../teaching/StatisticalOptimization.html">Statistical Optimization</a></div>
-                <div class="menu-item"><a href="../teaching/teaching.html">Teaching Evaluation</a></div>
-                <div class="menu-item"><a href="../teaching/group.html">Group Members</a></div>
-                
-                <div class="menu-category">Meeting</div>
-                <div class="menu-item"><a href="../meeting/meeting.html">Meeting Reservation</a></div>
-            </td>
-            
-            <td id="layout-content">
-                <div id="toptitle">
-                    <h1>Research Topics</h1>
-                </div>
-                
-                <p class="intro-text">
-                    My research develops statistical foundations for reliable and generalizable inference in modern data settings where classical assumptions often fail. Below is a directory of my main methodological areas and their applications.
-                </p>
+<body class="research-topics-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-shared-shell="true">
+    <div class="shell header-inner">
+      <a class="wordmark" href="../index.html" aria-label="Zijian Guo, home">
+        <span class="monogram" aria-hidden="true">ZG</span>
+        <span>Zijian Guo</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="../index.html">Home</a>
+        <a class="active" aria-current="page" href="../research/research_topics.html">Research</a>
+        <a href="../research/pub.html">Publications</a>
+        <a href="../research/talks.html">Talks</a>
+        <a href="../research/software.html">Software</a>
+        <a href="../teaching/teaching.html">Teaching</a>
+        <a href="../teaching/group.html">Group</a>
+        <a href="../blog.html">Blog</a>
+      </nav>
+      <details class="mobile-nav">
+        <summary aria-label="Open navigation">Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="../index.html">Home</a>
+          <a class="active" aria-current="page" href="../research/research_topics.html">Research</a>
+          <a href="../research/pub.html">Publications</a>
+          <a href="../research/talks.html">Talks</a>
+          <a href="../research/software.html">Software</a>
+          <a href="../teaching/teaching.html">Teaching</a>
+          <a href="../teaching/group.html">Group</a>
+          <a href="../blog.html">Blog</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+  <main id="main">
+    <section class="research-directory" aria-labelledby="research-topics-heading">
+      <div class="shell">
+        <header class="directory-hero">
+          <div class="directory-heading">
+            <p class="directory-eyebrow">Research overview</p>
+            <h1 class="directory-title" id="research-topics-heading">Research by Topic</h1>
+          </div>
+          <p class="directory-intro">Explore six connected areas spanning statistical foundations, computational methods, and scientific applications. Each topic page brings together a concise overview and selected work.</p>
+        </header>
 
-                <div class="topics-container">
-                    
-                    <div class="topic-card">
-                        <h2>
-                            <a href="research_by_topic/res_multisource.html">Generalizable Multi-source Learning</a>
-                        </h2>
-                        <div class="topic-keywords">Distributional Robustness &middot; Minimax Optimization &middot; Federated Learning</div>
-                        <p class="topic-desc">
-                            Making models reliable when data come from multiple heterogeneous studies, hospitals, or environments. Rather than assuming a single pooled distribution, I define robust targets using minimax objectives that guard against worst-case shifts, accompanied by efficient primal-dual algorithms and valid uncertainty quantification.
-                        </p>
-                    </div>
+        <div class="topic-directory-grid" aria-label="Six research topics">
+          <a class="topic-directory-card" href="research_by_topic/res_causal.html">
+            <span class="topic-type">Statistical foundations</span>
+            <h2>Causal inference</h2>
+            <p>Reliable causal conclusions under invalid instruments and hidden confounding.</p>
+            <span class="topic-action">Explore topic <span aria-hidden="true">&#8594;</span></span>
+          </a>
+          <a class="topic-directory-card" href="research_by_topic/res_multisource.html">
+            <span class="topic-type">Learning</span>
+            <h2>Multi-source learning</h2>
+            <p>Stable learning across heterogeneous sources and distribution shifts.</p>
+            <span class="topic-action">Explore topic <span aria-hidden="true">&#8594;</span></span>
+          </a>
+          <a class="topic-directory-card" href="research_by_topic/res_nonstandard.html">
+            <span class="topic-type">Statistical foundations</span>
+            <h2>Nonstandard inference</h2>
+            <p>Valid uncertainty quantification beyond regular asymptotics.</p>
+            <span class="topic-action">Explore topic <span aria-hidden="true">&#8594;</span></span>
+          </a>
+          <a class="topic-directory-card" href="research_by_topic/res_highdim.html">
+            <span class="topic-type">Statistical foundations</span>
+            <h2>High-dimensional statistics</h2>
+            <p>Principled inference when parameters outnumber observations.</p>
+            <span class="topic-action">Explore topic <span aria-hidden="true">&#8594;</span></span>
+          </a>
+          <a class="topic-directory-card topic-directory-card-application" href="research_by_topic/res_ai4science.html">
+            <span class="topic-type">Scientific application</span>
+            <h2>Genetics and health data</h2>
+            <p>Statistical methods for genetics, proteomics, biomarkers, and multi-center health data.</p>
+            <span class="topic-action">Explore topic <span aria-hidden="true">&#8594;</span></span>
+          </a>
+          <a class="topic-directory-card" href="research_by_topic/res_optimization.html">
+            <span class="topic-type">Computation</span>
+            <h2>Optimization</h2>
+            <p>Optimization methods for robust statistical learning, nonconvex problems, and scalable data analysis.</p>
+            <span class="topic-action">Explore topic <span aria-hidden="true">&#8594;</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-                    <div class="topic-card">
-                        <h2>
-                            <a href="research_by_topic/res_causal.html">Reliable Causal Inference</a>
-                        </h2>
-                        <div class="topic-keywords">Instrumental Variables (IV) &middot; Robust Identification &middot; Causal Invariance</div>
-                        <p class="topic-desc">
-                            Centering on instrumental variables (IV), I develop identification and inference tools that remain meaningful even when instruments are imperfect or invalid. My work also extends to under-identification, non-regular inference, and causal invariance learning to identify relationships that remain stable across different environments.
-                        </p>
-                    </div>
-
-                    <div class="topic-card">
-                        <h2>
-                            <a href="research_by_topic/res_highdim.html">High-dimensional Uncertainty Quantification</a>
-                        </h2>
-                        <div class="topic-keywords">High-dimensional Inference &middot; Multiple Testing &middot; Hidden Confounding</div>
-                        <p class="topic-desc">
-                            Turning high-dimensional modeling into trustworthy scientific conclusions. I develop inference-first toolkits—including confidence intervals, hypothesis tests, and multiple testing procedures—that remain valid in realistic regimes beyond simple linear models, addressing complications like hidden confounding and endogeneity.
-                        </p>
-                    </div>
-                    
-                    <div class="topic-card">
-                        <h2>
-                            <a href="research_by_topic/res_nonstandard.html">Nonstandard Inference</a>
-                        </h2>
-                        <div class="topic-keywords">Uncertainty Quantification &middot; Post-selection Inference &middot; Perturbation Methods</div>
-                        <p class="topic-desc">
-                            Providing reliable uncertainty quantification in modern problems where standard Wald intervals break down. I develop inference methods based on perturbation, resampling, and stability-driven constructions for scenarios involving optimization-defined targets, data-adaptive selection, or lack of standard regularity conditions.
-                        </p>
-                    </div>
-
-                    <div class="topic-card">
-                        <h2>
-                            <a href="research_by_topic/res_ai4science.html">Applications to Genetics and Health Data</a>
-                        </h2>
-                        <div class="topic-keywords">Mendelian Randomization &middot; Multi-center EHRs &middot; Biomarker Discovery</div>
-                        <p class="topic-desc">
-                            Making large, heterogeneous datasets—such as genetics, proteomics, and multi-center EHRs—actionable for science. Examples include MR-SPI for robust biomarker discovery via valid genetic instruments selection, and SurvMaximin for transporting survival risk prediction models across hospitals without sharing patient-level data.
-                        </p>
-                    </div>
-
-                </div>
-            </td>
-        </tr>
-    </table>
+  <footer class="site-footer" data-shared-shell="true">
+    <div class="shell footer-grid">
+      <div><p class="footer-name">Zijian Guo</p><p>Center for Data Science<br>Zhejiang University</p></div>
+      <div><p>No. 866 Yuhangtang Road<br>Hangzhou, Zhejiang, China</p></div>
+      <div><a href="mailto:zijguo@zju.edu.cn">zijguo@zju.edu.cn</a><p>© 2026 Zijian Guo</p></div>
+    </div>
+  </footer>
 </body>
 </html>

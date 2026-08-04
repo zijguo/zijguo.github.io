@@ -3,158 +3,149 @@
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <link href="../../jemdoc.css" rel="stylesheet" type="text/css">
-    <title>Applications to Genetics and Health Record Data - Zijian Guo</title>
-    <script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'>
-    </script>
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        TeX: { equationNumbers: { autoNumber: "AMS" } }
-      });
-    </script>
-    <style type="text/css">
-      html * { line-height: 1.65; font-size:19px; }
-      count { display: block }
-      countreset { display: block; counter-reset: item; }
-      count:before { content: counter(item) ". "; counter-increment: item }
-      countreset ul { list-style-type: none; }
-      h1 { font-size: 32px !important; }
-      h2 { font-size:22.5px !important; }
-    #layout-content {
-    counter-reset: paper-item;
-    }
+    <title>Nonstandard Inference — Zijian Guo</title>
+    <meta name="description" content="Research by Zijian Guo on uncertainty quantification when standard regularity conditions and Wald approximations fail.">
+    <link rel="canonical" href="https://zijguo.github.io/research/research_by_topic/res_nonstandard.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Zijian Guo">
+    <meta property="og:title" content="Nonstandard Inference — Zijian Guo">
+    <meta property="og:description" content="Research by Zijian Guo on uncertainty quantification when standard regularity conditions and Wald approximations fail.">
+    <meta property="og:url" content="https://zijguo.github.io/research/research_by_topic/res_nonstandard.html">
+    <meta property="og:image" content="https://zijguo.github.io/assets/og-card.png">
+    <meta property="og:image:width" content="1731">
+    <meta property="og:image:height" content="909">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nonstandard Inference — Zijian Guo">
+    <meta name="twitter:description" content="Research by Zijian Guo on uncertainty quantification when standard regularity conditions and Wald approximations fail.">
+    <meta name="twitter:image" content="https://zijguo.github.io/assets/og-card.png">
+    <meta name="theme-color" content="#176b73">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../photos/bio.jpg" type="image/jpeg">
+    <link href="../../homepage.css" rel="stylesheet" type="text/css">
 
-    #layout-content ul {
-    list-style-type: none; /* 去掉原本的点 */
-    margin-left: 20px;
-    padding-left: 4px;
-    }
-
-    #layout-content ul li p::before {
-    counter-increment: paper-item;
-    content: "" counter(paper-item) ". "; /* 显示为 [1], [2] */
-    font-weight: bold;
-    margin-right: 8px;
-    }
-    </style>
+    <link href="../../subpage.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-    <table id="tlayout" summary="Table for page layout.">
-        <tr valign="top">
-            <td id="layout-menu">
-                <img alt="alt text" height="300" src="../../photos/bio.jpg" width="200">
-                <h1 id="name">Zijian Guo</h1>
-                <div class="menu-category">
-                    Home
-                </div>
-                <div class="menu-item">
-                    <a href="../../index.html">About&nbsp;Me</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../../CV/Zijian_Guo_CV.pdf">CV</a>
-                </div>
-                <div class="menu-category">
-                    Research
-                </div>
-                <div class="menu-item">
-                    <a href="../pub.html">Publications</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../research_topics.html">Research by Topics</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../talks.html">Talks</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../software.html">Software</a>
-                </div>
-                <div class="menu-category">
-                    Teaching
-                </div>
-                <div class="menu-item">
-                    <a href="../../teaching/StatisticalOptimization.html">Statistical Optimization</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../../teaching/teaching.html">Teaching Evaluation</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../../teaching/group.html">Group Members</a>
-                </div>
-                <div class="menu-category">
-                    Meeting
-                </div>
-                <div class="menu-item">
-                    <a href="../../meeting/meeting.html">Meeting Reservation</a>
-                </div>
-            </td>
-            <td id="layout-content">
+<body class="topic-publications" style="--paper-start: 9;">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-shared-shell="true">
+    <div class="shell header-inner">
+      <a class="wordmark" href="../../index.html" aria-label="Zijian Guo, home">
+        <span class="monogram" aria-hidden="true">ZG</span>
+        <span>Zijian Guo</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="../../index.html">Home</a>
+        <a class="active" aria-current="page" href="../research_topics.html">Research</a>
+        <a href="../../research/pub.html">Publications</a>
+        <a href="../../research/talks.html">Talks</a>
+        <a href="../../research/software.html">Software</a>
+        <a href="../../teaching/teaching.html">Teaching</a>
+        <a href="../../teaching/group.html">Group</a>
+        <a href="../../blog.html">Blog</a>
+      </nav>
+      <details class="mobile-nav">
+        <summary aria-label="Open navigation">Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="../../index.html">Home</a>
+          <a class="active" aria-current="page" href="../research_topics.html">Research</a>
+          <a href="../../research/pub.html">Publications</a>
+          <a href="../../research/talks.html">Talks</a>
+          <a href="../../research/software.html">Software</a>
+          <a href="../../teaching/teaching.html">Teaching</a>
+          <a href="../../teaching/group.html">Group</a>
+          <a href="../../blog.html">Blog</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+  <main id="main">
+    <div id="layout-content">
                 <div id="toptitle">
                     <h1>Nonstandard Inference</h1>
                 </div>
                 <div class="infoblock">
                     <div class="blockcontent">
-                        <h3 style="margin-bottom: 0em; margin-top: 0;">Topic Summary</h3>
-                        <p>A central theme of my work is reliable uncertainty quantification in modern problems where standard Wald intervals with “estimate + standard error” recipes can break. This happens when the target is defined through an optimization (e.g., a worst-case/robust objective), when the procedure involves data-adaptive steps (e.g., model selection or causal discovery), or when key regularity conditions fail so the usual smooth asymptotic normal approximations are no longer accurate. In these settings, I develop inference methods—often based on perturbation/resampling or other stability-driven constructions—that remain valid even when the limiting distribution is nonsmooth or non-normal, or when nuisance components are learned flexibly and may converge slowly. Intuitively, the goal is to provide confidence statements that continue to mean what they say (correct coverage) in the realistic regimes where robustness, selection, and complex learning are essential, but classical asymptotic theory is overly optimistic.</p>
+                        <h2 class="topic-summary-heading">At a glance</h2>
+                        <div class="topic-summary-grid">
+                            <div><span class="topic-summary-label">Problem</span><p>Standard Wald intervals can fail for optimization-defined, data-adaptive, or nonregular targets.</p></div>
+                            <div><span class="topic-summary-label">Approach</span><p>Perturbation, resampling, and stability-based constructions accommodate nonsmooth limits and flexible nuisance learning.</p></div>
+                            <div><span class="topic-summary-label">Goal</span><p>Confidence statements with reliable coverage when classical normal approximations are too optimistic.</p></div>
+                        </div>
                     </div>
                 </div>
+                <h2 class="related-work-heading">Related work <span class="section-count" aria-label="8 related works">8</span></h2>
                 <ul>
                     <li>
                         <p>Heng, S.<sup>#✉</sup>, Shen, Y.<sup>#</sup>, <b>Guo, Z.</b><sup>✉</sup> (2026).<br>
-                        <a href="../../arxiv/2601.13150v1.pdf" style="color: #0061CE">Propensity Score Propagation: A General Framework for Design-Based Inference with Unknown Propensity Scores.</a><br>
+                        <a href="https://zijguo.github.io/arxiv/2601.13150v1.pdf">Propensity Score Propagation: A General Framework for Design-Based Inference with Unknown Propensity Scores.</a><br>
                         Technical Report</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><u>Koo, T.</u> and <b>Guo, Z.</b> (2025).<br>
-                        <a href="../../arxiv/2511.02632v2.pdf" style="color: #0061CE">Distributionally Robust Synthetic Control: Ensuring Robustness Against Highly Correlated Controls and Weight Shifts.</a><br>
+                        <a href="https://zijguo.github.io/arxiv/2511.02632v2.pdf">Distributionally Robust Synthetic Control: Ensuring Robustness Against Highly Correlated Controls and Weight Shifts.</a><br>
                         Technical Report</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p><u>Zheng, M.</u>,Bonvini, M.<sup>✉</sup>,and <b>Guo, Z.</b><sup>✉</sup>(2025).<br>
-                        <a href="../../arxiv/2511.01222v1.pdf" style="color: #0061CE">Perturbed Double Machine Learning: Nonstandard Inference Beyond the Parametric Length</a><br>
+                        <p><u>Zheng, M.</u>, Bonvini, M.<sup>✉</sup>, and <b>Guo, Z.</b><sup>✉</sup> (2025).<br>
+                        <a href="https://zijguo.github.io/arxiv/2511.01222v1.pdf">Perturbed Double Machine Learning: Nonstandard Inference Beyond the Parametric Length</a><br>
                         Technical Report</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p><b>Guo, Z.</b>, <u>Wang, Z.</u>, Hu, Y., and Bach, F.(2025).<br>
-                        <a href="../../arxiv/2507.09905v2.pdf" style="color: #0061CE">Statistical Analysis for Conditional Group Distributionally Robust Optimization with Cross-Entropy Loss</a><br>
+                        <p><b>Guo, Z.</b>, <u>Wang, Z.</u>, Hu, Y., and Bach, F. (2025).<br>
+                        <a href="https://zijguo.github.io/arxiv/2507.09905v2.pdf">Statistical Analysis for Conditional Group Distributionally Robust Optimization with Cross-Entropy Loss</a><br>
                         Technical Report</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><u>Chang, T. H.</u>, <b>Guo, Z.</b>, and Malinsky, D. (2026).<br>
-                        <a href="../../arxiv/2405.06763v4.pdf" style="color: #0061CE">Post-selection inference for causal effects after causal discovery.</a><br>
+                        <a href="https://zijguo.github.io/arxiv/2405.06763v4.pdf">Post-selection inference for causal effects after causal discovery.</a><br>
                         <i>Biometrika, 113(1), asaf073.</i></p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><b>Guo, Z.</b>, Li, X., Han, L., and Cai Tianxi. (2025).<br>
-                        <a href="../../arxiv/2301.00718v1.pdf" style="color: #0061CE">Robust Inference for Federated Meta-Learning</a><br>
-                        <i>Journal of the American Statistical Association,  120(551), 1695-1710.</i> [<a href="https://github.com/celehs/RIFL" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/2301.00718v1.pdf">Robust Inference for Federated Meta-Learning</a><br>
+                        <i>Journal of the American Statistical Association,  120(551), 1695-1710.</i> [<a class="resource-link" href="https://github.com/celehs/RIFL">Code</a>]</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><b>Guo, Z.</b> (2024).<br>
-                        <a href="../../arxiv/2011.07568v4.pdf" style="color: #0061CE">Statistical Inference for Maximin Effects: Identifying Stable Associations across Multiple Studies</a> .<br>
-                        <i>Journal of the American Statistical Association, 119(547), 1968-1984.</i> [<a href="https://github.com/zywang0701/MaximinInfer/" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/2011.07568v4.pdf">Statistical Inference for Maximin Effects: Identifying Stable Associations across Multiple Studies</a> .<br>
+                        <i>Journal of the American Statistical Association, 119(547), 1968-1984.</i> [<a class="resource-link" href="https://github.com/zywang0701/MaximinInfer/">Code</a>]</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><b>Guo, Z.</b> (2023).<br>
-                        <a href="../../arxiv/2104.06911v5.pdf" style="color: #0061CE">Causal Inference with Invalid Instruments: Post-selection Problems and A Solution Using Searching and Sampling.</a><br>
-                        <i>Journal of the Royal Statistical Society: Series B (Statistical Methodology), 85(3), 959-985.</i> [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/2104.06911v5.pdf">Causal Inference with Invalid Instruments: Post-selection Problems and A Solution Using Searching and Sampling.</a><br>
+                        <i>Journal of the Royal Statistical Society: Series B (Statistical Methodology), 85(3), 959-985.</i> [<a class="resource-link" href="https://github.com/zijguo/RobustIV">Code</a>]</p>
                     </li>
                 </ul>
-                <p style="font-size: 16px; color: #555;"><i>underline indicates supervised students ; # indicates equal contribution; * indicates alphabetical ordering ; ✉ indicates corresponding authorship.</i></p>
-            </td>
-        </tr>
-    </table>
+                <div class="publication-legend" aria-label="Authorship notation">
+                    <strong>Authorship notation</strong>
+                    <span><u>Name</u> supervised student</span>
+                    <span><b>#</b> equal contribution</span>
+                    <span><b>*</b> alphabetical ordering</span>
+                    <span><b>✉</b> corresponding author</span>
+                </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" data-shared-shell="true">
+    <div class="shell footer-grid">
+      <div><p class="footer-name">Zijian Guo</p><p>Center for Data Science<br>Zhejiang University</p></div>
+      <div><p>No. 866 Yuhangtang Road<br>Hangzhou, Zhejiang, China</p></div>
+      <div><a href="mailto:zijguo@zju.edu.cn">zijguo@zju.edu.cn</a><p>© 2026 Zijian Guo</p></div>
+    </div>
+  </footer>
 </body>
 </html>

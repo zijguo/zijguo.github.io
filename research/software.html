@@ -4,76 +4,63 @@
     <meta content="jemdoc, see http://jemdoc.jaboc.net/" name="generator">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <link href="../jemdoc.css" rel="stylesheet" type="text/css">
-    <title>Software</title><!-- MathJax -->
+    <title>Software — Zijian Guo</title>
+    <meta name="description" content="Research software and reproducible implementations from Zijian Guo and collaborators for robust causal and high-dimensional statistical inference.">
+    <link rel="canonical" href="https://zijguo.github.io/research/software.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Zijian Guo">
+    <meta property="og:title" content="Software — Zijian Guo">
+    <meta property="og:description" content="Research software and reproducible implementations from Zijian Guo and collaborators for robust causal and high-dimensional statistical inference.">
+    <meta property="og:url" content="https://zijguo.github.io/research/software.html">
+    <meta property="og:image" content="https://zijguo.github.io/assets/og-card.png">
+    <meta property="og:image:width" content="1731">
+    <meta property="og:image:height" content="909">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Software — Zijian Guo">
+    <meta name="twitter:description" content="Research software and reproducible implementations from Zijian Guo and collaborators for robust causal and high-dimensional statistical inference.">
+    <meta name="twitter:image" content="https://zijguo.github.io/assets/og-card.png">
+    <meta name="theme-color" content="#176b73">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../photos/bio.jpg" type="image/jpeg">
+    <link href="../homepage.css" rel="stylesheet" type="text/css">
 
-    <script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'>
-    </script>
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      TeX: { equationNumbers: { autoNumber: "AMS" } }
-    });
-    </script><!-- End MathJax -->
-
-    <style type="text/css">
-      html * { line-height: 1.65; font-size:19px; }
-      count { display: block }
-      countreset { display: block; counter-reset: item; }
-      count:before { content: counter(item) ". "; counter-increment: item }
-      h1 { font-size: 32px !important; }
-      h2 { font-size:22.5px !important; }
-    </style>
+    <link href="../subpage.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-    <table id="tlayout" summary="Table for page layout.">
-        <tr valign="top">
-            <td id="layout-menu">
-                <img alt="alt text" height="300" src="../photos/bio.jpg" width="200"> <h1 id="name">Zijian Guo</h1>
-                <div class="menu-category">
-                    Home
-                </div>
-                <div class="menu-item">
-                    <a href="../index.html">About&nbsp;Me</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../CV/Zijian_Guo_CV.pdf">CV</a>
-                </div>
-                
-                <div class="menu-category">
-                    Research
-                </div>
-                <div class="menu-item">
-                    <a href="pub.html">Publications</a>
-                </div>
-                <div class="menu-item">
-                    <a href="research_topics.html">Research by Topics</a>
-                </div>
-                <div class="menu-item">
-                    <a href="talks.html">Talks</a>
-                </div>
-                <div class="menu-item">
-                    <a href="software.html">Software</a>
-                </div>
-                
-                <div class="menu-category">
-                    Teaching
-                </div>
-                <div class="menu-item">
-                    <a href="../teaching/StatisticalOptimization.html">Statistical Optimization</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../teaching/teaching.html">Teaching Evaluation</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../teaching/group.html">Group Members</a>
-                </div>
-                <div class="menu-category">
-                    Meeting
-                </div>
-                <div class="menu-item">
-                    <a href="../meeting/meeting.html">Meeting Reservation</a>
-                </div>
-            </td>
-            <td id="layout-content">
+<body class="software-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-shared-shell="true">
+    <div class="shell header-inner">
+      <a class="wordmark" href="../index.html" aria-label="Zijian Guo, home">
+        <span class="monogram" aria-hidden="true">ZG</span>
+        <span>Zijian Guo</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="../index.html">Home</a>
+        <a href="../research/research_topics.html">Research</a>
+        <a href="../research/pub.html">Publications</a>
+        <a href="../research/talks.html">Talks</a>
+        <a class="active" aria-current="page" href="../research/software.html">Software</a>
+        <a href="../teaching/teaching.html">Teaching</a>
+        <a href="../teaching/group.html">Group</a>
+        <a href="../blog.html">Blog</a>
+      </nav>
+      <details class="mobile-nav">
+        <summary aria-label="Open navigation">Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="../index.html">Home</a>
+          <a href="../research/research_topics.html">Research</a>
+          <a href="../research/pub.html">Publications</a>
+          <a href="../research/talks.html">Talks</a>
+          <a class="active" aria-current="page" href="../research/software.html">Software</a>
+          <a href="../teaching/teaching.html">Teaching</a>
+          <a href="../teaching/group.html">Group</a>
+          <a href="../blog.html">Blog</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+  <main id="main">
+    <div id="layout-content">
                 <div id="toptitle">
                     <h1>Software</h1>
                 </div>
@@ -97,7 +84,7 @@
                         </ul>
                         <ul>
                             <li>
-                                <p><a href="#controlfunctionIV">controlfunctionIV: control function method with possibly invalid instru- ments.</a></p>
+                                <p><a href="#controlfunctionIV">controlfunctionIV: control function method with possibly invalid instruments.</a></p>
                             </li>
                         </ul>
                         <ul>
@@ -122,7 +109,7 @@
                         </ul>
                     </div>
                 </div>
-                <h2><a id="robustiv" name="robustiv">RobustIV: Robust Instrumental Variable Methods in Linear Models</a></h2>
+                <h2 id="robustiv">RobustIV: Robust Instrumental Variable Methods in Linear Models</h2>
                 <ul>
                     <li>
                         <p>Description: Inference for the treatment effect with possibly invalid instrumental variables via TSHT ('Guo et al.&rsquo; (2018)) and SearchingSampling ('Guo&rsquo; (2021)), which are effective for both low- and high-dimensional covariates and instrumental variables; test of endogeneity in high dimensions ('Guo et al.&rsquo; (2018)).<br></p>
@@ -130,7 +117,7 @@
                 </ul>
                 <ul>
                     <li>
-                        <p>Github Repository is <a href="https://github.com/zijguo/RobustIV" target="&ldquo;blank&rdquo;">here</a>, R package available at <a href="https://cran.r-project.org/web/packages/RobustIV/index.html" target="&ldquo;blank&rdquo;">https:<i></i>cran.r-project.org/web/packages/RobustIV/index.html</a>.<br></p>
+                        <p>GitHub repository: <a href="https://github.com/zijguo/RobustIV" target="_blank" rel="noopener noreferrer">here</a>, R package: <a href="https://cran.r-project.org/web/packages/RobustIV/index.html" target="_blank" rel="noopener noreferrer">RobustIV on CRAN</a>.<br></p>
                     </li>
                 </ul>
                 <ul>
@@ -138,27 +125,24 @@
                         <p>Paper reference<br></p>
                     </li>
                 </ul>
-                <dl>
-                    <dt></dt>
-                    <dd>
+                <div class="software-references">
+                    <div class="software-reference">
                         <p><b>Guo, Z.</b>, Kang, H., Cai, T. T. and Small, D. S. (2018).<br>
-                        <a href="../arxiv/1603.05224v3.pdf" style="color: #0061CE">Confidence Intervals for Causal Effects with Invalid Instruments using Two-Stage Hard Thresholding with Voting</a>.<br>
+                        <a href="https://zijguo.github.io/arxiv/1603.05224v3.pdf">Confidence Intervals for Causal Effects with Invalid Instruments using Two-Stage Hard Thresholding with Voting</a>.<br>
                         <i>Journal of the Royal Statistical Society: Series B,</i> 80(4), 793-815.</p>
-                    </dd>
-                    <dt></dt>
-                    <dd>
-                        <p><b>Guo, Z.</b> (2021).<br>
-                        <a href="../arxiv/2104.06911v5.pdf" style="color: #0061CE">Causal Inference with Invalid Instruments: Post-selection Problems and A Solution Using Searching and Sampling.</a><br>
-                        To appear in <i>Journal of the Royal Statistical Society: Series B</i></p>
-                    </dd>
-                    <dt></dt>
-                    <dd>
+                    </div>
+                    <div class="software-reference">
+                        <p><b>Guo, Z.</b> (2023).<br>
+                        <a href="https://zijguo.github.io/arxiv/2104.06911v5.pdf">Causal Inference with Invalid Instruments: Post-selection Problems and A Solution Using Searching and Sampling.</a><br>
+                        <i>Journal of the Royal Statistical Society: Series B,</i> 85(3), 959–985.</p>
+                    </div>
+                    <div class="software-reference">
                         <p><b>Guo, Z.</b>, Kang, H., Cai, T. T. and Small, D. S. (2018).<br>
-                        <a href="../arxiv/1609.06713v3.pdf" style="color: #0061CE">Testing Endogeneity with High Dimensional Covariates</a>.<br>
+                        <a href="https://zijguo.github.io/arxiv/1609.06713v3.pdf">Testing Endogeneity with High Dimensional Covariates</a>.<br>
                         <i>The Journal of Econometrics,</i> 207(1), 175-187.</p>
-                    </dd>
-                </dl>
-                <h2><a id="SIHR" name="SIHR">SIHR: Statistical Inference in High Dimensional Regression</a></h2>
+                    </div>
+                </div>
+                <h2 id="SIHR">SIHR: Statistical Inference in High Dimensional Regression</h2>
                 <ul>
                     <li>
                         <p>Description: Inference procedures in the high-dimensional setting for (1) linear functionals in generalized linear regression ('Cai et al.&rsquo; (2019), 'Guo et al.&rsquo; (2020) , 'Cai et al.&rsquo; (2021)), (2) individual treatment effects in generalized linear regression, (3) quadratic functionals in generalized linear regression ('Guo et al.&rsquo; (2019)).</p>
@@ -166,7 +150,7 @@
                 </ul>
                 <ul>
                     <li>
-                        <p>Github Repository is <a href="https://github.com/prabrishar1/SIHR" target="&ldquo;blank&rdquo;">here</a>, R package available at <a href="https://cran.r-project.org/web/packages/SIHR/index.html" target="&ldquo;blank&rdquo;">https:<i></i>cran.r-project.org/web/packages/SIHR/index.html</a>.</p>
+                        <p>GitHub repository: <a href="https://github.com/prabrishar1/SIHR" target="_blank" rel="noopener noreferrer">here</a>, R package: <a href="https://cran.r-project.org/web/packages/SIHR/index.html" target="_blank" rel="noopener noreferrer">SIHR on CRAN</a>.</p>
                     </li>
                 </ul>
                 <ul>
@@ -174,66 +158,61 @@
                         <p>Paper reference<br></p>
                     </li>
                 </ul>
-                <dl>
-                    <dt></dt>
-                    <dd>
+                <div class="software-references">
+                    <div class="software-reference">
                         <p>* Cai, T, Cai, T. T. and <b>Guo, Z.</b> (2021).<br>
-                        <a href="../arxiv/1904.12891v2.pdf" style="color: #0061CE">Optimal Statistical Inference for Individualized Treatment Effects in High-dimensional Models</a>.<br>
+                        <a href="https://zijguo.github.io/arxiv/1904.12891v2.pdf">Optimal Statistical Inference for Individualized Treatment Effects in High-dimensional Models</a>.<br>
                         <i>Journal of the Royal Statistical Society: Series B,</i> 2021, 83(4): 669-719.</p>
-                    </dd>
-                </dl>
-                <dl>
-                    <dt></dt>
-                    <dd>
+                    </div>
+                </div>
+                <div class="software-references">
+                    <div class="software-reference">
                         <p><b>Guo, Z.</b>, <u>Rakshit, P.</u>, Herman, D., and Chen, J. (2021).<br>
-                        <a href="../arxiv/2012.07133v3.pdf" style="color: #0061CE">Inference for Case Probability in High-dimensional Logistic Regression</a>.<br>
+                        <a href="https://zijguo.github.io/arxiv/2012.07133v3.pdf">Inference for Case Probability in High-dimensional Logistic Regression</a>.<br>
                         <i>Journal of Machine Learning Research,</i> 22(254), 1-54</p>
-                    </dd>
-                </dl>
-                <dl>
-                    <dt></dt>
-                    <dd>
+                    </div>
+                </div>
+                <div class="software-references">
+                    <div class="software-reference">
                         <p><b>Guo, Z.</b>, Renaux, C., Bühlmann, P., and Cai, T. T. (2021).<br>
-                        <a href="../arxiv/1909.01503v3.pdf" style="color: #0061CE">Group Inference in High Dimensions with Applications to Hierarchical Testing</a>.<br>
+                        <a href="https://zijguo.github.io/arxiv/1909.01503v3.pdf">Group Inference in High Dimensions with Applications to Hierarchical Testing</a>.<br>
                         <i>Electronic Journal of Statistics,</i> 15(2), 6633-6676.</p>
-                    </dd>
-                </dl>
-                <dl>
-                    <dt></dt>
-                    <dd>
-                        <p>Ma, R.,<b>Guo, Z.</b>, Cai, T. T., and Li, H. (2020).<br>
-                        <a href="../arxiv/2202.10007v2.pdf" style="color: #0061CE">Statistical Inference for Genetic Relatedness Based On High-Dimensional Logistic Regression</a>.<br>
-                        To appear in <i>Statistica Sinica.</i></p>
-                    </dd>
-                </dl>
+                    </div>
+                </div>
+                <div class="software-references">
+                    <div class="software-reference">
+                        <p>Ma, R., <b>Guo, Z.</b>, Cai, T. T., and Li, H. (2024).<br>
+                        <a href="https://zijguo.github.io/arxiv/2202.10007v2.pdf">Statistical Inference for Genetic Relatedness Based On High-Dimensional Logistic Regression</a>.<br>
+                        <i>Statistica Sinica,</i> 34(2), 1023–1043.</p>
+                    </div>
+                </div>
 
-                <h2><a id="TSCI" name="TSCI">TSCI: Tools for Causal Inference with Possibly Invalid Instrumental Variables</a></h2>
+                <h2 id="TSCI">TSCI: Tools for Causal Inference with Possibly Invalid Instrumental Variables</h2>
                         <ul>
                             <li>
                                 <p>Description: Two stage curvature identification with machine learning for causal inference in settings when instrumental variable regression is not suitable because of potentially invalid instrumental variables. Based on Guo and Buehlmann (2022) &ldquo;Two Stage Curvature Identification with Machine Learning: Causal Inference with Possibly Invalid Instrumental Variables&rdquo; .</p>
                             </li>
                             <li>
-                                <p>Github Repository is <a href="https://github.com/zijguo/TSCI" target="&ldquo;blank&rdquo;">here</a>, R package available at <a href="https://cran.r-project.org/web/packages/TSCI/index.html" target="&ldquo;blank&rdquo;">https:<i></i>cran.r-project.org/web/packages/TSCI/index.html</a>.</p>
+                                <p>GitHub repository: <a href="https://github.com/zijguo/TSCI" target="_blank" rel="noopener noreferrer">here</a>, R package: <a href="https://cran.r-project.org/web/packages/TSCI/index.html" target="_blank" rel="noopener noreferrer">TSCI on CRAN</a>.</p>
                             </li>
                             <li>
-                                <p>Paper reference ,</p>
+                                <p>Paper reference</p>
                             </li>
                         </ul>
-                        <dl>
-                            <dt></dt>
-                            <dd>
-                                <p><b>Guo, Z.</b> and Bühlmann, P. (2022).<br>
-                                <a href="../arxiv/2203.12808v4.pdf" style="color: #0061CE">Two Stage Curvature Identification with Machine Learning: Causal Inference with Possibly Invalid Instrumental Variables</a><br>
-                                Technical Report</p>
-                            </dd>
-                        </dl>
-                        <h2><a id="controlfunctionIV" name="controlfunctionIV">Control functionIV: Control Function Methods with Possibly Invalid Instrumental Variables</a></h2>
+                        <div class="software-references">
+                            <div class="software-reference">
+                                <p><b>Guo, Z.</b>, <u>Zheng, M.</u>, and Bühlmann, P. (2026).<br>
+                                <a href="https://zijguo.github.io/arxiv/2203.12808v4.pdf">Robustness Against Weak or Invalid Instruments: Exploring Nonlinear Treatment Models with Machine Learning</a>.<br>
+                                <i>Journal of Machine Learning Research,</i> to appear.</p>
+                            </div>
+                        </div>
+                        <h2 id="controlfunctionIV">controlfunctionIV: Control Function Methods with Possibly Invalid Instrumental Variables</h2>
                         <ul>
                             <li>
                                 <p>Description: Inference with control function methods for nonlinear outcome models when the model is known ('Guo and Small&rsquo; (2016)) and when unknown but semiparametric ('Li and Guo&rsquo; (2020)), using the Control Function method and the SpotIV method.</p>
                             </li>
                             <li>
-                                <p>Github Repository is <a href="https://github.com/zijguo/controlfunctionIV" target="&ldquo;blank&rdquo;">here</a>, R package available at <a href="https://cran.r-project.org/web/packages/controlfunctionIV/index.html" target="&ldquo;blank&rdquo;">https:<i></i>cran.r-project.org/web/packages/controlfunctionIV/index.html</a> .</p>
+                                <p>GitHub repository: <a href="https://github.com/zijguo/controlfunctionIV" target="_blank" rel="noopener noreferrer">here</a>, R package: <a href="https://cran.r-project.org/web/packages/controlfunctionIV/index.html" target="_blank" rel="noopener noreferrer">controlfunctionIV on CRAN</a> .</p>
                             </li>
                         </ul>
                         <ul>
@@ -241,21 +220,19 @@
                                 <p>Paper reference</p>
                             </li>
                         </ul>
-                        <dl>
-                            <dt></dt>
-                            <dd>
+                        <div class="software-references">
+                            <div class="software-reference">
                                 <p><b>Guo, Z.</b> and Small, D. S. (2016).<br>
-                                <a href="../arxiv/1602.01051v1.pdf" style="color: #0061CE">Control Function Instrumental Variable Estimation of Nonlinear Causal Effect Models</a>.<br>
+                                <a href="https://zijguo.github.io/arxiv/1602.01051v1.pdf">Control Function Instrumental Variable Estimation of Nonlinear Causal Effect Models</a>.<br>
                                 <i>Journal of Machine Learning Research,</i> 17(100):1-35, 2016.</p>
-                            </dd>
-                            <dt></dt>
-                            <dd>
+                            </div>
+                            <div class="software-reference">
                                 <p>Li, S. and <b>Guo, Z. (2020).</b><br>
-                                <a href="../arxiv/2010.09922v2.pdf" style="color: #0061CE">Causal Inference for Nonlinear Outcome Models with Possibly Invalid Instrumental Variables</a>.<br>
+                                <a href="https://zijguo.github.io/arxiv/2010.09922v2.pdf">Causal Inference for Nonlinear Outcome Models with Possibly Invalid Instrumental Variables</a>.<br>
                                 Technical Report</p>
-                            </dd>
-                        </dl>
-                        <h2><a id="MaximinInfer" name="MaximinInfer">MaximinInfer</a></h2>
+                            </div>
+                        </div>
+                        <h2 id="MaximinInfer">MaximinInfer</h2>
                         <ul>
                             <li>
                                 <p>Description: MaximinInfer is a package that implements the sampling and aggregation method for the covariate shift maximin effect, which was proposed in Guo (2020). It constructs the confidence interval for any linear combination of the high-dimensional maximin effect.</p>
@@ -263,7 +240,7 @@
                         </ul>
                         <ul>
                             <li>
-                                <p>Github Repository is <a href="https://github.com/zywang0701/MaximinInfer" target="&ldquo;blank&rdquo;">here</a>, R package available at <a href="https://cran.r-project.org/web/packages/MaximinInfer/index.html" target="&ldquo;blank&rdquo;">https:<i></i>cran.r-project.org/web/packages/MaximinInfer/index.html</a>.</p>
+                                <p>GitHub repository: <a href="https://github.com/zywang0701/MaximinInfer" target="_blank" rel="noopener noreferrer">here</a>, R package: <a href="https://cran.r-project.org/web/packages/MaximinInfer/index.html" target="_blank" rel="noopener noreferrer">MaximinInfer on CRAN</a>.</p>
                             </li>
                         </ul>
                         <ul>
@@ -271,45 +248,22 @@
                                 <p>Paper reference</p>
                             </li>
                         </ul>
-                        <dl>
-                            <dt></dt>
-                            <dd>
-                                <p><b>Guo, Z.</b> (2020).<br>
-                                <a href="../arxiv/2011.07568v4.pdf" style="color: #0061CE">Statistical Inference for Maximin Effects: Identifying Stable Associations across Multiple Studies</a> .<br>
-                                Minor Revision at <i>Journal of the American Statistical Association</i></p>
-                            </dd>
-                        </dl>
-                        <h2><a id="DLL" name="DLL">DLL: Decorrelated Local Linear Estimator</a></h2>
+                        <div class="software-references">
+                            <div class="software-reference">
+                                <p><b>Guo, Z.</b> (2024).<br>
+                                <a href="https://zijguo.github.io/arxiv/2011.07568v4.pdf">Statistical Inference for Maximin Effects: Identifying Stable Associations across Multiple Studies</a> .<br>
+                                <i>Journal of the American Statistical Association,</i> 119(547), 1968–1984.</p>
+                            </div>
+                        </div>
+                        <h2 id="DLL">DLL: Decorrelated Local Linear Estimator</h2>
                         <ul>
                             <li>
-                                <p>Description: Implementation of the Decorrelated Local Linear estimator proposed in <a href="../arxiv/1907.12732v2.pdf" target="&ldquo;blank&rdquo;">&lt;arXiv:1907.12732&gt;</a>. It constructs the confidence interval for the derivative of the function of interest under the high-dimensional sparse additive model.</p>
+                                <p>Description: Implementation of the Decorrelated Local Linear estimator proposed in <a href="https://zijguo.github.io/arxiv/1907.12732v2.pdf" target="_blank" rel="noopener noreferrer">&lt;arXiv:1907.12732&gt;</a>. It constructs the confidence interval for the derivative of the function of interest under the high-dimensional sparse additive model.</p>
                             </li>
                         </ul>
                         <ul>
                             <li>
-                                <p>Github Repository is <a href="https://github.com/zijguo/HighDim-Additive-Inference" target="&ldquo;blank&rdquo;">here</a>, R package available at <a href="https://cran.r-project.org/web/packages/DLL/index.html" target="&ldquo;blank&rdquo;">https:<i></i>cran.r-project.org/web/packages/DLL/index.html</a></p>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <p>Paper reference</p>
-                            </li>
-                        </ul>
-                        <dl>
-                            <dt></dt>
-                            <dd>
-                                <p><b>Guo, Z.</b>, <u>Yuan W.</u> and Zhang, C. (2019).<br>
-                                <a href="../arxiv/1907.12732v2.pdf" style="color: #0061CE">Local Inference in Additive Models with Decorrelated Local Linear Estimator</a>.<br>
-                                Technical Report</p>
-                            </dd>
-                        </dl>
-                        <h2><a id="DDL" name="DDL">DDL: Doubly Debiased Lasso</a></h2>
-                        <ul>
-                            <li>
-                                <p>Description: The goal of DDL is to implement the Doubly Debiased Lasso estimator proposed in <a href="../arxiv/2004.03758v3.pdf" target="&ldquo;blank&rdquo;">&lt;arXiv:2004.03758&gt;</a>. It Computes the Doubly Debiased Lasso estimator of a single regression coefficient in the high-dimensional linear model with hidden confounders and also constructs the confidence interval forthe target regression coefficient.</p>
-                            </li>
-                            <li>
-                                <p>Github Repository is <a href="https://github.com/zijguo/Doubly-Debiased-Lasso" target="&ldquo;blank&rdquo;">here</a>, R package available at <a href="https://cran.r-project.org/web/packages/DDL/index.html" target="&ldquo;blank&rdquo;">https:<i></i>cran.r-project.org/web/packages/DDL/index.html</a>.</p>
+                                <p>GitHub repository: <a href="https://github.com/zijguo/HighDim-Additive-Inference" target="_blank" rel="noopener noreferrer">here</a>, R package: <a href="https://cran.r-project.org/web/packages/DLL/index.html" target="_blank" rel="noopener noreferrer">DLL on CRAN</a></p>
                             </li>
                         </ul>
                         <ul>
@@ -317,23 +271,43 @@
                                 <p>Paper reference</p>
                             </li>
                         </ul>
-                        <dl>
-                            <dt></dt>
-                            <dd>
-                                <p><b>Guo, Z.</b> , Cevid, D., and Bühlmann, P. (2021+).<br>
-                                <a href="../arxiv/2004.03758v3.pdf" style="color: #0061CE">Doubly Debiased Lasso: High-Dimensional Inference under Hidden Confounding</a>.<br>
+                        <div class="software-references">
+                            <div class="software-reference">
+                                <p>*<b>Guo, Z.</b>, <u>Yuan, W.</u>, and Zhang, C. (2026).<br>
+                                <a href="https://zijguo.github.io/arxiv/1907.12732v2.pdf">Decorrelated Local Linear Estimator: Inference for Non-linear Effects in High-dimensional Additive Models</a>.<br>
+                                <i>Journal of Machine Learning Research,</i> 27(27), 1–79.</p>
+                            </div>
+                        </div>
+                        <h2 id="DDL">DDL: Doubly Debiased Lasso</h2>
+                        <ul>
+                            <li>
+                                <p>Description: DDL implements the Doubly Debiased Lasso estimator proposed in <a href="https://zijguo.github.io/arxiv/2004.03758v3.pdf" target="_blank" rel="noopener noreferrer">&lt;arXiv:2004.03758&gt;</a>. It computes the estimator and a confidence interval for a target regression coefficient in a high-dimensional linear model with hidden confounders.</p>
+                            </li>
+                            <li>
+                                <p>GitHub repository: <a href="https://github.com/zijguo/Doubly-Debiased-Lasso" target="_blank" rel="noopener noreferrer">here</a>, R package: <a href="https://cran.r-project.org/web/packages/DDL/index.html" target="_blank" rel="noopener noreferrer">DDL on CRAN</a>.</p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <p>Paper reference</p>
+                            </li>
+                        </ul>
+                        <div class="software-references">
+                            <div class="software-reference">
+                                <p><b>Guo, Z.</b>, Cevid, D., and Bühlmann, P. (2022).<br>
+                                <a href="https://zijguo.github.io/arxiv/2004.03758v3.pdf">Doubly Debiased Lasso: High-Dimensional Inference under Hidden Confounding</a>.<br>
                                 <i>Annals of Statistics</i>, 50 (3), 1320 - 1347.</p>
-                            </dd>
-                        </dl>
-                        <h2><a id="maczic" name="maczic">maczic: Mediation Analysis for Count and Zero-Inflated Count Data</a></h2>
+                            </div>
+                        </div>
+                        <h2 id="maczic">maczic: Mediation Analysis for Count and Zero-Inflated Count Data</h2>
                         <ul>
                             <li>
-                                <p>Description: Performs causal mediation analysis for count and zero-inflated count data without or with a post-treatment confounder; calculates power to detect prespecified causal mediation effects, direct effects, and total effects; performs sensitivity analysis when there is a treatment- induced mediator-outcome confounder as described by Cheng, J., Cheng, N.F., Guo, Z., Gregorich, S., Ismail, A.I., Gansky, S.A. (2018) <a href="https://journals.sagepub.com/doi/10.1177/0962280216686131" target="&ldquo;blank&rdquo;">&lt;doi:10.1177 / 0962280216686131&gt;</a>. Implements Instrumental Variable (IV) method to estimate the controlled (natural) direct and mediation effects, and compute the bootstrap Confidence Intervals as described by Guo, Z., Small, D.S., Gansky, S.A., Cheng, J. (2018) <a href="https://rss.onlinelibrary.wiley.com/doi/10.1111/rssc.12233" target="&ldquo;blank&rdquo;">&lt;doi:10.1111 / rssc.12233&gt;</a>. This software was made possible by Grant R03DE028410 from the The National Institute of Dental and Craniofacial Research, a component of the National Institutes of Health.</p>
+                                <p>Description: Performs causal mediation analysis for count and zero-inflated count data with or without a post-treatment confounder; calculates power for mediation, direct, and total effects; and supports sensitivity analysis. The methods are described by Cheng et al. (2018) <a href="https://journals.sagepub.com/doi/10.1177/0962280216686131" target="_blank" rel="noopener noreferrer">&lt;doi:10.1177/0962280216686131&gt;</a> and Guo et al. (2018) <a href="https://rss.onlinelibrary.wiley.com/doi/10.1111/rssc.12233" target="_blank" rel="noopener noreferrer">&lt;doi:10.1111/rssc.12233&gt;</a>. This software was supported by Grant R03DE028410 from the National Institute of Dental and Craniofacial Research, a component of the National Institutes of Health.</p>
                             </li>
                         </ul>
                         <ul>
                             <li>
-                                <p>Github Repository is <a href="https://github.com/zijguo/Doubly-Debiased-Lasso" target="&ldquo;blank&rdquo;">here</a>, R package available at <a href="https://cran.r-project.org/web/packages/maczic/index.html" target="&ldquo;blank&rdquo;">https:<i></i>cran.r-project.org/web/packages/maczic/index.html</a>.</p>
+                                <p>R package: <a href="https://cran.r-project.org/web/packages/maczic/index.html" target="_blank" rel="noopener noreferrer">maczic on CRAN</a>.</p>
                             </li>
                         </ul>
                         <ul>
@@ -341,22 +315,27 @@
                                 <p>Paper reference</p>
                             </li>
                         </ul>
-                        <dl>
-                            <dt></dt>
-                            <dd>
+                        <div class="software-references">
+                            <div class="software-reference">
                                 <p>Cheng J., Cheng, N. F., <b>Guo, Z.</b>, Gregorich, S., Ismail, A. I. and Gansky, S. A. (2018).<br>
-                                <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5502001/" style="color: #0061CE">Mediation Analysis for Count and Zero-Inflated Count Data</a>.<br>
+                                <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5502001/">Mediation Analysis for Count and Zero-Inflated Count Data</a>.<br>
                                 <i>Statistical Methods in Medical Research,</i> 27(9), 2756-2774.</p>
-                            </dd>
-                            <dt></dt>
-                            <dd>
+                            </div>
+                            <div class="software-reference">
                                 <p><b>Guo, Z.</b>, Small, D. S., Gansky, S. A., and Cheng, J. (2018).<br>
-                                <a href="../arxiv/1601.06294v2.pdf" style="color: #0061CE">Mediation Analysis for Count and Zero-Inflated Count Data without Sequential Ignorability</a>.<br>
+                                <a href="https://zijguo.github.io/arxiv/1601.06294v2.pdf">Mediation Analysis for Count and Zero-Inflated Count Data without Sequential Ignorability</a>.<br>
                                 <i>Journal of the Royal Statistical Society: Series C,</i> 67(2), 371-394.</p>
-                            </dd>
-                        </dl>
-            </td>
-        </tr>
-    </table>
+                            </div>
+                        </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" data-shared-shell="true">
+    <div class="shell footer-grid">
+      <div><p class="footer-name">Zijian Guo</p><p>Center for Data Science<br>Zhejiang University</p></div>
+      <div><p>No. 866 Yuhangtang Road<br>Hangzhou, Zhejiang, China</p></div>
+      <div><a href="mailto:zijguo@zju.edu.cn">zijguo@zju.edu.cn</a><p>© 2026 Zijian Guo</p></div>
+    </div>
+  </footer>
 </body>
 </html>

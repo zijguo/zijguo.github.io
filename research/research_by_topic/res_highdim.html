@@ -3,111 +3,88 @@
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <link href="../../jemdoc.css" rel="stylesheet" type="text/css">
-    <title>Applications to Genetics and Health Record Data - Zijian Guo</title>
-    <script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'>
-    </script>
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        TeX: { equationNumbers: { autoNumber: "AMS" } }
-      });
-    </script>
-    <style type="text/css">
-      html * { line-height: 1.65; font-size:19px; }
-      count { display: block }
-      countreset { display: block; counter-reset: item; }
-      count:before { content: counter(item) ". "; counter-increment: item }
-      countreset ul { list-style-type: none; }
-      h1 { font-size: 32px !important; }
-      h2 { font-size:22.5px !important; }
-    #layout-content {
-    counter-reset: paper-item;
-    }
+    <title>High-Dimensional Uncertainty Quantification — Zijian Guo</title>
+    <meta name="description" content="Research by Zijian Guo on valid uncertainty quantification and testing in high-dimensional statistical models.">
+    <link rel="canonical" href="https://zijguo.github.io/research/research_by_topic/res_highdim.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Zijian Guo">
+    <meta property="og:title" content="High-Dimensional Uncertainty Quantification — Zijian Guo">
+    <meta property="og:description" content="Research by Zijian Guo on valid uncertainty quantification and testing in high-dimensional statistical models.">
+    <meta property="og:url" content="https://zijguo.github.io/research/research_by_topic/res_highdim.html">
+    <meta property="og:image" content="https://zijguo.github.io/assets/og-card.png">
+    <meta property="og:image:width" content="1731">
+    <meta property="og:image:height" content="909">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="High-Dimensional Uncertainty Quantification — Zijian Guo">
+    <meta name="twitter:description" content="Research by Zijian Guo on valid uncertainty quantification and testing in high-dimensional statistical models.">
+    <meta name="twitter:image" content="https://zijguo.github.io/assets/og-card.png">
+    <meta name="theme-color" content="#176b73">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../photos/bio.jpg" type="image/jpeg">
+    <link href="../../homepage.css" rel="stylesheet" type="text/css">
 
-    #layout-content ul {
-    list-style-type: none; /* 去掉原本的点 */
-    margin-left: 20px;
-    padding-left: 4px;
-    }
-
-    #layout-content ul li p::before {
-    counter-increment: paper-item;
-    content: "" counter(paper-item) ". "; /* 显示为 [1], [2] */
-    font-weight: bold;
-    margin-right: 8px;
-    }
-    </style>
+    <link href="../../subpage.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-    <table id="tlayout" summary="Table for page layout.">
-        <tr valign="top">
-            <td id="layout-menu">
-                <img alt="alt text" height="300" src="../../photos/bio.jpg" width="200">
-                <h1 id="name">Zijian Guo</h1>
-                <div class="menu-category">
-                    Home
-                </div>
-                <div class="menu-item">
-                    <a href="../../index.html">About&nbsp;Me</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../../CV/Zijian_Guo_CV.pdf">CV</a>
-                </div>
-                <div class="menu-category">
-                    Research
-                </div>
-                <div class="menu-item">
-                    <a href="../pub.html">Publications</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../research_topics.html">Research by Topics</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../talks.html">Talks</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../software.html">Software</a>
-                </div>
-                <div class="menu-category">
-                    Teaching
-                </div>
-                <div class="menu-item">
-                    <a href="../../teaching/StatisticalOptimization.html">Statistical Optimization</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../../teaching/teaching.html">Teaching Evaluation</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../../teaching/group.html">Group Members</a>
-                </div>
-                <div class="menu-category">
-                    Meeting
-                </div>
-                <div class="menu-item">
-                    <a href="../../meeting/meeting.html">Meeting Reservation</a>
-                </div>
-            </td>
-            <td id="layout-content">
+<body class="topic-publications" style="--paper-start: 24;">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-shared-shell="true">
+    <div class="shell header-inner">
+      <a class="wordmark" href="../../index.html" aria-label="Zijian Guo, home">
+        <span class="monogram" aria-hidden="true">ZG</span>
+        <span>Zijian Guo</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="../../index.html">Home</a>
+        <a class="active" aria-current="page" href="../research_topics.html">Research</a>
+        <a href="../../research/pub.html">Publications</a>
+        <a href="../../research/talks.html">Talks</a>
+        <a href="../../research/software.html">Software</a>
+        <a href="../../teaching/teaching.html">Teaching</a>
+        <a href="../../teaching/group.html">Group</a>
+        <a href="../../blog.html">Blog</a>
+      </nav>
+      <details class="mobile-nav">
+        <summary aria-label="Open navigation">Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="../../index.html">Home</a>
+          <a class="active" aria-current="page" href="../research_topics.html">Research</a>
+          <a href="../../research/pub.html">Publications</a>
+          <a href="../../research/talks.html">Talks</a>
+          <a href="../../research/software.html">Software</a>
+          <a href="../../teaching/teaching.html">Teaching</a>
+          <a href="../../teaching/group.html">Group</a>
+          <a href="../../blog.html">Blog</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+  <main id="main">
+    <div id="layout-content">
                 <div id="toptitle">
-                    <h1>High-dimensional Uncertainty Quantification</h1>
+                    <h1>High-Dimensional Uncertainty Quantification</h1>
                 </div>
                 <div class="infoblock">
                     <div class="blockcontent">
-                        <h3 style="margin-bottom: 0em; margin-top: 0;">Topic Summary</h3>
-                        <p>In my high-dimensional statistics work, I focus on a simple applied problem: in modern studies (genomics, EHR, imaging, text), we often measure far more variables than samples, so standard regression output can look confident while actually being unstable. My goal is to turn high-dimensional modeling into something you can trust for scientific conclusions—not only building predictors, but also answering inferential questions like Which effects are real? How large are they? How uncertain are we? in regimes where classical low-dimensional formulas are no longer valid.<br>
-                        Methodologically, my contributions develop inference-first toolkits—confidence intervals, hypothesis tests, and multiple testing procedures—that remain valid in high dimensions and in realistic extensions beyond simple linear models. This includes rigorous inference for high-dimensional GLMs (notably logistic/binary outcomes and Poisson/count models), large-scale multiple testing for high-dimensional regression, group/hierarchical inference, and semi-supervised inference for prediction-related targets; I also study robustness to complications that commonly arise in practice, such as hidden confounding (e.g., doubly debiased Lasso) and endogeneity testing with many covariates, and I connect these ideas to concrete scientific tasks such as genetic relatedness and mediation analysis. Several of these methods are accompanied by reusable implementations (e.g., the SIHR R package) to make the theory directly usable.</p>
+                        <h2 class="topic-summary-heading">At a glance</h2>
+                        <div class="topic-summary-grid">
+                            <div><span class="topic-summary-label">Problem</span><p>When variables outnumber observations, ordinary regression output can look precise while remaining unstable.</p></div>
+                            <div><span class="topic-summary-label">Approach</span><p>Confidence intervals, tests, and multiple-testing procedures designed for high-dimensional linear and generalized linear models.</p></div>
+                            <div><span class="topic-summary-label">Applications</span><p>Hidden confounding, endogeneity, genetic relatedness, mediation analysis, and semi-supervised risk prediction.</p></div>
+                        </div>
                     </div>
                 </div>
+                <h2 class="related-work-heading">Related work <span class="section-count" aria-label="23 related works">23</span></h2>
                 <ul>
                     <li>
-                        <p><u>Rakshit, P.</u>, and <b>Guo, Z.</b>(2024).<br>
-                        <a href="../../arxiv/2410.20671v1.pdf" style="color: #0061CE">Statistical Inference in High-dimensional Poisson Regression with Applications to Mediation Analysis</a><br>
+                        <p><u>Rakshit, P.</u>, and <b>Guo, Z.</b> (2024).<br>
+                        <a href="https://zijguo.github.io/arxiv/2410.20671v1.pdf">Statistical Inference in High-dimensional Poisson Regression with Applications to Mediation Analysis</a><br>
                         Technical Report</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p>*Fan, Q., <b>Guo, Z.</b>, <u>Mei, Z.</u>,and Zhang, C. (2023).<br>
-                        <a href="../../arxiv/2310.08063v3.pdf" style="color: #0061CE">
+                        <p>*Fan, Q., <b>Guo, Z.</b>, <u>Mei, Z.</u>, and Zhang, C. (2023).<br>
+                        <a href="https://zijguo.github.io/arxiv/2310.08063v3.pdf">
                             Inference for Nonlinear Endogenous Treatment Effects Accounting for High-Dimensional Covariate Complexity.</a><br>
                         Technical report</p>
                     </li>
@@ -115,7 +92,7 @@
                 <ul>
                     <li>
                         <p><u>Liu, Y.</u>, Liu, M., <b>Guo, Z.</b> and Cai, Tianxi. (2026).<br>
-                        <a href="../../arxiv/2302.04970v2.pdf" style="color: #0061CE">Efficient Modeling of Surrogates to Improve Multi-source High-dimensional Biobank Studies.</a><br>
+                        <a href="https://zijguo.github.io/arxiv/2302.04970v2.pdf">Efficient Modeling of Surrogates to Improve Multi-source High-dimensional Biobank Studies.</a><br>
                         <i>Journal of Machine Learning Research, to appear.</i></p>
                     </li>
                 </ul>
@@ -123,79 +100,79 @@
                 <ul>
                     <li>
                         <p>*<b>Guo, Z.</b>, <u>Yuan W.</u> and Zhang, C. (2026).<br>
-                        <a href="../../arxiv/1907.12732v2.pdf" style="color: #0061CE">Decorrelated Local Linear Estimator: Inference for Non-linear Effects in High-dimensional Additive Models.</a><br>
-                        <i>Journal of Machine Learning Research, 27(27), 1-79.</i>[<a href="https://github.com/zijguo/HighDim-Additive-Inference" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/1907.12732v2.pdf">Decorrelated Local Linear Estimator: Inference for Non-linear Effects in High-dimensional Additive Models.</a><br>
+                        <i>Journal of Machine Learning Research, 27(27), 1-79.</i>[<a class="resource-link" href="https://github.com/zijguo/HighDim-Additive-Inference">Code</a>]</p>
                     </li>
                 </ul>
-                
+
                 <ul>
                     <li>
-                        <p>*Fan, Q., <b>Guo, Z.</b>,and <u>Mei, Z.</u> (2025).<br>
-                        <a href="../../arxiv/2205.00171v3.pdf" style="color: #0061CE">A Heteroscedasticity-Robust Overidentifying Restriction Test with High-Dimensional Covariates</a><br>
-                        <i>Journal of Business & Economic Statistics, 43(2), 413-422.</i></p>
+                        <p>*Fan, Q., <b>Guo, Z.</b>, and <u>Mei, Z.</u> (2025).<br>
+                        <a href="https://zijguo.github.io/arxiv/2205.00171v3.pdf">A Heteroscedasticity-Robust Overidentifying Restriction Test with High-Dimensional Covariates</a><br>
+                        <i>Journal of Business &amp; Economic Statistics, 43(2), 413-422.</i></p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><u>Scheidegger, C.</u>, <b>Guo, Z.</b>, and Bühlmann, P. (2025).<br>
-                        <a href="../../arxiv/2312.02860v3.pdf" style="color: #0061CE">Spectral deconfounding for high-dimensional sparse additive models</a><br>
+                        <a href="https://zijguo.github.io/arxiv/2312.02860v3.pdf">Spectral deconfounding for high-dimensional sparse additive models</a><br>
                         <i>ACM/IMS Journal of Data Science, 2(1), Article 1, 52 pages.</i></p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p>Lin, Y., <b>Guo, Z.</b>, Sun, B., and Lin, Z.(2025).<br>
-                        <a href="../../arxiv/2310.05539v3.pdf" style="color: #0061CE">Testing High-Dimensional Mediation Effect with Arbitrary Exposure-Mediator Coefficients</a><br>
+                        <p>Lin, Y., <b>Guo, Z.</b>, Sun, B., and Lin, Z. (2025).<br>
+                        <a href="https://zijguo.github.io/arxiv/2310.05539v3.pdf">Testing High-Dimensional Mediation Effect with Arbitrary Exposure-Mediator Coefficients</a><br>
                         <i>Test, 34(3), 530-579.</i></p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p>Ma, R., <b>Guo, Z.</b>,Cai, T. T., and Li, H.(2024).<br>
-                        <a href="../../arxiv/2202.10007v2.pdf" style="color: #0061CE">Statistical Inference of Genetic Relatedness using High-Dimensional Logistic Regression.</a><br>
+                        <p>Ma, R., <b>Guo, Z.</b>, Cai, T. T., and Li, H. (2024).<br>
+                        <a href="https://zijguo.github.io/arxiv/2202.10007v2.pdf">Statistical Inference of Genetic Relatedness using High-Dimensional Logistic Regression.</a><br>
                         <i>Statistica Sinica, 34 (2): 1023-1043.</i></p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p><u>Rakshit, P.</u>,<u>Wang, Z.</u>,Cai, T. T., and <b>Guo, Z.</b> (2024).<br>
-                        <a href="../../arxiv/2109.03365v3.pdf" style="color: #0061CE">SIHR: An R Package for Statistical Inference in High-dimensional Linear and Logistic Regression Models.</a>.<br>
+                        <p><u>Rakshit, P.</u>, <u>Wang, Z.</u>, Cai, T. T., and <b>Guo, Z.</b> (2024).<br>
+                        <a href="https://zijguo.github.io/arxiv/2109.03365v3.pdf">SIHR: An R Package for Statistical Inference in High-dimensional Linear and Logistic Regression Models.</a><br>
                         <i>R Journal, 16(3), 27-45.</i></p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p>*Cai, T., <b>Guo, Z.</b> and Xia, Y. (2023).<br>
-                        <a href="../../arxiv/2301.10392v1.pdf" style="color: #0061CE">Statistical Inference and Large-scale Multiple Testing for High-dimensional Regression Models</a><br>
-                        <i>Test (with discussion), 32(4), 1135-1171.</i> [<a href="https://github.com/prabrishar1/SIHR" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/2301.10392v1.pdf">Statistical Inference and Large-scale Multiple Testing for High-dimensional Regression Models</a><br>
+                        <i>Test (with discussion), 32(4), 1135-1171.</i> [<a class="resource-link" href="https://github.com/prabrishar1/SIHR">Code</a>]</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p>Hou, J., <b>Guo, Z.</b>, and Cai, T. (2023).<br>
-                        <a href="../../arxiv/2105.01264v1.pdf" style="color: #0061CE">Surrogate Assisted Semi-supervised Inference for High Dimensional Risk Prediction</a>.<br>
-                        <i>Journal of Machine Learning Research, 24(265), 1-58.</i> [<a href="" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/2105.01264v1.pdf">Surrogate Assisted Semi-supervised Inference for High Dimensional Risk Prediction</a>.<br>
+                        <i>Journal of Machine Learning Research, 24(265), 1–58.</i></p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p>* Cai, T. T., <b>Guo, Z.</b>, and Ma, R. (2023).<br>
-                        <a href="../../arxiv/Inference-GLM.pdf" style="color: #0061CE">Statistical Inference for High-Dimensional Generalized Linear Models with Binary Outcomes</a>.<br>
-                        <i>Journal of the American Statistical Association, 118 (542), 1319-1332.</i> [<a href="https://github.com/prabrishar1/SIHR" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/Inference-GLM.pdf">Statistical Inference for High-Dimensional Generalized Linear Models with Binary Outcomes</a>.<br>
+                        <i>Journal of the American Statistical Association, 118 (542), 1319-1332.</i> [<a class="resource-link" href="https://github.com/prabrishar1/SIHR">Code</a>]</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><b>Guo, Z.</b> , Cevid, D., and Bühlmann, P. (2022).<br>
-                        <a href="../../arxiv/2004.03758v3.pdf" style="color: #0061CE">Doubly Debiased Lasso: High-Dimensional Inference under Hidden Confounding</a>.<br>
-                        <i>Annals of Statistics</i>, 50 (3), 1320 - 1347. [<a href="https://github.com/zijguo/Doubly-Debiased-Lasso" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/2004.03758v3.pdf">Doubly Debiased Lasso: High-Dimensional Inference under Hidden Confounding</a>.<br>
+                        <i>Annals of Statistics</i>, 50 (3), 1320 - 1347. [<a class="resource-link" href="https://github.com/zijguo/Doubly-Debiased-Lasso">Code</a>]</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><b>Guo, Z.</b> and Zhang, C. (2022).<br>
-                        <a href="../../arxiv/1904.12897v2.pdf" style="color: #0061CE">
-                            Extreme eigenvalues of nonlinear correlation matrices with applications 
+                        <a href="https://zijguo.github.io/arxiv/1904.12897v2.pdf">
+                            Extreme eigenvalues of nonlinear correlation matrices with applications
                             to additive models</a>.<br>
                         <i>Stochastic Processes and Their Applications,</i> 150, 1037-1058</p>
                     </li>
@@ -203,70 +180,83 @@
                 <ul>
                     <li>
                         <p>* Cai, T, Cai, T. T. and <b>Guo, Z.</b> (2021).<br>
-                        <a href="../../arxiv/1904.12891v2.pdf" style="color: #0061CE">Optimal Statistical Inference for Individualized Treatment Effects in High-dimensional Models</a>.<br>
-                        <i>Journal of the Royal Statistical Society: Series B,</i> 2021, 83(4): 669-719. [<a href="https://github.com/prabrishar1/SIHR" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/1904.12891v2.pdf">Optimal Statistical Inference for Individualized Treatment Effects in High-dimensional Models</a>.<br>
+                        <i>Journal of the Royal Statistical Society: Series B,</i> 2021, 83(4): 669-719. [<a class="resource-link" href="https://github.com/prabrishar1/SIHR">Code</a>]</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><b>Guo, Z.</b>, <u>Rakshit, P.</u>, Herman, D., and Chen, J. (2021).<br>
-                        <a href="../../arxiv/2012.07133v3.pdf" style="color: #0061CE">Inference for the Case Probability in High-dimensional Logistic Regression</a>.<br>
-                        <i>Journal of Machine Learning Research,</i> 22(254), 1-54 [<a href="https://github.com/prabrishar1/SIHR" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/2012.07133v3.pdf">Inference for the Case Probability in High-dimensional Logistic Regression</a>.<br>
+                        <i>Journal of Machine Learning Research,</i> 22(254), 1-54 [<a class="resource-link" href="https://github.com/prabrishar1/SIHR">Code</a>]</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><b>Guo, Z.</b>, Renaux, C., Bühlmann, P., and Cai, T. T. (2021).<br>
-                        <a href="../../arxiv/1909.01503v3.pdf" style="color: #0061CE">Group Inference in High Dimensions with Applications to Hierarchical Testing</a>.<br>
-                        <i>Electronic Journal of Statistics,</i> 15(2), 6633-6676. [<a href="https://github.com/prabrishar1/SIHR" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/1909.01503v3.pdf">Group Inference in High Dimensions with Applications to Hierarchical Testing</a>.<br>
+                        <i>Electronic Journal of Statistics,</i> 15(2), 6633-6676. [<a class="resource-link" href="https://github.com/prabrishar1/SIHR">Code</a>]</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p>* Cai, T. T. and <b>Guo, Z.</b> (2020).<br>
-                        <a href="../../arxiv/1806.06179v2.pdf" style="color: #0061CE">Semi-supervised Inference for Explained Variance in High-dimensional Linear Regression and Its Applications</a>.<br>
-                        <i>Journal of the Royal Statistical Society: Series B,</i> 82(2), 391-419. [<a href="https://github.com/prabrishar1/SIHR" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/1806.06179v2.pdf">Semi-supervised Inference for Explained Variance in High-dimensional Linear Regression and Its Applications</a>.<br>
+                        <i>Journal of the Royal Statistical Society: Series B,</i> 82(2), 391-419. [<a class="resource-link" href="https://github.com/prabrishar1/SIHR">Code</a>]</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><b>Guo, Z.</b>, Wang, W., Cai, T. T. and Li, H. (2019).<br>
-                        <a href="../../arxiv/1605.07244v1.pdf" style="color: #0061CE">Optimal Estimation of Genetic Relatedness in High-dimensional Linear Models</a>.<br>
-                        <i>Journal of the American Statistical Association</i>, 114(525), 358-369. [<a href="https://github.com/prabrishar1/SIHR" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/1605.07244v1.pdf">Optimal Estimation of Genetic Relatedness in High-dimensional Linear Models</a>.<br>
+                        <i>Journal of the American Statistical Association</i>, 114(525), 358-369. [<a class="resource-link" href="https://github.com/prabrishar1/SIHR">Code</a>]</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><b>Guo, Z.</b>, Kang, H., Cai, T. T. and Small, D. S. (2018).<br>
-                        <a href="../../arxiv/1609.06713v3.pdf" style="color: #0061CE">Testing Endogeneity with High Dimensional Covariates</a>.<br>
-                        <i>The Journal of Econometrics,</i> 207(1), 175-187. [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/1609.06713v3.pdf">Testing Endogeneity with High Dimensional Covariates</a>.<br>
+                        <i>The Journal of Econometrics,</i> 207(1), 175-187. [<a class="resource-link" href="https://github.com/zijguo/RobustIV">Code</a>]</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p><b>Guo, Z.</b>, Kang, H., Cai, T. T. and Small, D. S. (2018).<br>
-                        <a href="../../arxiv/1603.05224v3.pdf" style="color: #0061CE">Confidence Intervals for Causal Effects with Invalid Instruments using Two-Stage Hard Thresholding with Voting</a>.<br>
-                        <i>Journal of the Royal Statistical Society: Series B,</i> 80(4), 793-815. [<a href="https://github.com/zijguo/RobustIV" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/1603.05224v3.pdf">Confidence Intervals for Causal Effects with Invalid Instruments using Two-Stage Hard Thresholding with Voting</a>.<br>
+                        <i>Journal of the Royal Statistical Society: Series B,</i> 80(4), 793-815. [<a class="resource-link" href="https://github.com/zijguo/RobustIV">Code</a>]</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p>* Cai, T. T. and <b>Guo, Z.</b> (2018).<br>
-                        <a href="../../arxiv/1603.03474v2.pdf" style="color: #0061CE">Accuracy Assessment for High-dimensional Linear Regression</a>.<br>
+                        <a href="https://zijguo.github.io/arxiv/1603.03474v2.pdf">Accuracy Assessment for High-dimensional Linear Regression</a>.<br>
                         <i>The Annals of Statistics,</i> 46(4), 1807-1836.</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <p>* Cai, T. T. and <b>Guo, Z.</b> (2017).<br>
-                        <a href="../../arxiv/1506.05539v2.pdf" style="color: #0061CE">Confidence Intervals for High-Dimensional Linear Regression: Minimax Rates and Adaptivity</a>.<br>
-                        <i>The Annals of Statistics,</i> 45(2), 615-646. [<a href="https://github.com/prabrishar1/SIHR" style="color: #FF2D00">Codes</a>]</p>
+                        <a href="https://zijguo.github.io/arxiv/1506.05539v2.pdf">Confidence Intervals for High-Dimensional Linear Regression: Minimax Rates and Adaptivity</a>.<br>
+                        <i>The Annals of Statistics,</i> 45(2), 615-646. [<a class="resource-link" href="https://github.com/prabrishar1/SIHR">Code</a>]</p>
                     </li>
                 </ul>
-                <p style="font-size: 16px; color: #555;"><i>underline indicates supervised students ; # indicates equal contribution; * indicates alphabetical ordering ; ✉ indicates corresponding authorship.</i></p>
-                
-            </td>
-        </tr>
-    </table>
+                <div class="publication-legend" aria-label="Authorship notation">
+                    <strong>Authorship notation</strong>
+                    <span><u>Name</u> supervised student</span>
+                    <span><b>#</b> equal contribution</span>
+                    <span><b>*</b> alphabetical ordering</span>
+                    <span><b>✉</b> corresponding author</span>
+                </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" data-shared-shell="true">
+    <div class="shell footer-grid">
+      <div><p class="footer-name">Zijian Guo</p><p>Center for Data Science<br>Zhejiang University</p></div>
+      <div><p>No. 866 Yuhangtang Road<br>Hangzhou, Zhejiang, China</p></div>
+      <div><a href="mailto:zijguo@zju.edu.cn">zijguo@zju.edu.cn</a><p>© 2026 Zijian Guo</p></div>
+    </div>
+  </footer>
 </body>
 </html>

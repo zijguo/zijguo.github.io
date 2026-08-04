@@ -1,0 +1,6 @@
+# The lab scheduler contains private operational data and is not part of the public website.
+meeting/
+
+# Local workstation files and private CV source material.
+.DS_Store
+Zijian Guo CV/
