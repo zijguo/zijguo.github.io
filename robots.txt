@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zijguo.github.io/sitemap.xml

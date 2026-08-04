@@ -4,254 +4,233 @@
     <meta content="jemdoc, see http://jemdoc.jaboc.net/" name="generator">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <link href="../jemdoc.css" rel="stylesheet" type="text/css">
-    <title>Teaching</title><!-- MathJax -->
+    <title>Optimization for Data Science — Zijian Guo</title>
+    <meta name="description" content="Lecture notes and computational materials for Zijian Guo’s Optimization for Data Science course.">
+    <link rel="canonical" href="https://zijguo.github.io/teaching/StatisticalOptimization.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Zijian Guo">
+    <meta property="og:title" content="Optimization for Data Science — Zijian Guo">
+    <meta property="og:description" content="Lecture notes and computational materials for Zijian Guo’s Optimization for Data Science course.">
+    <meta property="og:url" content="https://zijguo.github.io/teaching/StatisticalOptimization.html">
+    <meta property="og:image" content="https://zijguo.github.io/assets/og-card.png">
+    <meta property="og:image:width" content="1731">
+    <meta property="og:image:height" content="909">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Optimization for Data Science — Zijian Guo">
+    <meta name="twitter:description" content="Lecture notes and computational materials for Zijian Guo’s Optimization for Data Science course.">
+    <meta name="twitter:image" content="https://zijguo.github.io/assets/og-card.png">
+    <meta name="theme-color" content="#176b73">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../photos/bio.jpg" type="image/jpeg">
+    <link href="../homepage.css" rel="stylesheet" type="text/css">
 
-    <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
-    </script>
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-          TeX: { equationNumbers: { autoNumber: "AMS" } }
-      });
-    </script><!-- End MathJax -->
-
-    <style type="text/css">
-      html * {
-        line-height: 1.65;
-        font-size: 19px;
-      }
-      count {
-        display: block;
-      }
-      countreset {
-        display: block;
-        counter-reset: item;
-      }
-      count:before {
-        content: counter(item) ". ";
-        counter-increment: item;
-      }
-      h1 {
-        font-size: 32px !important;
-      }
-      h2 {
-        font-size: 22.5px !important;
-      }
-    </style>
+    <link href="../subpage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <table id="tlayout" summary="Table for page layout.">
-        <tr valign="top">
-            <td id="layout-menu">
-                <img alt="alt text" height="300" src="../photos/bio.jpg" width="200">
-                <h1 id="name">Zijian Guo</h1>
-                <div class="menu-category">
-                    Home
-                </div>
-                <div class="menu-item">
-                    <a href="../index.html">About&nbsp;Me</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../CV/Zijian_Guo_CV.pdf">CV</a>
-                </div>
-                <div class="menu-category">
-                    Research
-                </div>
-                <div class="menu-item">
-                    <a href="../research/pub.html">Publications</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../research/research_topics.html">Research by Topics</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../research/talks.html">Talks</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../research/software.html">Software</a>
-                </div>
-                <div class="menu-category">
-                    Teaching
-                </div>
-                <div class="menu-item">
-                    <a href="StatisticalOptimization.html">Statistical Optimization</a>
-                </div>
-                <div class="menu-item">
-                    <a href="teaching.html">Teaching Evaluation</a>
-                </div>
-                <div class="menu-item">
-                    <a href="group.html">Group Members</a>
-                </div>
-                <div class="menu-category">
-                    Meeting
-                </div>
-                <div class="menu-item">
-                    <a href="../meeting/meeting.html">Meeting Reservation</a>
-                </div>
-            </td>
-            <td id="layout-content">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-shared-shell="true">
+    <div class="shell header-inner">
+      <a class="wordmark" href="../index.html" aria-label="Zijian Guo, home">
+        <span class="monogram" aria-hidden="true">ZG</span>
+        <span>Zijian Guo</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="../index.html">Home</a>
+        <a href="../research/research_topics.html">Research</a>
+        <a href="../research/pub.html">Publications</a>
+        <a href="../research/talks.html">Talks</a>
+        <a href="../research/software.html">Software</a>
+        <a class="active" aria-current="page" href="../teaching/teaching.html">Teaching</a>
+        <a href="../teaching/group.html">Group</a>
+        <a href="../blog.html">Blog</a>
+      </nav>
+      <details class="mobile-nav">
+        <summary aria-label="Open navigation">Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="../index.html">Home</a>
+          <a href="../research/research_topics.html">Research</a>
+          <a href="../research/pub.html">Publications</a>
+          <a href="../research/talks.html">Talks</a>
+          <a href="../research/software.html">Software</a>
+          <a class="active" aria-current="page" href="../teaching/teaching.html">Teaching</a>
+          <a href="../teaching/group.html">Group</a>
+          <a href="../blog.html">Blog</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+  <main id="main">
+    <div id="layout-content">
                 <div id="toptitle">
-                    <h1>Optimization for Data Science<br></h1>
+                    <h1>Optimization for Data Science</h1>
+                    <div id="subtitle">Course website · <a href="teaching.html">Back to the Teaching overview</a></div>
                 </div>
-                
-                
-                    
+
+
+
                 <h2>Lecture 1: Introduction to Statistics</h2>
-                <ul>
-                    <!--  请将需要上传的pdf 放入 teaching/StaOpt 文件夹即可 
-                这是一个示例 请最后不要忘记删除 -->
-                   <a href="StaOpt/Lecture 1.pdf" style="color: #0061CE"> Lecture 1 </a>
-                   contextualizes statistics and optimization within modern AI applications. It contrasts probability, 
-                   which mathematically describes data generation, with statistics, which infers unknown parameters 
-                   from observed data . The session reviews fundamental probability concepts including discrete 
-                   and continuous random variables, density functions, expectation, variance, and independence . 
-                   These concepts establish the framework for statistical inference, demonstrated through 
+                <div class="lecture-summary">
+                   <a href="https://zijguo.github.io/teaching/StaOpt/Lecture%201.pdf">Lecture 1</a>
+                   contextualizes statistics and optimization within modern AI applications. It contrasts probability,
+                   which mathematically describes data generation, with statistics, which infers unknown parameters
+                   from observed data . The session reviews fundamental probability concepts including discrete
+                   and continuous random variables, density functions, expectation, variance, and independence .
+                   These concepts establish the framework for statistical inference, demonstrated through
                    parameter estimation in Binomial, Normal, and multiple linear regression models.
-                </ul>
+                </div>
                 <h2>Lecture 2: Optimization for Statistics</h2>
-                <ul>
-                    <a href="StaOpt/Lecture 2.pdf" style="color: #0061CE"> Lecture 2 </a>
-                   outlines statistical inference via point estimation and confidence intervals grounded in 
-                   the Law of Large Numbers and the Central Limit Theorem . 
-                   It establishes parameter optimization using Maximum Likelihood Estimation and 
-                   the least squares principle . The session distinguishes supervised regression and 
-                   classification from unsupervised learning . These foundations are applied 
-                   to ordinary least squares regression and Principal Component Analysis . 
+                <div class="lecture-summary">
+                    <a href="https://zijguo.github.io/teaching/StaOpt/Lecture%202.pdf">Lecture 2</a>
+                   outlines statistical inference via point estimation and confidence intervals grounded in
+                   the Law of Large Numbers and the Central Limit Theorem .
+                   It establishes parameter optimization using Maximum Likelihood Estimation and
+                   the least squares principle . The session distinguishes supervised regression and
+                   classification from unsupervised learning . These foundations are applied
+                   to ordinary least squares regression and Principal Component Analysis .
                    Model optimization is formalized through risk functions and negative log-likelihoods .
-                </ul>
+                </div>
                 <h2>Lecture 3: Optimization and Convexity</h2>
-                <ul>
-                    <a href="StaOpt/Lecture 3.pdf" style="color: #0061CE"> Lecture 3 </a>
-                   introduces the optimization framework, defining global, local, 
-                   and approximate minima . It details convex sets, convex functions, 
-                   Jensen's inequality, and operations preserving convexity . 
-                   The core theorem proves every local minimum of a convex function is inherently 
-                   a global minimum . The lecture establishes the first-order condition, gradient monotonicity, 
+                <div class="lecture-summary">
+                    <a href="https://zijguo.github.io/teaching/StaOpt/Lecture%203.pdf">Lecture 3</a>
+                   introduces the optimization framework, defining global, local,
+                   and approximate minima . It details convex sets, convex functions,
+                   Jensen's inequality, and operations preserving convexity .
+                   The core theorem proves every local minimum of a convex function is inherently
+                   a global minimum . The lecture establishes the first-order condition, gradient monotonicity,
                    and second-order positive semidefinite Hessian characterizations of convexity
-                </ul>
+                </div>
                 <h2>Lecture 4: Optimality Condition and Strict/Strong Convexity</h2>
-                <ul>
-                    <a href="StaOpt/Lecture 4.pdf" style="color: #0061CE"> Lecture 4 </a>
-                    outlines the fundamentals of convex optimization, emphasizing that every 
-                    local minimum is a global minimum. It details the precise first-order optimality 
-                    conditions required to identify global optima across unconstrained and 
-                    constrained problems. The session covers the rigorous definitions alongside the first- 
-                    and second-order characterizations of strict and strong convexity. 
-                    It establishes the mathematical hierarchy among standard, strict, 
+                <div class="lecture-summary">
+                    <a href="https://zijguo.github.io/teaching/StaOpt/Lecture%204.pdf">Lecture 4</a>
+                    outlines the fundamentals of convex optimization, emphasizing that every
+                    local minimum is a global minimum. It details the precise first-order optimality
+                    conditions required to identify global optima across unconstrained and
+                    constrained problems. The session covers the rigorous definitions alongside the first-
+                    and second-order characterizations of strict and strong convexity.
+                    It establishes the mathematical hierarchy among standard, strict,
                     and strong convexity, applying these principles to quadratic functions.
-                </ul>
+                </div>
                 <h2>Lecture 5: Optimization for Exponential Family</h2>
-                <ul>
-                    <a href="StaOpt/Lecture 5.pdf" style="color: #0061CE"> Lecture 5 </a>
-                    outlines the fundamentals of the exponential family, emphasizing the inherent convexity 
-                    of their log-likelihoods. It details the canonical formulations required to frame Maximum 
-                    Likelihood Estimation as a convex optimization problem across one- and multi-parameter 
-                    distributions. The session covers rigorous definitions, moment generating functions, 
-                    and convexity proofs using Hölder's Inequality, 
+                <div class="lecture-summary">
+                    <a href="https://zijguo.github.io/teaching/StaOpt/Lecture%205.pdf">Lecture 5</a>
+                    outlines the fundamentals of the exponential family, emphasizing the inherent convexity
+                    of their log-likelihoods. It details the canonical formulations required to frame Maximum
+                    Likelihood Estimation as a convex optimization problem across one- and multi-parameter
+                    distributions. The session covers rigorous definitions, moment generating functions,
+                    and convexity proofs using Hölder's Inequality,
                     applying these mathematical principles to standard statistical models.
-                </ul>
+                </div>
                 <h2>Lecture 6: Ordinary Least Squares and Gradient Descent</h2>
-                <ul>
-                    <a href="StaOpt/Lecture 6.pdf" style="color: #0061CE"> Lecture 6 </a>
-                    examines Ordinary Least Squares (OLS) optimization , focusing on the geometric perspective of 
-                    its closed-form solution as an orthogonal projection onto a column space. 
-                    The lecture transitions from theoretical foundations to practical computation, 
-                    contrasting exact algebraic techniques like QR decomposition with iterative solvers. 
-                    Specifically, it establishes strict convergence bounds for first-order gradient descent 
-                    and demonstrates the single-step efficiency of second-order Newton's method for quadratic 
+                <div class="lecture-summary">
+                    <a href="https://zijguo.github.io/teaching/StaOpt/Lecture%206.pdf">Lecture 6</a>
+                    examines Ordinary Least Squares (OLS) optimization , focusing on the geometric perspective of
+                    its closed-form solution as an orthogonal projection onto a column space.
+                    The lecture transitions from theoretical foundations to practical computation,
+                    contrasting exact algebraic techniques like QR decomposition with iterative solvers.
+                    Specifically, it establishes strict convergence bounds for first-order gradient descent
+                    and demonstrates the single-step efficiency of second-order Newton's method for quadratic
                     objectives , reinforcing these concepts through functional Python implementations.
-                </ul>
+                </div>
                 <h2>Lecture 7: Gradient Descent: Theoretical Analysis</h2>
-                <ul>
-                    <a href="StaOpt/Lecture 7.pdf" style="color: #0061CE"> Lecture 7 </a>
+                <div class="lecture-summary">
+                    <a href="https://zijguo.github.io/teaching/StaOpt/Lecture%207.pdf">Lecture 7</a>
                     explores the theoretical convergence of gradient descent, demonstrating
-                    how different properties of an objective function impact algorithmic speed. 
+                    how different properties of an objective function impact algorithmic speed.
                     The lecture highlights that a basic analysis provides weak guarantees, meaning
-                    stronger assumptions are necessary to prove efficiency. It establishes a clear 
-                    hierarchy: while Lipschitz convex functions suffer from very slow convergence , 
-                    introducing smoothness significantly accelerates the process. Ultimately, functions 
-                    that are both smooth and strongly convex achieve rapid, linear convergence, 
+                    stronger assumptions are necessary to prove efficiency. It establishes a clear
+                    hierarchy: while Lipschitz convex functions suffer from very slow convergence ,
+                    introducing smoothness significantly accelerates the process. Ultimately, functions
+                    that are both smooth and strongly convex achieve rapid, linear convergence,
                     drastically minimizing the total iterations needed to find the optimal solution.
-                </ul>
+                </div>
                 <h2>Lecture 8: Line Search Methods: Gradient Descent Step Size Selection</h2>
-                <ul>
-                    <a href="StaOpt/Lecture 8.pdf" style="color: #0061CE"> Lecture 8 </a>
-                    shifts focus to the practical selection of step sizes in gradient descent. Because 
-                    fixed step sizes risk either sluggish progress or unstable oscillations , 
-                    the lecture introduces adaptive line search strategies. It moves past exact line 
-                    search due to its high computational cost , emphasizing practical, inexact 
-                    alternatives instead. The core discussion details the Wolfe conditions, 
-                    which enforce both a sufficient decrease and adequate curvature , alongside the 
-                    backtracking method that iteratively shrinks an initial trial step until these 
-                    acceptable criteria are met. This <a href="StaOpt/logistic_regression.ipynb" 
-                    style="color: #0061CE" download> code</a> is supplementary material for this lecture.
-                </ul>
+                <div class="lecture-summary">
+                    <a href="https://zijguo.github.io/teaching/StaOpt/Lecture%208.pdf">Lecture 8</a>
+                    shifts focus to the practical selection of step sizes in gradient descent. Because
+                    fixed step sizes risk either sluggish progress or unstable oscillations ,
+                    the lecture introduces adaptive line search strategies. It moves past exact line
+                    search due to its high computational cost , emphasizing practical, inexact
+                    alternatives instead. The core discussion details the Wolfe conditions,
+                    which enforce both a sufficient decrease and adequate curvature , alongside the
+                    backtracking method that iteratively shrinks an initial trial step until these
+                    acceptable criteria are met. This <a href="https://zijguo.github.io/teaching/StaOpt/logistic_regression.ipynb"
+                    download> code</a> is supplementary material for this lecture.
+                </div>
                 <h2>Lecture 9: Projected GD, Coordinate descent, Proximal GD and SGD</h2>
-                <ul>
-                    <a href="StaOpt/Lecture 9.pdf" style="color: #0061CE"> Lecture 9 </a>
-                    explores four efficient extensions of standard gradient descent tailored for complex 
-                    optimization challenges. The session covers Projected Gradient Descent for enforcing 
-                    parameter constraints via projection steps , alongside Coordinate Descent, which 
-                    reduces high-dimensional problems into cheaper, single-variable updates. To address 
-                    composite objectives with non-smooth penalties, it introduces Proximal Gradient 
-                    Descent , and concludes with Stochastic Gradient Descent, a method that accelerates 
-                    large-scale training by substituting expensive full gradients with cost-effective, 
-                    unbiased single-sample estimators. This <a href="StaOpt/lasso_regression.ipynb" 
-                    style="color: #0061CE" download> code</a> is supplementary material for this lecture.
-                </ul>
+                <div class="lecture-summary">
+                    <a href="https://zijguo.github.io/teaching/StaOpt/Lecture%209.pdf">Lecture 9</a>
+                    explores four efficient extensions of standard gradient descent tailored for complex
+                    optimization challenges. The session covers Projected Gradient Descent for enforcing
+                    parameter constraints via projection steps , alongside Coordinate Descent, which
+                    reduces high-dimensional problems into cheaper, single-variable updates. To address
+                    composite objectives with non-smooth penalties, it introduces Proximal Gradient
+                    Descent , and concludes with Stochastic Gradient Descent, a method that accelerates
+                    large-scale training by substituting expensive full gradients with cost-effective,
+                    unbiased single-sample estimators. This <a href="https://zijguo.github.io/teaching/StaOpt/lasso_regression.ipynb"
+                    download> code</a> is supplementary material for this lecture.
+                </div>
                 <h2>Lecture 10: Newton’s method</h2>
-                <ul>
-                    <a href="StaOpt/Lecture 10.pdf" style="color: #0061CE"> Lecture 10 </a>
-                    explores Newton's method as a powerful second-order technique for statistical 
-                    optimization. The session begins with the 1-dimensional case, demonstrating 
-                    how tangent lines are used to find zero gradients for function minimization. 
-                    It then extends this approach to high-dimensional spaces, where it utilizes both 
-                    gradient and curvature information—specifically the inverse of the Hessian 
-                    matrix—to minimize a local second-order Taylor expansion of the objective function. 
-                    The lecture concludes by establishing the method's theoretical guarantees, proving 
-                    its rapid quadratic convergence rate under the conditions of bounded inverse and 
+                <div class="lecture-summary">
+                    <a href="https://zijguo.github.io/teaching/StaOpt/Lecture%2010.pdf">Lecture 10</a>
+                    explores Newton's method as a powerful second-order technique for statistical
+                    optimization. The session begins with the 1-dimensional case, demonstrating
+                    how tangent lines are used to find zero gradients for function minimization.
+                    It then extends this approach to high-dimensional spaces, where it utilizes both
+                    gradient and curvature information—specifically the inverse of the Hessian
+                    matrix—to minimize a local second-order Taylor expansion of the objective function.
+                    The lecture concludes by establishing the method's theoretical guarantees, proving
+                    its rapid quadratic convergence rate under the conditions of bounded inverse and
                     Lipschitz continuous Hessians.
-                </ul>
+                </div>
                 <h2>Lecture 11: Lagrange duality</h2>
-                <ul>
-                    <a href="StaOpt/Lecture 11.pdf" style="color: #0061CE"> Lecture 11 </a>
+                <div class="lecture-summary">
+                    <a href="https://zijguo.github.io/teaching/StaOpt/Lecture%2011.pdf">Lecture 11</a>
                      explores Lagrange duality and the Karush-Kuhn-Tucker (KKT) conditions
-                     as fundamental theoretical frameworks for constrained statistical optimization. 
-                     The session begins by defining the Lagrangian and its dual function, 
-                     establishing the principles of weak and strong duality alongside the concept 
-                     of a zero duality gap. It then details the KKT conditions—encompassing primal 
-                     feasibility, dual feasibility, complementary slackness, and stationarity—as necessary 
-                     and sufficient requirements for global optimality under convexity. The lecture 
-                     concludes by demonstrating practical applications of these theoretical principles, 
-                     utilizing the Lagrangian formulation to derive elegant closed-form solutions for 
-                     projection onto the unit ball, simplex projection, 
+                     as fundamental theoretical frameworks for constrained statistical optimization.
+                     The session begins by defining the Lagrangian and its dual function,
+                     establishing the principles of weak and strong duality alongside the concept
+                     of a zero duality gap. It then details the KKT conditions—encompassing primal
+                     feasibility, dual feasibility, complementary slackness, and stationarity—as necessary
+                     and sufficient requirements for global optimality under convexity. The lecture
+                     concludes by demonstrating practical applications of these theoretical principles,
+                     utilizing the Lagrangian formulation to derive elegant closed-form solutions for
+                     projection onto the unit ball, simplex projection,
                     and mirror descent updates via
                     KL divergence.
-                </ul>
+                </div>
                 <h2>Lecture 12: Penalty and Augmented Lagrangian Methods</h2>
-                <ul>
-                    <a href="StaOpt/Lecture 12.pdf" style="color: #0061CE"> Lecture 12 </a>
-                    compares three methods for solving constrained optimization problems . 
-                    While the dual-ascent method risks instability and the pure quadratic penalty 
-                    method causes severe ill-conditioning at high values , the Augmented Lagrangian 
-                    Method (ALM) elegantly combines their strengths . By pairing a stabilizing quadratic 
-                    penalty with explicit multiplier updates, ALM achieves accurate, feasible solutions 
+                <div class="lecture-summary">
+                    <a href="https://zijguo.github.io/teaching/StaOpt/Lecture%2012.pdf">Lecture 12</a>
+                    compares three methods for solving constrained optimization problems .
+                    While the dual-ascent method risks instability and the pure quadratic penalty
+                    method causes severe ill-conditioning at high values , the Augmented Lagrangian
+                    Method (ALM) elegantly combines their strengths . By pairing a stabilizing quadratic
+                    penalty with explicit multiplier updates, ALM achieves accurate, feasible solutions
                     without the numerical drawbacks of extreme penalty parameters.
-                </ul>
+                </div>
                 <h2>Lecture 13: Alternating Direction Method of Multipliers</h2>
-                <ul>
-                    <a href="StaOpt/Lecture 13.pdf" style="color: #0061CE"> Lecture 13 </a>
+                <div class="lecture-summary">
+                    <a href="https://zijguo.github.io/teaching/StaOpt/Lecture%2013.pdf">Lecture 13</a>
                     introduces the Alternating Direction Method of Multipliers as a powerful technique
-                     for solving structured optimization problems . Specifically, it addresses scenarios 
-                     where the main objective can be cleanly separated into two independent components 
-                     that are linked by explicit linear equations rather than abstract constraints . 
-                     While the traditional Augmented Lagrangian Method forces these components to be 
-                     optimized simultaneously—which creates computational bottlenecks and destroys 
-                     separability —this new approach resolves the issue by separating the optimization 
-                     process into alternating steps . By updating one component at a time, the method s
-                     uccessfully restores decomposability, making complex systems significantly easier 
-                     to compute and implement in practice .
-                </ul>
-            </td>
-        </tr>
-    </table>
+                     for solving structured optimization problems . Specifically, it addresses scenarios
+                     where the main objective can be cleanly separated into two independent components
+                     that are linked by explicit linear equations rather than abstract constraints .
+                     While the traditional Augmented Lagrangian Method forces these components to be
+                     optimized simultaneously—which creates computational bottlenecks and destroys
+                     separability —this new approach resolves the issue by separating the optimization
+                     process into alternating steps. By updating one component at a time, the method
+                     successfully restores decomposability, making complex systems significantly easier
+                     to compute and implement in practice.
+                </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" data-shared-shell="true">
+    <div class="shell footer-grid">
+      <div><p class="footer-name">Zijian Guo</p><p>Center for Data Science<br>Zhejiang University</p></div>
+      <div><p>No. 866 Yuhangtang Road<br>Hangzhou, Zhejiang, China</p></div>
+      <div><a href="mailto:zijguo@zju.edu.cn">zijguo@zju.edu.cn</a><p>© 2026 Zijian Guo</p></div>
+    </div>
+  </footer>
 </body>
 </html>

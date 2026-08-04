@@ -3,112 +3,89 @@
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <link href="../../jemdoc.css" rel="stylesheet" type="text/css">
-    <title>Applications to Genetics and Health Record Data - Zijian Guo</title>
-    <script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'>
-    </script>
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        TeX: { equationNumbers: { autoNumber: "AMS" } }
-      });
-    </script>
-    <style type="text/css">
-      html * { line-height: 1.65; font-size:19px; }
-      count { display: block }
-      countreset { display: block; counter-reset: item; }
-      count:before { content: counter(item) ". "; counter-increment: item }
-      countreset ul { list-style-type: none; }
-      h1 { font-size: 32px !important; }
-      h2 { font-size:22.5px !important; }
-    #layout-content {
-    counter-reset: paper-item;
-    }
+    <title>Applications to Genetics and Health Data — Zijian Guo</title>
+    <meta name="description" content="Applications of Zijian Guo’s statistical research to genetics, proteomics, biomarkers, and multi-center health data.">
+    <link rel="canonical" href="https://zijguo.github.io/research/research_by_topic/res_ai4science.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Zijian Guo">
+    <meta property="og:title" content="Applications to Genetics and Health Data — Zijian Guo">
+    <meta property="og:description" content="Applications of Zijian Guo’s statistical research to genetics, proteomics, biomarkers, and multi-center health data.">
+    <meta property="og:url" content="https://zijguo.github.io/research/research_by_topic/res_ai4science.html">
+    <meta property="og:image" content="https://zijguo.github.io/assets/og-card.png">
+    <meta property="og:image:width" content="1731">
+    <meta property="og:image:height" content="909">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Applications to Genetics and Health Data — Zijian Guo">
+    <meta name="twitter:description" content="Applications of Zijian Guo’s statistical research to genetics, proteomics, biomarkers, and multi-center health data.">
+    <meta name="twitter:image" content="https://zijguo.github.io/assets/og-card.png">
+    <meta name="theme-color" content="#176b73">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../photos/bio.jpg" type="image/jpeg">
+    <link href="../../homepage.css" rel="stylesheet" type="text/css">
 
-    #layout-content ul {
-    list-style-type: none; /* 去掉原本的点 */
-    margin-left: 20px;
-    padding-left: 4px;
-    }
-
-    #layout-content ul li p::before {
-    counter-increment: paper-item;
-    content: "" counter(paper-item) ". "; /* 显示为 [1], [2] */
-    font-weight: bold;
-    margin-right: 8px;
-    }
-    </style>
+    <link href="../../subpage.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-    <table id="tlayout" summary="Table for page layout.">
-        <tr valign="top">
-            <td id="layout-menu">
-                <img alt="alt text" height="300" src="../../photos/bio.jpg" width="200">
-                <h1 id="name">Zijian Guo</h1>
-                <div class="menu-category">
-                    Home
-                </div>
-                <div class="menu-item">
-                    <a href="../../index.html">About&nbsp;Me</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../../CV/Zijian_Guo_CV.pdf">CV</a>
-                </div>
-                <div class="menu-category">
-                    Research
-                </div>
-                <div class="menu-item">
-                    <a href="../pub.html">Publications</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../research_topics.html">Research by Topics</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../talks.html">Talks</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../software.html">Software</a>
-                </div>
-                <div class="menu-category">
-                    Teaching
-                </div>
-                <div class="menu-item">
-                    <a href="../../teaching/StatisticalOptimization.html">Statistical Optimization</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../../teaching/teaching.html">Teaching Evaluation</a>
-                </div>
-                <div class="menu-item">
-                    <a href="../../teaching/group.html">Group Members</a>
-                </div>
-                <div class="menu-category">
-                    Meeting
-                </div>
-                <div class="menu-item">
-                    <a href="../../meeting/meeting.html">Meeting Reservation</a>
-                </div>
-            </td>
-            <td id="layout-content">
+<body class="topic-publications" style="--paper-start: 4;">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-shared-shell="true">
+    <div class="shell header-inner">
+      <a class="wordmark" href="../../index.html" aria-label="Zijian Guo, home">
+        <span class="monogram" aria-hidden="true">ZG</span>
+        <span>Zijian Guo</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="../../index.html">Home</a>
+        <a class="active" aria-current="page" href="../research_topics.html">Research</a>
+        <a href="../../research/pub.html">Publications</a>
+        <a href="../../research/talks.html">Talks</a>
+        <a href="../../research/software.html">Software</a>
+        <a href="../../teaching/teaching.html">Teaching</a>
+        <a href="../../teaching/group.html">Group</a>
+        <a href="../../blog.html">Blog</a>
+      </nav>
+      <details class="mobile-nav">
+        <summary aria-label="Open navigation">Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="../../index.html">Home</a>
+          <a class="active" aria-current="page" href="../research_topics.html">Research</a>
+          <a href="../../research/pub.html">Publications</a>
+          <a href="../../research/talks.html">Talks</a>
+          <a href="../../research/software.html">Software</a>
+          <a href="../../teaching/teaching.html">Teaching</a>
+          <a href="../../teaching/group.html">Group</a>
+          <a href="../../blog.html">Blog</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+  <main id="main">
+    <div id="layout-content">
                 <div id="toptitle">
                     <h1>Applications to Genetics and Health Data</h1>
                 </div>
                 <div class="infoblock">
                     <div class="blockcontent">
-                        <h3 style="margin-bottom: 0em; margin-top: 0;">Topic Summary</h3>
-                        <p>In my AI4Science / biomedical data work, I develop statistical methods that make large, heterogeneous datasets—such as genetics/proteomics and multi-center EHRs—more actionable for science: the goal is to draw conclusions that remain reliable when real-world complications arise (e.g., imperfect instruments in genetics, strong cross-hospital heterogeneity, and privacy constraints that limit data sharing).<br>
-                        Concretely, one line of work proposes MR-SPI, a robust Mendelian randomization approach that automatically selects valid genetic instruments and then performs post-selection inference, so causal biomarker discovery is less sensitive to invalid SNPs; it is applied to UK Biobank proteomics (912 proteins) to identify proteins associated with Alzheimer’s disease, with follow-up structural analysis via AlphaFold2. Another line of work develops SurvMaximin, a robust federated/transfer learning method for survival risk prediction that borrows strength across centers using one-time summary sharing (no patient-level data) and is designed to remain stable even when site-specific models are highly heterogeneous, improving performance especially for smaller target sites.</p>
+                        <h2 class="topic-summary-heading">At a glance</h2>
+                        <div class="topic-summary-grid">
+                            <div><span class="topic-summary-label">Problem</span><p>Genetic and clinical data are heterogeneous, instruments can be imperfect, and privacy constraints can prevent patient-level sharing.</p></div>
+                            <div><span class="topic-summary-label">Approach</span><p>Robust causal, federated, and transfer-learning methods combine evidence without assuming that every instrument or data source is equally reliable.</p></div>
+                            <div><span class="topic-summary-label">Scientific aim</span><p>Support reproducible biomarker discovery and durable risk prediction across biobanks, hospitals, and patient populations.</p></div>
+                        </div>
                     </div>
                 </div>
+                <h2 class="related-work-heading">Related work <span class="section-count" aria-label="3 related works">3</span></h2>
                 <ul>
                     <li>
                         <p>Xiong, X., <b>Guo, Z.</b>, Zhu, H., Hong, C., Smoller, J. W., Cai, T., Liu, M<sup>✉</sup>. (2026).<br>
-                        <a href="../../arxiv/2601.11860v1.pdf" style="color: #0061CE">Adversarial Drift-Aware Predictive Transfer: Toward Durable Clinical AI.</a><br>
+                        <a href="https://zijguo.github.io/arxiv/2601.11860v1.pdf">Adversarial Drift-Aware Predictive Transfer: Toward Durable Clinical AI.</a><br>
                         Technical Report</p>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <p><u>Yao, M.</u>, Miller, G., Vardarajan, B., Baccarelli, A.,<b>Guo, Z.</b><sup>✉</sup>,and Liu, Z.<sup>✉</sup> (2024).<br>
-                        <a href="../../arxiv/2023.02.20.23286200v5.full.pdf" style="color: #0061CE">
-                            Deciphering proteins in Alzheimer’s 
+                        <p><u>Yao, M.</u>, Miller, G., Vardarajan, B., Baccarelli, A., <b>Guo, Z.</b><sup>✉</sup>, and Liu, Z.<sup>✉</sup> (2024).<br>
+                        <a href="https://zijguo.github.io/arxiv/2023.02.20.23286200v5.full.pdf">
+                            Deciphering proteins in Alzheimer’s
                             disease: A new Mendelian randomization method integrated with AlphaFold3 for 3D structure
                             prediction.</a><br>
                            <i>Cell Genomics, 4(12), 100700.</i></p>
@@ -116,14 +93,27 @@
                 </ul>
                 <ul>
                     <li>
-                        <p>Wang, X., Zhou, H., · · ·, 4CE,Avillach, P.<sup>✉</sup>, <b>Guo, Z.</b><sup>✉</sup>, and Cai, T.<sup>✉</sup> (2022)<br>
-                        <a href="../../arxiv/2022.02.03.22270410v1.full.pdf" style="color: #0061CE">Surv-Maximin: Robust Federated Approach to Transporting Survival Risk Prediction Models</a>.<br>
+                        <p>Wang, X., Zhou, H., · · ·, 4CE, Avillach, P.<sup>✉</sup>, <b>Guo, Z.</b><sup>✉</sup>, and Cai, T.<sup>✉</sup> (2022).<br>
+                        <a href="https://zijguo.github.io/arxiv/2022.02.03.22270410v1.full.pdf">Surv-Maximin: Robust Federated Approach to Transporting Survival Risk Prediction Models</a>.<br>
                         <i>Journal of Biomedical Informatics, 134 (2022): 104-176.</i></p>
                     </li>
                 </ul>
-                <p style="font-size: 16px; color: #555;"><i>underline indicates supervised students ; # indicates equal contribution; * indicates alphabetical ordering ; ✉ indicates corresponding authorship.</i></p>
-            </td>
-        </tr>
-    </table>
+                <div class="publication-legend" aria-label="Authorship notation">
+                    <strong>Authorship notation</strong>
+                    <span><u>Name</u> supervised student</span>
+                    <span><b>#</b> equal contribution</span>
+                    <span><b>*</b> alphabetical ordering</span>
+                    <span><b>✉</b> corresponding author</span>
+                </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" data-shared-shell="true">
+    <div class="shell footer-grid">
+      <div><p class="footer-name">Zijian Guo</p><p>Center for Data Science<br>Zhejiang University</p></div>
+      <div><p>No. 866 Yuhangtang Road<br>Hangzhou, Zhejiang, China</p></div>
+      <div><a href="mailto:zijguo@zju.edu.cn">zijguo@zju.edu.cn</a><p>© 2026 Zijian Guo</p></div>
+    </div>
+  </footer>
 </body>
 </html>
