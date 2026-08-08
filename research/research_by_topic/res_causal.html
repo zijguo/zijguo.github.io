@@ -4,19 +4,19 @@
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <link href="../../jemdoc.css" rel="stylesheet" type="text/css">
     <title>Reliable Causal Inference — Zijian Guo</title>
-    <meta name="description" content="Research by Zijian Guo on reliable causal inference with invalid instruments, hidden confounding, causal invariance, and robust identification.">
+    <meta name="description" content="Research by Zijian Guo on causal identification and inference with invalid instruments, endogeneity, hidden confounding, and heterogeneous treatment effects.">
     <link rel="canonical" href="https://zijguo.github.io/research/research_by_topic/res_causal.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Zijian Guo">
     <meta property="og:title" content="Reliable Causal Inference — Zijian Guo">
-    <meta property="og:description" content="Research by Zijian Guo on reliable causal inference with invalid instruments, hidden confounding, causal invariance, and robust identification.">
+    <meta property="og:description" content="Research by Zijian Guo on causal identification and inference with invalid instruments, endogeneity, hidden confounding, and heterogeneous treatment effects.">
     <meta property="og:url" content="https://zijguo.github.io/research/research_by_topic/res_causal.html">
     <meta property="og:image" content="https://zijguo.github.io/assets/og-card.png">
     <meta property="og:image:width" content="1731">
     <meta property="og:image:height" content="909">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Reliable Causal Inference — Zijian Guo">
-    <meta name="twitter:description" content="Research by Zijian Guo on reliable causal inference with invalid instruments, hidden confounding, causal invariance, and robust identification.">
+    <meta name="twitter:description" content="Research by Zijian Guo on causal identification and inference with invalid instruments, endogeneity, hidden confounding, and heterogeneous treatment effects.">
     <meta name="twitter:image" content="https://zijguo.github.io/assets/og-card.png">
     <meta name="theme-color" content="#176b73">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,7 @@
 
     <link href="../../subpage.css" rel="stylesheet" type="text/css">
 </head>
-<body class="topic-publications" style="--paper-start: 24;">
+<body class="topic-publications" style="--paper-start: 25;">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header" data-shared-shell="true">
     <div class="shell header-inner">
@@ -65,12 +65,7 @@
                 </div>
                 <div class="infoblock">
                     <div class="blockcontent">
-                        <h2 class="topic-summary-heading">At a glance</h2>
-                        <div class="topic-summary-grid">
-                            <div><span class="topic-summary-label">Problem</span><p>Unmeasured confounding and invalid instruments can make causal conclusions fragile or unidentified.</p></div>
-                            <div><span class="topic-summary-label">Approach</span><p>Identification and inference methods remain meaningful when some instruments may violate the usual validity assumptions.</p></div>
-                            <div><span class="topic-summary-label">Current directions</span><p>Nonregular uncertainty quantification and causal relationships that remain stable across environments.</p></div>
-                        </div>
+                        <p class="topic-summary-paragraph">Causal conclusions can fail when instruments are weak or invalid, treatment assignment is endogenous, or important confounders are unobserved. My work develops identification strategies, tests, and estimators for causal effects that remain reliable under these departures, with particular emphasis on instrumental variables, heterogeneous treatment effects, mediation, and observational-study design.</p>
                     </div>
                 </div>
                 <h2 class="related-work-heading">Related work <span class="section-count" aria-label="24 related works">24</span></h2>
@@ -90,6 +85,27 @@
                 </ul>
                 <ul>
                     <li>
+                        <p><u>Chang, T. H.</u>, <b>Guo, Z.</b>, and Malinsky, D. (2026).<br>
+                        <a href="https://zijguo.github.io/arxiv/2405.06763v4.pdf">Post-selection inference for causal effects after causal discovery.</a><br>
+                        <i>Biometrika, 113(1), asaf073.</i></p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><b>Guo, Z.</b>, <u>Zheng, M.</u>, and Bühlmann, P. (2026).<br>
+                        <a href="https://zijguo.github.io/arxiv/2203.12808v4.pdf">Robustness Against Weak or Invalid Instruments: Exploring Nonlinear Treatment Models with Machine Learning</a><br>
+                        <i>Journal of Machine Learning Research, to appear.</i></p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><u>Scheidegger, C.</u>, <b>Guo, Z.</b>, and Bühlmann, P. (2026).<br>
+                        <a href="https://zijguo.github.io/arxiv/2503.03530v2.pdf">Inference for Heterogeneous Treatment Effects with Efficient Instruments and Machine Learning</a><br>
+                        Electronic Journal of Statistics, 20(1), 718–770.</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
                         <p><u>Koo, T.</u> and <b>Guo, Z.</b> (2025).<br>
                         <a href="https://arxiv.org/abs/2511.02632">Distributionally Robust Synthetic Control: Ensuring Robustness Against Highly Correlated Controls and Weight Shifts.</a><br>
                         Technical Report</p>
@@ -102,56 +118,11 @@
                         Technical Report</p>
                     </li>
                 </ul>
-
-                <ul>
-                    <li>
-                        <p>Zhu, J., Zhang, J., <b>Guo, Z.</b>, and Heng, S. (2023).<br>
-                        <a href="https://arxiv.org/abs/2308.02005">Randomization-Based Inference for Average Treatment Effects in Inexactly Matched Observational Studies.</a><br>
-                        Technical Report</p>
-                    </li>
-                </ul>
-
                 <ul>
                     <li>
                         <p><u>Gu, Y.</u>, Fang, C., Xu, Y., <b>Guo, Z.</b>, and Fan, J. (2025).<br>
                         <a href="https://arxiv.org/abs/2501.17354">Fundamental Computational Limits in Pursuing Invariant Causal Prediction and Invariance-Guided Regularization</a><br>
                         Technical Report</p>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <p><u>Wang, Z.<sup>#</sup></u>, Hu, Y.<sup>#</sup>, Bühlmann, P.<sup>✉</sup>, and <b>Guo, Z.</b><sup>✉</sup> (2024).<br>
-                        <a href="https://arxiv.org/abs/2412.11850">Causal Invariance Learning via Efficient Nonconvex Optimization</a><br>
-                        Technical Report</p>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <p>*Fan, Q., <b>Guo, Z.</b>, <u>Mei, Z.</u>, and Zhang, C. (2023).<br>
-                        <a href="https://arxiv.org/abs/2310.08063">
-                            Inference for Nonlinear Endogenous Treatment Effects Accounting for High-Dimensional Covariate Complexity.</a><br>
-                        Technical report</p>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <p><b>Guo, Z.</b>, <u>Zheng, M.</u>, and Bühlmann, P. (2026).<br>
-                        <a href="https://zijguo.github.io/arxiv/2203.12808v4.pdf">Robustness Against Weak or Invalid Instruments: Exploring Nonlinear Treatment Models with Machine Learning</a><br>
-                        <i>Journal of Machine Learning Research, to appear.</i>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <p><u>Scheidegger, C.</u>, <b>Guo, Z.</b>, and Bühlmann, P. (2026).<br>
-                        <a href="https://zijguo.github.io/arxiv/2503.03530v2.pdf">Inference for Heterogeneous Treatment Effects with Efficient Instruments and Machine Learning</a><br>
-                        Electronic Journal of Statistics, 20(1), 718–770.</p>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <p><u>Chang, T. H.</u>, <b>Guo, Z.</b>, and Malinsky, D. (2026).<br>
-                        <a href="https://zijguo.github.io/arxiv/2405.06763v4.pdf">Post-selection inference for causal effects after causal discovery.</a><br>
-                        <i>Biometrika, 113(1), asaf073.</i></p>
                     </li>
                 </ul>
                 <ul>
@@ -180,6 +151,28 @@
                         <p>Kang, H., <b>Guo, Z.</b>, Liu, Z., and Small, D. (2025).<br>
                         <a href="https://zijguo.github.io/arxiv/2407.19558v1.pdf">Identification and Inference with Invalid Instruments</a><br>
                         <i>Annual Review of Statistics and Its Application, 12, 385–405.</i></p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><u>Wang, Z.<sup>#</sup></u>, Hu, Y.<sup>#</sup>, Bühlmann, P.<sup>✉</sup>, and <b>Guo, Z.</b><sup>✉</sup> (2024).<br>
+                        <a href="https://arxiv.org/abs/2412.11850">Causal Invariance Learning via Efficient Nonconvex Optimization</a><br>
+                        Technical Report</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p>Zhu, J., Zhang, J., <b>Guo, Z.</b>, and Heng, S. (2023).<br>
+                        <a href="https://arxiv.org/abs/2308.02005">Randomization-Based Inference for Average Treatment Effects in Inexactly Matched Observational Studies.</a><br>
+                        Technical Report</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p>*Fan, Q., <b>Guo, Z.</b>, <u>Mei, Z.</u>, and Zhang, C. (2023).<br>
+                        <a href="https://arxiv.org/abs/2310.08063">
+                            Inference for Nonlinear Endogenous Treatment Effects Accounting for High-Dimensional Covariate Complexity.</a><br>
+                        Technical report</p>
                     </li>
                 </ul>
                 <ul>

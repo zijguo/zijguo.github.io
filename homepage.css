@@ -187,6 +187,13 @@ h1 { margin: 0; color: var(--ink); font: 500 clamp(4.25rem, 8vw, 7.2rem)/.94 var
 .footer-grid p { margin: 0 0 8px; }
 .footer-name { color: white; font: 500 1.35rem var(--serif); }
 .footer-grid div:last-child { text-align: right; }
+.footer-grid .site-visits {
+  margin-top: 11px;
+  color: #9fb1b4;
+  font-size: .72rem;
+  letter-spacing: .025em;
+}
+.site-visits span { font-variant-numeric: tabular-nums; }
 .authorship-note { margin-top: 38px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.12); color: #8f9b94; font-size: .72rem; }
 
 @media (max-width: 900px) {
