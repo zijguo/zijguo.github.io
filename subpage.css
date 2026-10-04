@@ -217,7 +217,7 @@ body a:hover { color: var(--coral); }
 .publications-page #layout-content #toptitle + .publication-section > h2 { margin-top: 0; }
 .publications-page #layout-content .publication-section > h2::before,
 .publications-page #layout-content .publication-section > h2::after { display: none; }
-.publication-section.technical-reports { counter-reset: publication-item 17; }
+.publication-section.technical-reports { counter-reset: publication-item 19; }
 .publication-section.published-papers { counter-reset: publication-item 40; }
 .publication-section .section-count,
 .related-work-heading .section-count {
@@ -976,6 +976,12 @@ body.research-topics-page .topic-directory-card h2::after { display: none; }
   gap: 10px;
   margin-left: auto;
   vertical-align: baseline;
+}
+.talks-page .talk-event {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font: 400 .88rem/1.55 var(--sans);
 }
 .talks-page #layout-content .talk-resource {
   color: var(--teal-dark);
