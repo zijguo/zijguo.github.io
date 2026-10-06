@@ -16,7 +16,7 @@
 }
 
 * { box-sizing: border-box; }
-html { min-width: 0; background: var(--paper); font-size: 17px; scroll-behavior: smooth; }
+html { min-width: 0; background: var(--paper); font-size: 18px; scroll-behavior: smooth; }
 html body {
   min-width: 0;
   margin: 0;
@@ -24,7 +24,7 @@ html body {
   color: var(--ink);
   background: var(--paper);
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
@@ -1032,7 +1032,7 @@ body.research-topics-page .topic-directory-card h2::after { display: none; }
 }
 
 @media (max-width: 680px) {
-  html { font-size: 16px; }
+  html { font-size: 17px; }
   #layout-content { width: min(100% - 32px, 560px); padding-block: 55px 78px; }
   #layout-content #toptitle h1,
   #layout-content > h1 { font-size: clamp(2.8rem, 15vw, 4.5rem) !important; }

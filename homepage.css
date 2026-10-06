@@ -16,7 +16,7 @@
 }
 
 * { box-sizing: border-box; }
-html { font-size: 17px; scroll-behavior: smooth; }
+html { font-size: 18px; scroll-behavior: smooth; }
 body {
   margin: 0;
   color: var(--ink);
@@ -24,7 +24,7 @@ body {
     radial-gradient(circle at 92% 3%, rgba(201,143,50,.075), transparent 25rem),
     var(--paper);
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
@@ -216,7 +216,7 @@ h1 { margin: 0; color: var(--ink); font: 500 clamp(4.25rem, 8vw, 7.2rem)/.94 var
 }
 
 @media (max-width: 680px) {
-  html { font-size: 16px; }
+  html { font-size: 17px; }
   .shell { width: min(100% - 32px, 560px); }
   .header-inner { min-height: 66px; }
   .hero { grid-template-columns: 1fr; padding-block: 58px 70px; }
