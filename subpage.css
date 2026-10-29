@@ -217,7 +217,7 @@ body a:hover { color: var(--coral); }
 .publications-page #layout-content #toptitle + .publication-section > h2 { margin-top: 0; }
 .publications-page #layout-content .publication-section > h2::before,
 .publications-page #layout-content .publication-section > h2::after { display: none; }
-.publication-section.technical-reports { counter-reset: publication-item 19; }
+.publication-section.technical-reports { counter-reset: publication-item 20; }
 .publication-section.published-papers { counter-reset: publication-item 40; }
 .publication-section .section-count,
 .related-work-heading .section-count {
