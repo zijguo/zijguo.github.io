@@ -1,0 +1,77 @@
+/* Talk materials and the chronological presentation history. */
+.talks-page .talk-section-nav,
+.talks-page .talk-year-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  font: 600 .8rem/1.5 var(--sans);
+}
+
+.talks-page .talk-section-nav { margin-top: 24px; }
+.talks-page .talk-section-nav a,
+.talks-page .talk-year-nav a { text-decoration: none; }
+.talks-page .talk-section-nav a:hover,
+.talks-page .talk-section-nav a:focus-visible,
+.talks-page .talk-year-nav a:hover,
+.talks-page .talk-year-nav a:focus-visible { text-decoration: underline; }
+
+.talks-page #layout-content #talk-materials { margin-top: 0; }
+.talks-page #layout-content .talk-material-topic { margin: 34px 0 10px; }
+.talks-page #layout-content #talk-materials,
+.talks-page #layout-content #talk-history,
+.talks-page #layout-content .talk-year,
+.talks-page #pku-2026 { scroll-margin-top: 110px; }
+
+.talks-page .talk-history { margin-top: 64px; }
+.talks-page #layout-content .talk-history-intro {
+  color: var(--muted);
+  font-size: .9rem;
+}
+.talks-page .talk-year-nav {
+  gap: 8px 22px;
+  margin: 20px 0 36px;
+  padding: 14px 0;
+  border-block: 1px solid var(--line);
+}
+.talks-page #layout-content .talk-year { margin: 42px 0 10px; }
+.talks-page .talk-history-list { margin: 0; padding: 0; list-style: none; }
+.talks-page .talk-history-list > li {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 26px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+.talks-page .talk-history-list time {
+  padding-top: 3px;
+  color: var(--muted);
+  font: 400 .76rem/1.6 var(--sans);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.talks-page #layout-content .talk-history-title {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font: 500 1rem/1.5 var(--serif);
+}
+.talks-page #layout-content .talk-history-venue {
+  margin: 0;
+  color: var(--muted);
+  font: 400 .84rem/1.6 var(--sans);
+}
+.talks-page #layout-content .talk-history-kind {
+  margin: 0 0 5px;
+  color: var(--teal-dark);
+  font: 600 .74rem/1.5 var(--sans);
+}
+.talks-page .talk-history-list .talk-resources { margin: 10px 0 0; }
+
+@media (max-width: 680px) {
+  .talks-page .talk-section-nav { gap: 10px 20px; }
+  .talks-page .talk-history-list > li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    padding: 20px 0;
+  }
+  .talks-page .talk-history-list time { padding-top: 0; }
+}
